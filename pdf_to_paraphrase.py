@@ -16,7 +16,6 @@ from pptgpt import list_of_splits_to_paraphrase
 # from pptgpt import list_garbage_texts
 # from pptgpt import write_correct_ppt_jsons
 
-pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract-ocr"
 
 
 def pdf_to_images(pdf=None):
@@ -81,6 +80,7 @@ def correct_texts_to_paraphrases(tokenizeds):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Paraphrasing a PDF file using API")
     parser.add_argument("file", type=str, help="Path to PDF file")
+    parser.add_argument("-o", "--ocr", type=str, help="The ocr FILE_PATH")
 
     args = parser.parse_args(sys.argv[1:])
 
@@ -92,8 +92,19 @@ if __name__ == "__main__":
         print("Please provide a Pdf file.")
         sys.exit(2)
 
+    if args.ocr is None:
+        print("Please provide a ocr FILEPATH.")
+        sys.exit(2)
+
+
+
     pdf = args.file
+    ocr_path = args.ocr
+
+    pytesseract.pytesseract.tesseract_cmd = ocr_path
     images = pdf_to_images(pdf)
+    print(images)
+    sys.exit(0)
     garbage_texts = images_to_garbage_texts(images)
     correct_texts = garbage_texts_to_correct_texts(garbage_texts)
 
