@@ -1,2 +1,3 @@
 pdf2image
 pytesseract
+python-dotenv
