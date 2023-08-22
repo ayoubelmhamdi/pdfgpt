@@ -1,3 +1,7 @@
+task:
+  - refactor to french
+  - assert to return the some text, not changes of texts
+
 pdf_to_garbage_texts:
   file1.pdf:
     - cache/file1.pdf_garbage_texts.d/1.txt
