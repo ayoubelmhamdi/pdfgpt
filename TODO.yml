@@ -1,0 +1,14 @@
+pdf_to_garbage_texts:
+  file1.pdf:
+    - cache/file1.pdf_garbage_texts.d/1.txt
+    - cache/file1.pdf_garbage_texts.d/2.txt
+garbage_texts_correct_text: 
+  read garbage_texts:
+    - ask LLM.
+    - write correct text to 
+      - cache/file1.pdf_correct_texts.d/1.txt
+      - cache/file1.pdf_correct_texts.d/2.txt
+    - remove garbage_text
+
+final:
+  - Concatenate all correct_texts files
