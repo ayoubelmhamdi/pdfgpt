@@ -16,6 +16,10 @@ from pptgpt import list_of_splits_to_paraphrase
 # from pptgpt import list_garbage_texts
 # from pptgpt import write_correct_ppt_jsons
 
+from dotenv import load_dotenv
+load_dotenv(".env")
+
+
 
 
 def pdf_to_images(pdf=None):
@@ -100,11 +104,13 @@ if __name__ == "__main__":
 
     pdf = args.file
     ocr_path = args.ocr
-
     pytesseract.pytesseract.tesseract_cmd = ocr_path
+
     images = pdf_to_images(pdf)
+    import os
+    print(os.getenv("OPENAI_API_KEY"))
     #print(images)
-    #sys.exit(0)
+    sys.exit(0)
     garbage_texts = images_to_garbage_texts(images)
     correct_texts = garbage_texts_to_correct_texts(garbage_texts)
 
