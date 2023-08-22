@@ -103,8 +103,8 @@ if __name__ == "__main__":
 
     pytesseract.pytesseract.tesseract_cmd = ocr_path
     images = pdf_to_images(pdf)
-    print(images)
-    sys.exit(0)
+    #print(images)
+    #sys.exit(0)
     garbage_texts = images_to_garbage_texts(images)
     correct_texts = garbage_texts_to_correct_texts(garbage_texts)
 
