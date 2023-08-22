@@ -4,6 +4,7 @@ import os
 import sys
 
 import pytesseract
+from dotenv import load_dotenv
 from pdf2image.pdf2image import convert_from_path
 from pptgpt import list_correct_text_tokenized
 from pptgpt import list_correct_texts
@@ -16,10 +17,8 @@ from pptgpt import list_of_splits_to_paraphrase
 # from pptgpt import list_garbage_texts
 # from pptgpt import write_correct_ppt_jsons
 
-from dotenv import load_dotenv
+
 load_dotenv(".env")
-
-
 
 
 def pdf_to_images(pdf=None):
@@ -100,8 +99,6 @@ if __name__ == "__main__":
         print("Please provide a ocr FILEPATH.")
         sys.exit(2)
 
-
-
     pdf = args.file
     ocr_path = args.ocr
     pytesseract.pytesseract.tesseract_cmd = ocr_path
@@ -112,26 +109,46 @@ if __name__ == "__main__":
     # print(images)
     # sys.exit(0)
     garbage_texts = images_to_garbage_texts(images)
+    print(
+        "garbage_texts",
+        file=sys.stderr,
+    )
+
     correct_texts = garbage_texts_to_correct_texts(garbage_texts)
+    print(
+        "correct_texts",
+        file=sys.stderr,
+    )
 
     if correct_texts is not None:
         total_pages = len(correct_texts)
         for i, page in enumerate(correct_texts):
+            x = i + 1
             print(
-                f"test {i}/{total_pages}",
+                f"test {x}/{total_pages}",
                 file=sys.stderr,
             )
             print(page, "\n\n")
         print("\n# ---------------\n")
 
     tokenizeds = correct_text_to_tokenized(correct_texts)
+    print(
+        "tokenizeds",
+        file=sys.stderr,
+    )
+
     paraphrases = correct_texts_to_paraphrases(tokenizeds)
 
+    print(
+        "paraphrases",
+        file=sys.stderr,
+    )
     if paraphrases is not None:
         total_chnks = len(paraphrases)
         for i, chunk in enumerate(paraphrases):
+            x = i + 1
             print(
-                f"chunk {i}/{total_chnks}",
+                f"chunk {x}/{total_chnks}",
                 file=sys.stderr,
             )
             print(chunk, "\n\n")
