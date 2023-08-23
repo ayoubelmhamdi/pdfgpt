@@ -36,7 +36,6 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           #source $GITHUB_ENV
-          FILE="PDFs/21.pdf"
           echo "OPENAI_API_KEY=$OPENAI_API_KEY"
           echo "FILE=$FILE"
           mkdir -p src/
