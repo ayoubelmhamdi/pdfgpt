@@ -34,7 +34,7 @@ jobs:
         run: |
           #source $GITHUB_ENV
           echo "OPENAI_API_KEY=$OPENAI_API_KEY"
-          echo $OPENAI_API_KEY > file.txt
+          echo "ll $OPENAI_API_KEY ll" > file.txt
           echo "file.txt"
           head file.txt
           echo "FILE=$FILE"
