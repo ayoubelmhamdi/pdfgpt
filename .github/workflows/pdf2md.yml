@@ -32,7 +32,7 @@ jobs:
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          source $GITHUB_ENV
+          #source $GITHUB_ENV
           echo $OPENAI_API_KEY
           echo $FILE
           echo python pdf_to_paraphrase.py $FILE --ocr /usr/bin/tesseract \> src/$FILE.md
