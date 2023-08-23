@@ -8,6 +8,8 @@ on:
 jobs:
   convert:
     runs-on: ubuntu-latest
+    environment: # specify the name of the environment that contains the secret
+      name: my-environment
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -19,14 +21,16 @@ jobs:
       - name: Get changed PDF file name
         run: |
           FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
-          echo "FILE=$FILE" >> $GITHUB_ENV
+          # echo "FILE=$FILE" >> $GITHUB_ENV
+          export FILE=$FILE
       - name: Convert PDF to Markdown
+        env: # pass the secret as an environment variable to the script
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          python pdf_to_paraphrase.py $FILE --ocr /usr/bin/tesseract > src/$FILE.md
+          echo python pdf_to_paraphrase.py $FILE --ocr /usr/bin/tesseract \> src/$FILE.md
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: init
           branch: master
           file_pattern: src/$FILE.md
-
