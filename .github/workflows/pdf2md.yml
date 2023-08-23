@@ -23,6 +23,7 @@ jobs:
         run: |
           #cat $GITHUB_EVENT_PATH
           #FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
+          du -h d0 .
           HASH=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH) # get the commit hash from the JSON file
           FILE="$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH | jq -r '.files[0].filename')"
           #FILE=$(git diff-tree --no-commit-id --name-only -r $HASH | grep PDFs/ | tail -n 1)
