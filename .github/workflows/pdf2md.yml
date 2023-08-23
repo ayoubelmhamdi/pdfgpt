@@ -41,7 +41,7 @@ jobs:
           OUTPUT="${FILE#PDFs/}"
           OUTPUT="src/${OUTPUT%.pdf}.md"
           echo "OUTPUT=$OUTPUT"
-          echo python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "$OUTPUT"
+          python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "$OUTPUT"
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
