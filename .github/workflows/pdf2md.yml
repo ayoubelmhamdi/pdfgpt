@@ -18,16 +18,16 @@ jobs:
       #     sudo apt update
       #     sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
       #     pip install -r requirements.txt
-      - name: Get changed PDF file name
-        run: |
-          #cat $GITHUB_EVENT_PATH
-          #FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
-          HASH=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH) # get the commit hash from the JSON file
-          FILE="$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH | jq -r '.files[0].filename')"
-          #FILE=$(git diff-tree --no-commit-id --name-only -r $HASH | grep PDFs/ | tail -n 1)
-          echo "FILE=$FILE" >> $GITHUB_ENV
-          echo "FILE=$FILE"
-          #export FILE=$FILE
+      # - name: Get changed PDF file name
+      #   run: |
+      #     #cat $GITHUB_EVENT_PATH
+      #     #FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
+      #     HASH=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH) # get the commit hash from the JSON file
+      #     FILE="$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH | jq -r '.files[0].filename')"
+      #     #FILE=$(git diff-tree --no-commit-id --name-only -r $HASH | grep PDFs/ | tail -n 1)
+      #     echo "FILE=$FILE" >> $GITHUB_ENV
+      #     echo "FILE=$FILE"
+      #     #export FILE=$FILE
       - name: Convert PDF to Markdown
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -35,8 +35,11 @@ jobs:
           #source $GITHUB_ENV
           echo "OPENAI_API_KEY=$OPENAI_API_KEY"
           echo "FILE=$FILE"
+          FILE="PDFs/21.pdf"
           mkdir -p src/
-          python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "src/$FILE.md"
+          OUTPUT="${FILE#PDFs/}"
+          OUTPUT="src/${OUTPUT#.pdf}.md"
+          echo python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract \> "$OUTPUT"
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
