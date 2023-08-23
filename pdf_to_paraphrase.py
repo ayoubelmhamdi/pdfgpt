@@ -3,13 +3,12 @@ import argparse
 import os
 import sys
 
-from dotenv import load_dotenv
-
-
 import pytesseract
+from dotenv import load_dotenv
 from pdf2image.pdf2image import convert_from_path
-from pptgpt import (list_correct_text_tokenized, list_correct_texts,
-                    list_of_splits_to_paraphrase)
+from pptgpt import list_correct_text_tokenized
+from pptgpt import list_correct_texts
+from pptgpt import list_of_splits_to_paraphrase
 
 # from pdf2image import convert_from_path
 
@@ -19,6 +18,7 @@ from pptgpt import (list_correct_text_tokenized, list_correct_texts,
 # from pptgpt import write_correct_ppt_jsons
 
 load_dotenv(".env", verbose=True, override=True)
+
 
 def pdf_to_images(pdf=None):
     if pdf is None:
@@ -69,7 +69,7 @@ def correct_text_to_tokenized(correct_texts):
 
 
 def correct_texts_to_paraphrases(tokenizeds):
-    if correct_texts is None:
+    if tokenizeds is None:
         print(
             "E008: lang-chain can not tokenized the correct texts",
             file=sys.stderr,
@@ -87,76 +87,49 @@ if __name__ == "__main__":
     args = parser.parse_args(sys.argv[1:])
 
     if not os.path.exists(args.file):
-        print(f"File {args.file} does not exist.")
+        print(f"File {args.file} does not exist.", file=sys.stderr)
         sys.exit(1)
 
     if args.file is None:
-        print("Please provide a Pdf file.")
+        print("Please provide a Pdf file.", file=sys.stderr)
         sys.exit(2)
 
     if args.ocr is None:
-        print("Please provide a ocr FILEPATH.")
+        print("Please provide a ocr FILEPATH.", file=sys.stderr)
         sys.exit(2)
 
     pdf = args.file
     ocr_path = args.ocr
 
-
-    print(
-        os.getenv("OPENAI_API_KEY"),
-        file=sys.stderr,
-    )
+    # print( os.getenv("OPENAI_API_KEY"), file=sys.stderr)
 
     pytesseract.pytesseract.tesseract_cmd = ocr_path
 
+    # Images + garbage texts
     images = pdf_to_images(pdf)
-
-    # print(images)
-    # sys.exit(0)
     garbage_texts = images_to_garbage_texts(images)
-    print(
-        "garbage_texts",
-        file=sys.stderr,
-    )
+    print("images ✔", file=sys.stderr)
 
+    print("\n# -------- GARBAGE TEXT -------\n")
+    for page in garbage_texts:
+        print(page, "\n\n")
+    print("Garbage_texts ✔", file=sys.stderr)
+
+    print("\n# -------- CORRECT TEXTS -------\n")
     correct_texts = garbage_texts_to_correct_texts(garbage_texts)
-    print(
-        "correct_texts",
-        file=sys.stderr,
-    )
+    for page in correct_texts:
+        print(page, "\n\n")
+    print("Correct_texts ✔", file=sys.stderr)
 
-    if correct_texts is not None:
-        total_pages = len(correct_texts)
-        for i, page in enumerate(correct_texts):
-            print(
-                f"page {i+1}/{total_pages}",
-                file=sys.stderr,
-            )
-            print(page, "\n\n")
-        print("\n# ---------------\n")
-
+    # ToKENZIED
     tokenizeds = correct_text_to_tokenized(correct_texts)
-    print(
-        "tokenizeds",
-        file=sys.stderr,
-    )
+    print("Tokenizeds ✔", file=sys.stderr)
 
+    print("\n# -------- PARAPHRASES -------\n")
     paraphrases = correct_texts_to_paraphrases(tokenizeds)
 
-    print(
-        "paraphrases",
-        file=sys.stderr,
-    )
-    if paraphrases is not None:
-        total_chnks = len(paraphrases)
-        for i, chunk in enumerate(paraphrases):
-            print(
-                f"chunk {i+1}/{total_chnks}",
-                file=sys.stderr,
-            )
-            print(chunk, "\n\n")
-    else:
-        print(
-            "E005:  OPENAI can not return paraphrasing",
-            file=sys.stderr,
-        )
+    total_chnks = len(paraphrases)
+    for i, chunk in enumerate(paraphrases):
+        print(f"chunk {i+1}/{total_chnks}", file=sys.stderr)
+        print(chunk, "\n\n")
+    print("Paraphrases ✔", file=sys.stderr)
