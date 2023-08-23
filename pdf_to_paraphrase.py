@@ -3,12 +3,13 @@ import argparse
 import os
 import sys
 
-import pytesseract
 from dotenv import load_dotenv
+
+
+import pytesseract
 from pdf2image.pdf2image import convert_from_path
-from pptgpt import list_correct_text_tokenized
-from pptgpt import list_correct_texts
-from pptgpt import list_of_splits_to_paraphrase
+from pptgpt import (list_correct_text_tokenized, list_correct_texts,
+                    list_of_splits_to_paraphrase)
 
 # from pdf2image import convert_from_path
 
@@ -17,9 +18,7 @@ from pptgpt import list_of_splits_to_paraphrase
 # from pptgpt import list_garbage_texts
 # from pptgpt import write_correct_ppt_jsons
 
-
-load_dotenv(".env")
-
+load_dotenv(".env", verbose=True, override=True)
 
 def pdf_to_images(pdf=None):
     if pdf is None:
@@ -35,7 +34,7 @@ def images_to_garbage_texts(images=None):
     texts = []
     num_images = len(images)
     for i in range(num_images):
-        print(f"{i}/{num_images}", file=sys.stderr)
+        print(f"image {i+1}/{num_images}", file=sys.stderr)
         texts.append(pytesseract.image_to_string(images[i]))
 
     if len(texts) == 0:
@@ -101,11 +100,17 @@ if __name__ == "__main__":
 
     pdf = args.file
     ocr_path = args.ocr
+
+
+    print(
+        os.getenv("OPENAI_API_KEY"),
+        file=sys.stderr,
+    )
+
     pytesseract.pytesseract.tesseract_cmd = ocr_path
 
     images = pdf_to_images(pdf)
-    # import os
-    # print(os.getenv("OPENAI_API_KEY"))
+
     # print(images)
     # sys.exit(0)
     garbage_texts = images_to_garbage_texts(images)
@@ -123,9 +128,8 @@ if __name__ == "__main__":
     if correct_texts is not None:
         total_pages = len(correct_texts)
         for i, page in enumerate(correct_texts):
-            x = i + 1
             print(
-                f"test {x}/{total_pages}",
+                f"page {i+1}/{total_pages}",
                 file=sys.stderr,
             )
             print(page, "\n\n")
@@ -146,9 +150,8 @@ if __name__ == "__main__":
     if paraphrases is not None:
         total_chnks = len(paraphrases)
         for i, chunk in enumerate(paraphrases):
-            x = i + 1
             print(
-                f"chunk {x}/{total_chnks}",
+                f"chunk {i+1}/{total_chnks}",
                 file=sys.stderr,
             )
             print(chunk, "\n\n")
