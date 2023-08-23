@@ -25,8 +25,11 @@ jobs:
           HASH=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH) # get the commit hash from the JSON file
           pwd
           ls
+          echo "git tree"
           git diff-tree --no-commit-id --name-only -r $HASH
-          echo "ici"
+          echo "git status"
+          git status -s
+          echo '$FILE value'
           FILE=$(git diff-tree --no-commit-id --name-only -r $HASH | grep PDFs/ | tail -n 1)
           echo "FILE=$FILE" >> $GITHUB_ENV
           echo "FILE=$FILE"
