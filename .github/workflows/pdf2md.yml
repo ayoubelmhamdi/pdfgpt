@@ -38,7 +38,7 @@ jobs:
           echo "FILE=$FILE"
           mkdir -p src/
           OUTPUT="${FILE#PDFs/}"
-          OUTPUT="src/${OUTPUT#.pdf}.md"
+          OUTPUT="src/${OUTPUT%.pdf}.md"
           echo "OUTPUT=$OUTPUT"
           echo python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract \> "$OUTPUT"
       - name: Commit and push changes
