@@ -21,12 +21,14 @@ jobs:
       - name: Get changed PDF file name
         run: |
           FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
-          # echo "FILE=$FILE" >> $GITHUB_ENV
-          export FILE=$FILE
+          echo "FILE=$FILE" >> $GITHUB_ENV
+          #export FILE=$FILE
       - name: Convert PDF to Markdown
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
+          echo $OPENAI_API_KEY
+          echo $FILE
           echo python pdf_to_paraphrase.py $FILE --ocr /usr/bin/tesseract \> src/$FILE.md
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
