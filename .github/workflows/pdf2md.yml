@@ -13,20 +13,23 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
-          pip install -r requirements.txt
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
+      #     pip install -r requirements.txt
       - name: Get changed PDF file name
         run: |
+          cat $GITHUB_EVENT_PATH
           FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
           echo "FILE=$FILE" >> $GITHUB_ENV
+          echo "FILE=$FILE"
           #export FILE=$FILE
       - name: Convert PDF to Markdown
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
+          source $GITHUB_ENV
           echo $OPENAI_API_KEY
           echo $FILE
           echo python pdf_to_paraphrase.py $FILE --ocr /usr/bin/tesseract \> src/$FILE.md
