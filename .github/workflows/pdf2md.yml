@@ -23,7 +23,7 @@ jobs:
           #cat $GITHUB_EVENT_PATH
           #FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
           jq -r '.commits[0].id' $GITHUB_EVENT_PATH
-          git diff-tree --no-commit-id --name-only -r $HASH | grep PDFs/
+          git diff-tree --no-commit-id --name-only -r $(jq -r '.commits[0].id' $GITHUB_EVENT_PATH) | grep PDFs/
           HASH=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH) # get the commit hash from the JSON file
           FILE=$(git diff-tree --no-commit-id --name-only -r $HASH | grep PDFs/ | tail -n 1)
           echo "FILE=$FILE" >> $GITHUB_ENV
