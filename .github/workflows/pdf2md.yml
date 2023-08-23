@@ -34,12 +34,9 @@ jobs:
         run: |
           #source $GITHUB_ENV
           echo "OPENAI_API_KEY=$OPENAI_API_KEY"
-          echo "ll $OPENAI_API_KEY ll" > file.txt
-          echo "file.txt"
-          head file.txt
           echo "FILE=$FILE"
           mkdir -p src/
-          echo python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract \> "src/$FILE.md"
+          python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "src/$FILE.md"
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
