@@ -43,6 +43,8 @@ jobs:
           echo "OUTPUT=$OUTPUT"
           echo python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "$OUTPUT"
       - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: init
