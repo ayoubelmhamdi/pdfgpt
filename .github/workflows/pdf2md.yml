@@ -1,0 +1,32 @@
+name: PDF to Markdown
+
+on:
+  push:
+    paths:
+      - 'PDFs/*.pdf'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
+          pip install -r requirements.txt
+      - name: Get changed PDF file name
+        run: |
+          FILE=$(jq -r '.commits[0].added[0]' $GITHUB_EVENT_PATH)
+          echo "FILE=$FILE" >> $GITHUB_ENV
+      - name: Convert PDF to Markdown
+        run: |
+          python pdf_to_paraphrase.py $FILE --ocr /usr/bin/tesseract > src/$FILE.md
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: init
+          branch: master
+          file_pattern: src/$FILE.md
+
