@@ -40,7 +40,7 @@ jobs:
 
           mkdir -p src/
           #python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "$OUTPUT" && rm -f "$FILE"
-          echo python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "$OUTPUT" # && rm -f "$FILE"
+          echo python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract > "$OUTPUT" && rm -f "$FILE"
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
