@@ -32,9 +32,12 @@ jobs:
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          OUTPUT="${FILE#PDFs/}"
-          OUTPUT="src/${OUTPUT%.pdf}.md"
           LANG="${FILE%_PDFs/*}"
+          
+          PREFIX="${LANG}_PDFs"
+          OUTPUT="${FILE#"${PREFIX}"/}"
+          OUTPUT="src/${OUTPUT%.pdf}.md"
+
           echo "OPENAI_API_KEY=$OPENAI_API_KEY"
           echo "FILE=$FILE"
           echo "OUTPUT=$OUTPUT"
