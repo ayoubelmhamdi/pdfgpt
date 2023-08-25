@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'En_PDFs/*.pdf'
-      - 'Fr_PDF_Fr/*.pdf'
+      - 'Fr_PDFs/*.pdf'
 
 jobs:
   convert:
