@@ -6,16 +6,7 @@ import sys
 import pytesseract
 from dotenv import load_dotenv
 from pdf2image.pdf2image import convert_from_path
-from pptgpt import list_correct_text_tokenized
-from pptgpt import list_correct_texts
-from pptgpt import list_of_splits_to_paraphrase
-
-# from pdf2image import convert_from_path
-
-# from pptgpt import list_correct_ppt_jsons
-# from pptgpt import list_garbage_json
-# from pptgpt import list_garbage_texts
-# from pptgpt import write_correct_ppt_jsons
+from pptgpt import CreateParaphrasing
 
 load_dotenv(".env", verbose=True, override=True)
 
@@ -42,47 +33,11 @@ def images_to_garbage_texts(images=None):
     return texts
 
 
-def garbage_texts_to_correct_texts(garbage_texts):
-    if garbage_texts is None:
-        print("E007: can not extract text from pdf/image", file=sys.stderr)
-        sys.exit(1)
-    return list_correct_texts(garbage_texts)
-
-
-def correct_text_to_tokenized(correct_texts):
-    # correct_texts = pdf_correct_texts(pdf_binary)
-    # correct_texts = [
-    #     "# H1\nAyoub",
-    #     "# H2\n## h1\n Long text",
-    # ]
-    if correct_texts is None:
-        print(
-            "E008: OPENAI can not return correct_texts",
-            file=sys.stderr,
-        )
-        sys.exit(1)
-
-    correct_text_str = ""
-    for text in correct_texts:
-        correct_text_str += text
-    return list_correct_text_tokenized(correct_text_str)
-
-
-def correct_texts_to_paraphrases(tokenizeds):
-    if tokenizeds is None:
-        print(
-            "E008: lang-chain can not tokenized the correct texts",
-            file=sys.stderr,
-        )
-        sys.exit(1)
-
-    return list_of_splits_to_paraphrase(tokenizeds)
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Paraphrasing a PDF file using API")
     parser.add_argument("file", type=str, help="Path to PDF file")
     parser.add_argument("-o", "--ocr", type=str, help="The ocr FILE_PATH")
+    parser.add_argument("-l", "--lang", type=str, help="The langague of PDF")
 
     args = parser.parse_args(sys.argv[1:])
 
@@ -98,38 +53,40 @@ if __name__ == "__main__":
         print("Please provide a ocr FILEPATH.", file=sys.stderr)
         sys.exit(2)
 
+    if args.lang is not None:
+        lang=args.lang
+    else:
+        lang="En"
+
     pdf = args.file
     ocr_path = args.ocr
 
-    # print( os.getenv("OPENAI_API_KEY"), file=sys.stderr)
-
     pytesseract.pytesseract.tesseract_cmd = ocr_path
 
-    # Images + garbage texts
+    #############################################################
+
     images = pdf_to_images(pdf)
     garbage_texts = images_to_garbage_texts(images)
     print("images ✔", file=sys.stderr)
 
-    print("\n# -------- GARBAGE TEXT -------\n")
+    print("# -------- GARBAGE TEXT -------\n")
     for page in garbage_texts:
         print(page, "\n\n")
     print("Garbage_texts ✔", file=sys.stderr)
 
-    print("\n# -------- CORRECT TEXTS -------\n")
-    correct_texts = garbage_texts_to_correct_texts(garbage_texts)
-    for page in correct_texts:
-        print(page, "\n\n")
-    print("Correct_texts ✔", file=sys.stderr)
+    #############################################################
+    paraphrases = (
+        CreateParaphrasing(
+            lang=lang,
+            garbage_texts=garbage_texts,
+        )
+        .list_correct_texts()
+        .correct_text_to_tokenized()
+        .list_of_splits_to_paraphrase()
+    )
 
-    # ToKENZIED
-    tokenizeds = correct_text_to_tokenized(correct_texts)
-    print("Tokenizeds ✔", file=sys.stderr)
-
-    print("\n# -------- PARAPHRASES -------\n")
-    paraphrases = correct_texts_to_paraphrases(tokenizeds)
-
+    print("\n# -------- PARAPHRASSING TEXT -------\n")
     total_chnks = len(paraphrases)
     for i, chunk in enumerate(paraphrases):
         print(f"chunk {i+1}/{total_chnks}", file=sys.stderr)
         print(chunk, "\n\n")
-    print("Paraphrases ✔", file=sys.stderr)
