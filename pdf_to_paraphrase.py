@@ -88,5 +88,5 @@ if __name__ == "__main__":
     print("\n# -------- PARAPHRASSING TEXT -------\n")
     total_chnks = len(paraphrases)
     for i, chunk in enumerate(paraphrases):
-        print(f"chunk {i+1}/{total_chnks}", file=sys.stderr)
+        print(f"chunk {i+1}/{total_chnks} ✔", file=sys.stderr)
         print(chunk, "\n\n")
