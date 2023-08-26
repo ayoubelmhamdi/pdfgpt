@@ -69,9 +69,11 @@ if __name__ == "__main__":
     garbage_texts = images_to_garbage_texts(images)
     print("images ✔", file=sys.stderr)
 
-    print("# -------- GARBAGE TEXT -------\n")
-    for page in garbage_texts:
-        print(page, "\n\n")
+    # TODO: use open with to store to src/file.pdf.garbage.md
+    # TODO: paraphrasing to src/file.pdf.paraphrasing.md
+    # print("# -------- GARBAGE TEXT -------\n")
+    # for page in garbage_texts:
+    #     print(page, "\n\n")
     print("Garbage_texts ✔", file=sys.stderr)
 
     #############################################################
