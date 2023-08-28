@@ -1,0 +1,59 @@
+{
+  "sha": "67d3502385031e4f2c8107f3b879956dec18d16c",
+  "node_id": "C_kwDOKJ8lwdoAKDY3ZDM1MDIzODUwMzFlNGYyYzgxMDdmM2I4Nzk5NTZkZWMxOGQxNmM",
+  "commit": {
+    "author": {
+      "name": "Ayoub EL Mhamdi",
+      "email": "ayoub.elmhamdi@gmail.com",
+      "date": "2023-08-28T10:31:03Z"
+    },
+    "committer": {
+      "name": "Ayoub EL Mhamdi",
+      "email": "ayoub.elmhamdi@gmail.com",
+      "date": "2023-08-28T10:31:03Z"
+    },
+    "message": "init en_PDFs/p20.pdf in: 2023-08-28",
+    "tree": {
+      "sha": "78134460b42ad5006db96d879e589f2c460e600b",
+      "url": "https://api.github.com/repos/ayoubelmhamdi/pdfgpt/git/trees/78134460b42ad5006db96d879e589f2c460e600b"
+    },
+    "url": "https://api.github.com/repos/ayoubelmhamdi/pdfgpt/git/commits/67d3502385031e4f2c8107f3b879956dec18d16c",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null
+    }
+  },
+  "url": "https://api.github.com/repos/ayoubelmhamdi/pdfgpt/commits/67d3502385031e4f2c8107f3b879956dec18d16c",
+  "html_url": "https://github.com/ayoubelmhamdi/pdfgpt/commit/67d3502385031e4f2c8107f3b879956dec18d16c",
+  "comments_url": "https://api.github.com/repos/ayoubelmhamdi/pdfgpt/commits/67d3502385031e4f2c8107f3b879956dec18d16c/comments",
+  "author": null,
+  "committer": null,
+  "parents": [
+    {
+      "sha": "02758e0ca93709f44c030ded83fc6a1a119897e4",
+      "url": "https://api.github.com/repos/ayoubelmhamdi/pdfgpt/commits/02758e0ca93709f44c030ded83fc6a1a119897e4",
+      "html_url": "https://github.com/ayoubelmhamdi/pdfgpt/commit/02758e0ca93709f44c030ded83fc6a1a119897e4"
+    }
+  ],
+  "stats": {
+    "total": 0,
+    "additions": 0,
+    "deletions": 0
+  },
+  "files": [
+    {
+      "sha": "6c00f6a0b263cf07fd66d29be2ff0d3a569fc0e8",
+      "filename": "en_PDFs/p20.pdf",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "blob_url": "https://github.com/ayoubelmhamdi/pdfgpt/blob/67d3502385031e4f2c8107f3b879956dec18d16c/en_PDFs%2Fp20.pdf",
+      "raw_url": "https://github.com/ayoubelmhamdi/pdfgpt/raw/67d3502385031e4f2c8107f3b879956dec18d16c/en_PDFs%2Fp20.pdf",
+      "contents_url": "https://api.github.com/repos/ayoubelmhamdi/pdfgpt/contents/en_PDFs%2Fp20.pdf?ref=67d3502385031e4f2c8107f3b879956dec18d16c"
+    }
+  ]
+}
