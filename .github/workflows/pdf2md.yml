@@ -3,8 +3,8 @@ name: PDF to Markdown
 on:
   push:
     paths:
-      - 'En_PDFs/*.pdf'
-      - 'Fr_PDFs/*.pdf'
+      - 'en_PDFs/*.pdf'
+      - 'fr_PDFs/*.pdf'
 
 jobs:
   convert:
@@ -39,11 +39,11 @@ jobs:
           OUTPUT="src/${OUTPUT%.pdf}.md"
 
           echo "OPENAI_API_KEY=$OPENAI_API_KEY"
+          echo "LANG=$LANG"
           echo "FILE=$FILE"
           echo "OUTPUT=$OUTPUT"
-          echo "LANG=$LANG"
 
-          mkdir -p src/
+          mkdir -p src/ en_PDFs/ fr_PDFs/
 
           # in debian /bin/tesseract not /bin/tesseract-ocr
           #python3 pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract --lang "$LANG" > "$OUTPUT" && rm -f "$FILE"
