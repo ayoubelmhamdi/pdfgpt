@@ -69,7 +69,7 @@ if __name__ == "__main__":
     if args.lang is not None:
         lang = args.lang
     else:
-        lang = "En"
+        lang = "en"
 
     if not args.llm:
         print("Please provide at least one task for LLM.", file=sys.stderr)
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     #################################################
 
     lists = CreateParaphrasing(
-        lang="fr",
+        lang=lang,
         input_texts=garbage_texts,
         Tasks=args.llm,  # "child"],
     ).list_tasks()
