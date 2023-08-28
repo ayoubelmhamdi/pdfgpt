@@ -31,7 +31,6 @@ def images_to_garbage_texts(images=None):
         except KeyError as e:
             print(f"ocr not found or because of {e}", file=sys.stderr)
 
-
     if len(texts) == 0:
         sys.exit(1)
     return texts
@@ -75,12 +74,12 @@ if __name__ == "__main__":
     else:
         lang = "en"
 
-    if not args.llm:
+    if not args.llm or len(args.llm) == 0:
         print("Please provide at least one task for LLM.", file=sys.stderr)
         sys.exit(3)
-    
+
     if not is_valid_subset(args.llm):
-        raise ValueError("--llm not include in taks that implemented")
+        raise ValueError("--llm task not included implimented tasks")
 
     #################################################
 
