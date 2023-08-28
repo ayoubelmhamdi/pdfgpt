@@ -45,7 +45,8 @@ jobs:
 
           mkdir -p src/
 
-          python pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract --lang "$LANG" > "$OUTPUT" && rm -f "$FILE"
+          #python3 pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract --lang "$LANG" > "$OUTPUT" && rm -f "$FILE"
+          python3 llmtask.py --lang "$LANG" --ocr /usr/bin/tesseract-ocr --llm correct_ocr --llm paraphrasing --file "$FILE" 1>"$OUTPUT" && rm -f "$FILE"
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
