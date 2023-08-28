@@ -24,11 +24,17 @@ jobs:
         run: |
           #cat $GITHUB_EVENT_PATH
           du -h -d0 .
-          HASH=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH)
-          echo "HASH:$HASH"
+          jq . $GITHUB_EVENT_PATH
+
+          HASH0=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH)
+          HASH1=$(jq -r '.commits[1].id' $GITHUB_EVENT_PATH)
+          echo "HASH0:$HASH0"
+          echo "HASH1:$HASH1"
           #TODO while not empty
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH > hash.json
-          FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash.json | grep pdf | head -1)"
+          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH0 > hash0.json
+          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH1 > hash1.json
+          FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash0.json | grep pdf | head -1)"
+          [ -z "$FILE" ] && FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash1.json | grep pdf | head -1)"
           echo "FILE=$FILE"
           echo "FILE=$FILE" >> $GITHUB_ENV
       - name: Convert PDF to Markdown
