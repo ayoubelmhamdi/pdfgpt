@@ -54,9 +54,9 @@ if __name__ == "__main__":
         sys.exit(2)
 
     if args.lang is not None:
-        lang=args.lang
+        lang = args.lang
     else:
-        lang="En"
+        lang = "En"
 
     pdf = args.file
     ocr_path = args.ocr
