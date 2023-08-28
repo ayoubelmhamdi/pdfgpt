@@ -23,13 +23,14 @@ pdf_lang(){
   [ -z "$lang" ] && echo "no lang provide" && return 1
   [ ! -f "$pdf_file" ] && echo "does no $pdf_file" && return 1
 
-  cat /dev/null > tasks.txt
 
+  shift 1
   text=""
-  for arg in "${@:2:$#-2}"; do
-   text+="--llm $arg\n"
+  for arg in "${@}"; do
+    if [ ! "$arg" = "$pdf_file" ];then
+      text+="--llm $arg\n"
+    fi
   done
-  echo -e "$text" > tasks.txt
 
   pdf_path="$(realpath "$pdf_file")"
 
@@ -43,8 +44,12 @@ pdf_lang(){
     git pull origin master || { echo "can not pull" && return 1;}
 
 
+    cat /dev/null > ./tasks.txt
+    echo -e "$text" > ./tasks.txt
+
     git add tasks.txt
-    git commit -m"modify tasks.txt in: $(date +%Y-%m-%d)"
+    git commit -m"modify tasks.txt in: $(date +%Y-%m-%d)" ./tasks.txt
+    git push -u origin master
 
     output_pdf="${lang}_PDFs/$pdf_file"
     mkdir -p "${lang}_PDFs/"
@@ -52,7 +57,7 @@ pdf_lang(){
     [ ! -f "$output_pdf" ] && echo "there is no $output_pdf" && return 1
 
     git add "$output_pdf"
-    git commit -m"init $output_pdf in: $(date +%Y-%m-%d)"
+    git commit -m"init $output_pdf in: $(date +%Y-%m-%d)" "$output_pdf"
 
     git push -u origin master
   fi
