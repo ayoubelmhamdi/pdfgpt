@@ -25,6 +25,8 @@ jobs:
           #cat $GITHUB_EVENT_PATH
           du -h -d0 .
           HASH=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH)
+          echo "HASH:$HASH"
+          #TODO while not empty
           curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH > hash.json
           FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash.json | grep pdf | head -1)"
           echo "FILE=$FILE"
