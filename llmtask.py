@@ -25,8 +25,12 @@ def images_to_garbage_texts(images=None):
     texts = []
     num_images = len(images)
     for i in range(num_images):
-        print(f"ocr image {i+1}/{num_images} ✔", file=sys.stderr)
-        texts.append(pytesseract.image_to_string(images[i]))
+        try:
+            texts.append(pytesseract.image_to_string(images[i]))
+            print(f"ocr image {i+1}/{num_images} ✔", file=sys.stderr)
+        except KeyError as e:
+            print(f"ocr not found or because of {e}", file=sys.stderr)
+
 
     if len(texts) == 0:
         sys.exit(1)
