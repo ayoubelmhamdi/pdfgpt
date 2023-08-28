@@ -1,1 +1,4 @@
+--llm correct_ocr
+--llm paraphrasing
+--llm p12.pdf
 
