@@ -42,6 +42,7 @@ jobs:
           echo "FILE=$FILE"
           echo "OUTPUT=$OUTPUT"
           echo "LANG=$LANG"
+          which tesseract-ocr
 
           mkdir -p src/
 
