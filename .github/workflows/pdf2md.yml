@@ -61,10 +61,12 @@ jobs:
           echo "${tasks[*]}"
           eval "python3 llmtask.py ${tasks[*]} --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT && rm -f $FILE && cat /dev/null > ./tasks.txt"
       - name: Commit and push changes
+        # suggestions
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: init
           branch: master
-          #file_pattern: src/*.md
+          fetch-depth: 0
+          pull_strategy: REBASE # MERGE or REBASE
