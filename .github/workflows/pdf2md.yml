@@ -80,4 +80,5 @@ jobs:
           branch: master
           skip_fetch: false
           skip_checkout: false
-          push_options: --rebase
+          push_options: --force
+          commit_options: --no-verify
