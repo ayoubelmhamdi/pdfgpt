@@ -3,4 +3,6 @@ res*.md
 hash.json
 hash0.json
 hash1.json
-
+vscode/
+venv/
+.vscode/
