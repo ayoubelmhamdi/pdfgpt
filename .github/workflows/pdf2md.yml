@@ -73,6 +73,7 @@ jobs:
             tasks+=("$line")
           done < tasks.txt
           echo "${tasks[*]}"
+          echo eval "python3 llmtask.py ${tasks[*]} --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT; rm -f $FILE && cat /dev/null > ./tasks.txt"
           eval "python3 llmtask.py ${tasks[*]} --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT; rm -f $FILE && cat /dev/null > ./tasks.txt"
 
       - name: Commit and push changes
