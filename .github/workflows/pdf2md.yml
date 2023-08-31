@@ -15,12 +15,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # - name: Install dependencies
-      #   run: |
-      #     sudo apt update
-      #     sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
-      #     pip install -r requirements.txt
-      #     pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
+          pip install -r requirements.txt
+          pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker
 
       - name: Get changed PDF file name
         run: |
