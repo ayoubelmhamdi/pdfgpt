@@ -61,6 +61,10 @@ jobs:
           readarray -t tasks < ./tasks.txt
           echo "${tasks[*]}"
           echo eval "python3 llmtask.py ${tasks[*]} --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT && rm -f $FILE && cat /dev/null > ./tasks.txt"
+
+          # remove
+          echo "sleep 300"
+          sleep 300
       - name: Commit and push changes
         # suggestions
         env:
