@@ -14,12 +14,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
-          pip install -r requirements.txt
-          pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker
+
+      # - name: Install dependencies
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
+      #     pip install -r requirements.txt
+      #     pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker
       - name: Get changed PDF file name
         run: |
           #cat $GITHUB_EVENT_PATH
@@ -59,7 +60,7 @@ jobs:
           #python3 llmtask.py --lang "$LANG" --ocr /usr/bin/tesseract --llm correct_ocr --llm paraphrasing --file "$FILE" 1>"$OUTPUT" && rm -f "$FILE"
           readarray -t tasks < ./tasks.txt
           echo "${tasks[*]}"
-          eval "python3 llmtask.py ${tasks[*]} --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT && rm -f $FILE && cat /dev/null > ./tasks.txt"
+          echo eval "python3 llmtask.py ${tasks[*]} --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT && rm -f $FILE && cat /dev/null > ./tasks.txt"
       - name: Commit and push changes
         # suggestions
         env:
@@ -68,5 +69,8 @@ jobs:
         with:
           commit_message: init
           branch: master
-          fetch-depth: 0
-          pull_strategy: REBASE # MERGE or REBASE
+          # fetch-depth: 0
+          # pull_strategy: REBASE # MERGE or REBASE
+          skip_fetch: false
+          skip_checkout: false
+          push_options: --rebase
