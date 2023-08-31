@@ -21,6 +21,7 @@ jobs:
       #     sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
       #     pip install -r requirements.txt
       #     pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker
+
       - name: Get changed PDF file name
         run: |
           #cat $GITHUB_EVENT_PATH
@@ -38,6 +39,7 @@ jobs:
           [ -z "$FILE" ] && FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash1.json | grep pdf | head -1)"
           echo "FILE=$FILE"
           echo "FILE=$FILE" >> $GITHUB_ENV
+
       - name: Convert PDF to Markdown
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -58,13 +60,18 @@ jobs:
           # in debian /bin/tesseract not /bin/tesseract-ocr
           #python3 pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract --lang "$LANG" > "$OUTPUT" && rm -f "$FILE"
           #python3 llmtask.py --lang "$LANG" --ocr /usr/bin/tesseract --llm correct_ocr --llm paraphrasing --file "$FILE" 1>"$OUTPUT" && rm -f "$FILE"
-          readarray -t tasks < ./tasks.txt
+          # readarray -t tasks < ./tasks.txt
+          tasks=()
+          
+          # loop through the file and read each line
+          while IFS="" read -r line || [ -n "$line" ]; do
+            # append the line to the array
+            tasks+=("$line")
+          done < tasks.txt
           echo "${tasks[*]}"
+          #remove
           echo eval "python3 llmtask.py ${tasks[*]} --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT && rm -f $FILE && cat /dev/null > ./tasks.txt"
 
-          # remove
-          echo "sleep 300"
-          sleep 300
       - name: Commit and push changes
         # suggestions
         env:
