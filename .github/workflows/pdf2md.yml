@@ -40,6 +40,10 @@ jobs:
           echo "FILE=$FILE"
           echo "FILE=$FILE" >> $GITHUB_ENV
 
+          # assert faield if no FILE=null
+          echo "ls $FILE"
+          ls "$FILE"
+
       - name: Convert PDF to Markdown
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
