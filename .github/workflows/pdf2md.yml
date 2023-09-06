@@ -74,8 +74,10 @@ jobs:
           done < tasks.txt
           echo "${tasks[*]}"
 
-          echo eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || echo some errors"
-          eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || echo some errors"
+          CONVERSION=true
+          echo eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false; echo some errors ;}"
+          eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false echo; some errors ;}"
+          echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV
 
           echo "rm -f $FILE"
           rm -f "$FILE"
@@ -94,3 +96,7 @@ jobs:
           skip_checkout: false
           push_options: --force
           commit_options: --no-verify
+
+      - name: Test if the Conversion is done
+        run: |
+          $CONVERSION && conversion is Done || exit 1
