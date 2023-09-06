@@ -99,4 +99,4 @@ jobs:
 
       - name: Test if the Conversion is done
         run: |
-          $CONVERSION && conversion is Done || exit 1
+          [ $CONVERSION ] && conversion is Done || exit 1
