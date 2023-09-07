@@ -77,6 +77,8 @@ jobs:
           CONVERSION=true
           echo eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false; echo some errors ;}"
           eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false echo; some errors ;}"
+
+          echo "CONVERSION=$CONVERSION \>\> $GITHUB_ENV"
           echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV
 
           echo "rm -f $FILE"
@@ -99,4 +101,4 @@ jobs:
 
       - name: Test if the Conversion is done
         run: |
-          [ $CONVERSION ] && conversion is Done || exit 1
+          [ $CONVERSION ] && echo conversion is Done || exit 1
