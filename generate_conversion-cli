@@ -1,0 +1,62 @@
+#!/bin/bash
+
+clear
+cmd=""
+
+select lang_option in 'English (en)' 'French (fr)'; do
+  case $lang_option in
+    'English (en)')
+      lang='en'
+      break
+      ;;
+    'French (fr)')
+      lang='fr'
+      break
+      ;;
+    *)
+      echo 'Invalid option'
+      exit 1
+      ;;
+  esac
+done
+
+clear
+
+select task_option in 'Ocr to correcte text' 'Paraphrase text for beginner'; do
+  case $task_option in
+    'Ocr to correcte text')
+      task='correct_ocr'
+      break
+      ;;
+    'Paraphrase text for beginner')
+      task='paraphrasing'
+      break
+      ;;
+    *)
+      echo 'Invalid option'
+      exit 1
+      ;;
+  esac
+done
+
+
+clear
+
+file="${1:-/tmp/1.pdf}"
+output="file.md"
+
+cmd=""
+cmd+="CONVERSION=false\n"
+cmd+="\n"
+cmd+="if python3 llmtask.py "
+cmd+="--lang $lang "
+cmd+="--ocr /usr/bin/tesseract "
+cmd+="--llm $task "
+cmd+="--file $file "
+cmd+="1>$output"
+cmd+="; then\n"
+cmd+="    CONVERSION=false\n"
+cmd+="    echo \"some errors\"\n"
+cmd+="fi"
+
+echo -e "$cmd"
