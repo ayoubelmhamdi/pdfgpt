@@ -3,44 +3,73 @@
 clear
 cmd=""
 
-select lang_option in 'English (en)' 'French (fr)'; do
-  case $lang_option in
-    'English (en)')
-      lang='en'
+remove_task() {
+  local task_option="$1"
+  index=0
+  for i in "${!tasks[@]}"; do
+    if [[ "${tasks[i]}" == "$task_option" ]]; then
+      index=$i
       break
-      ;;
-    'French (fr)')
-      lang='fr'
-      break
-      ;;
-    *)
-      echo 'Invalid option'
-      exit 1
-      ;;
-  esac
-done
+    fi
+  done
+  unset "tasks[$index]"
+  tasks=("${tasks[@]}")  # Remove empty placeholders
+}
+
+#1langs=('English (en)' 'French (fr)')
+#1select lang_option in "${langs[@]}"; do
+#1  case $lang_option in
+#1    'English (en)')
+#1      lang='en'
+#1      break
+#1      ;;
+#1    'French (fr)')
+#1      lang='fr'
+#1      break
+#1      ;;
+#1    *)
+#1      echo 'Invalid option'
+#1      exit 1
+#1      ;;
+#1  esac
+#1done
 
 clear
 
-select task_option in 'Ocr to correcte text' 'Paraphrase text for beginner'; do
-  case $task_option in
-    'Ocr to correcte text')
-      task='correct_ocr'
-      break
-      ;;
-    'Paraphrase text for beginner')
-      task='paraphrasing'
-      break
-      ;;
-    *)
-      echo 'Invalid option'
-      exit 1
-      ;;
-  esac
+tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'pass')
+
+need_more_task=true
+while $need_more_task;do
+  if [ ${#tasks[@]} -le 1  ];then
+    break
+  fi
+  select task_option in "${tasks[@]}" ; do
+    case $task_option in
+      'Ocr to correcte text')
+        task+='--llm correct_ocr '
+        remove_task "$task_option"
+        break
+        ;;
+      'Paraphrase text for beginner')
+        task+='--llm correct_ocr '
+        remove_task "$task_option"
+        break
+        ;;
+      'pass')
+        need_more_task=false
+        break
+        ;;
+      *)
+        echo 'Invalid option'
+        exit 1
+        ;;
+    esac
+  done
 done
 
 
-clear
+# clear
+exit 1
 
 file="${1:-/tmp/1.pdf}"
 output="file.md"
@@ -51,7 +80,7 @@ cmd+="\n"
 cmd+="if python3 llmtask.py "
 cmd+="--lang $lang "
 cmd+="--ocr /usr/bin/tesseract "
-cmd+="--llm $task "
+cmd+="$task "
 cmd+="--file $file "
 cmd+="1>$output"
 cmd+="; then\n"
