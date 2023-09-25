@@ -16,23 +16,23 @@ remove_task() {
   tasks=("${tasks[@]}")  # Remove empty placeholders
 }
 
-#1langs=('English (en)' 'French (fr)')
-#1select lang_option in "${langs[@]}"; do
-#1  case $lang_option in
-#1    'English (en)')
-#1      lang='en'
-#1      break
-#1      ;;
-#1    'French (fr)')
-#1      lang='fr'
-#1      break
-#1      ;;
-#1    *)
-#1      echo 'Invalid option'
-#1      exit 1
-#1      ;;
-#1  esac
-#1done
+langs=('English (en)' 'French (fr)')
+select lang_option in "${langs[@]}"; do
+  case $lang_option in
+    'English (en)')
+      lang='en'
+      break
+      ;;
+    'French (fr)')
+      lang='fr'
+      break
+      ;;
+    *)
+      echo 'Invalid option'
+      exit 1
+      ;;
+  esac
+done
 
 clear
 
@@ -57,6 +57,10 @@ while $need_more_task;do
         ;;
       'pass')
         need_more_task=false
+        if [ -z "$task" ];then
+          echo "We should provide at least one task"
+          exit 1
+        fi
         break
         ;;
       *)
@@ -67,9 +71,9 @@ while $need_more_task;do
   done
 done
 
-
-# clear
-exit 1
+# exit 1
+clear
+# exit 1
 
 file="${1:-/tmp/1.pdf}"
 output="file.md"
