@@ -50,6 +50,8 @@ jobs:
           # This assumes your book is in the root of your repository.
           # Just Add a `cd` here if you need to change to another directory.
           mdbook build
+          echo "pwd"
+          pwd
       - name: Deploy GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
