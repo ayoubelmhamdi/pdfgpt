@@ -54,9 +54,8 @@ jobs:
           pwd
           echo "ls"
           ls
-      - name: Deploy GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - uses: rust-lang/simpleinfra/github-actions/static-websites@master
         with:
-          folder: book/
-          force: true
-          clean-exclude: pr-preview/
+          deploy_dir: book
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository_owner == 'rust-lang'
