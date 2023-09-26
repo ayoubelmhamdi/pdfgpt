@@ -47,6 +47,11 @@ jobs:
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
+          echo "mkdir -p ./src/"
+          mkdir -p ./src/
+          echo "cat -n ./convert.sh"
+          cat -n ./convert.sh
+          echo "bash ./convert.sh"
           bash ./convert.sh
           #3LANG="${FILE%_PDFs/*}"
           #3
