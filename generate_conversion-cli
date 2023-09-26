@@ -109,6 +109,7 @@ main(){
   cmd+='then\n'
   cmd+='    CONVERSION=false\n'
   cmd+='    echo "some errors"\n'
+  cmd+='    exit 1\n'
   cmd+='fi\n\n'
   cmd+='echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"'
   
