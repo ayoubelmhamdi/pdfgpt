@@ -50,12 +50,9 @@ jobs:
           # This assumes your book is in the root of your repository.
           # Just Add a `cd` here if you need to change to another directory.
           mdbook build
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
-      - name: Build with mdBook
-        run: mdbook build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: ./book
+          folder: book/html
+          force: false
+          clean-exclude: pr-preview/
