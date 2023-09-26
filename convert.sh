@@ -14,3 +14,5 @@ then
 fi
 
 echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"
+
+echo "Ayoub"
