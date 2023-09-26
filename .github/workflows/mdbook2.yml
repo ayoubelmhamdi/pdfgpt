@@ -58,5 +58,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: book/
-          force: false
+          force: true
           clean-exclude: pr-preview/
