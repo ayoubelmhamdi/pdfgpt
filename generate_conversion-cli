@@ -14,66 +14,22 @@ main(){
     exit 1
   fi
 
-  output="./src/file.md"
+  case "$file" in
+      *.pdf) 
+          name="${file##*/}"
+          name="${name%.pdf}"
+          output="./src/${name}.md"
+          if [ -e "$output" ];then
+            output="./src/${name}-$(date +%Y-%m-%d-%H:%M).md"
+          fi
+          ;;
+      *)
+          echo "File has an unsupported extension"
+          exit 1
+          ;;
+  esac
 
   cmd=""
-  # langs=('English (en)' 'French (fr)')
-  # select lang_option in "${langs[@]}"; do
-  #   case $lang_option in
-  #     'English (en)')
-  #       lang='en'
-  #       break
-  #       ;;
-  #     'French (fr)')
-  #       lang='fr'
-  #       break
-  #       ;;
-  #     *)
-  #       lang='en'
-  #       break
-  #       ;;
-  #   esac
-  # done
-  
-  # tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase')
-  # selected_tasks=()
-  # task=""
-  # need_more_task=true
-  # while $need_more_task;do
-  #   clear
-  #   if [ ${#tasks[@]} -le 1  ];then
-  #     break
-  #   fi
-  #   select task_option in "${tasks[@]}" ; do
-  #     case $task_option in
-  #       'Ocr to correcte text')
-  #         selected_tasks+=('--llm correct_ocr ')
-  #         remove_task "$task_option"
-  #         break
-  #         ;;
-  #       'Paraphrase text for beginner')
-  #         selected_tasks+=('--llm paraphrasing ')
-  #         remove_task "$task_option"
-  #         break
-  #         ;;
-  #       'Ocr then paraphrase')
-  #         selected_tasks+=('--llm correct_ocr --llm paraphrasing ')
-  #         remove_task 'Ocr to correcte text'
-  #         remove_task 'Paraphrase text for beginner'
-  #         remove_task "$task_option"
-  #         break
-  #         ;;
-  #       *)
-  #         need_more_task=false
-  #         if [ ${#tasks[@]} -lt 1  ];then
-  #           echo "We should provide at least one task"
-  #           exit 1
-  #         fi
-  #         break
-  #         ;;
-  #     esac
-  #   done
-  # done
 
   lang=$(select_language)
 
@@ -130,21 +86,22 @@ main(){
   clear
   
   cmd=''
+  cmd+='#!/bin/bash\n\n'
   cmd+='CONVERSION=true\n'
   cmd+='\n'
-  cmd+='if ! python3 llmtask.py '
-  cmd+="--lang $lang "
-  cmd+='--ocr /usr/bin/tesseract '
-  cmd+="$task "
-  cmd+="--file $file "
-  cmd+="1>$output"
-  cmd+='; then\n'
+  cmd+='if ! python3 llmtask.py                \\\n'
+  cmd+='    --ocr /usr/bin/tesseract           \\\n'
+  cmd+="    --lang $lang                          \\\\\n"
+  cmd+="    $task \\\\\n"
+  cmd+="    --file $file \\\\\n"
+  cmd+="    1>$output\n"
+  cmd+='then\n'
   cmd+='    CONVERSION=false\n'
   cmd+='    echo "some errors"\n'
   cmd+='fi\n\n'
-  cmd+='echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV'
+  cmd+='echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"'
   
-  echo -e "$cmd"
+  echo -e "$cmd" > ./convert.sh
 }
 
 remove_task() {
