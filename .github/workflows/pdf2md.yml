@@ -3,7 +3,7 @@ name: PDF to Markdown
 on:
   push:
     paths:
-      - './convert.sh'
+      - 'convert.sh'
 
 jobs:
   convert:
