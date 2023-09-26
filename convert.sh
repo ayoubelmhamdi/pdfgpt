@@ -11,7 +11,8 @@ if ! python3 llmtask.py                \
 then
     CONVERSION=false
     echo "some errors"
+    exit 1
 fi
 
-echo "Ayoub05"
+echo "Ayoub06"
 echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"
