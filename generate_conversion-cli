@@ -90,10 +90,10 @@ main(){
 
     echo "Available tasks:" >&2
     for ((i = 0; i < ${#tasks[@]}; i++)); do
-      echo "$((i + 1)) ${tasks[i]}" >&2
+      echo "$((i + 1))) ${tasks[i]}" >&2
     done
 
-    read -rp "Enter the task number to add (default is none): " choice
+    read -rp "Enter the task number to add (default is 3): " choice
     clear
     if [ -z "$choice" ]; then
       choice=$default_option
@@ -161,12 +161,12 @@ remove_task() {
 }
 
 select_language() {
-  langs=('English (en)' 'French (fr)')
+  langs=('English' 'French')
   default_option=1
 
   echo "Select a language (default is English):" >&2
   for ((i=0; i<${#langs[@]}; i++)); do
-    echo "$((i+1)) ${langs[i]}" >&2
+    echo "$((i+1))) ${langs[i]}" >&2
   done
 
   read -rp "Enter your choice (default is $default_option): " choice >&2
