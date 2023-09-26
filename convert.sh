@@ -13,4 +13,5 @@ then
     echo "some errors"
 fi
 
+echo "Ayoub"
 echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"
