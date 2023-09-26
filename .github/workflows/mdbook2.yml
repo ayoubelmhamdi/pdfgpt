@@ -52,6 +52,8 @@ jobs:
           mdbook build
           echo "pwd"
           pwd
+          echo "ls"
+          ls
       - name: Deploy GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
