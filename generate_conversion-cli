@@ -1,8 +1,98 @@
 #!/bin/bash
 # shellcheck disable=2016
 
-clear
-cmd=""
+
+main(){
+  cmd=""
+  langs=('English (en)' 'French (fr)')
+  select lang_option in "${langs[@]}"; do
+    case $lang_option in
+      'English (en)')
+        lang='en'
+        break
+        ;;
+      'French (fr)')
+        lang='fr'
+        break
+        ;;
+      *)
+        echo 'Invalid option'
+        exit 1
+        ;;
+    esac
+  done
+  
+  tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase' 'pass')
+  selected_tasks=()
+  # set -x
+  task=""
+  need_more_task=true
+  while $need_more_task;do
+    clear
+    if [ ${#tasks[@]} -le 1  ];then
+      break
+    fi
+    select task_option in "${tasks[@]}" ; do
+      case $task_option in
+        'Ocr to correcte text')
+          selected_tasks+=('--llm correct_ocr ')
+          remove_task "$task_option"
+          break
+          ;;
+        'Paraphrase text for beginner')
+          selected_tasks+=('--llm paraphrasing ')
+          remove_task "$task_option"
+          break
+          ;;
+        'Ocr then paraphrase')
+          selected_tasks+=('--llm correct_ocr --llm paraphrasing ')
+          remove_task 'Ocr to correcte text'
+          remove_task 'Paraphrase text for beginner'
+          remove_task "$task_option"
+          break
+          ;;
+        'pass')
+          need_more_task=false
+          if [ ${#tasks[@]} -lt 1  ];then
+            echo "We should provide at least one task"
+            exit 1
+          fi
+          break
+          ;;
+        *)
+          echo 'Invalid option'
+          exit 1
+          ;;
+      esac
+    done
+  done
+  
+  task=$(printf "%s" "${selected_tasks[@]}")
+  echo "$task"
+  
+  # exit 1
+  clear
+  
+  file="${1:-/tmp/1.pdf}"
+  output="file.md"
+  
+  cmd=''
+  cmd+='CONVERSION=true\n'
+  cmd+='\n'
+  cmd+='if ! python3 llmtask.py '
+  cmd+="--lang $lang "
+  cmd+='--ocr /usr/bin/tesseract '
+  cmd+="$task "
+  cmd+="--file $file "
+  cmd+="1>$output"
+  cmd+='; then\n'
+  cmd+='    CONVERSION=false\n'
+  cmd+='    echo "some errors"\n'
+  cmd+='fi\n\n'
+  cmd+='echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV'
+  
+  echo -e "$cmd"
+}
 
 remove_task() {
   local task_option="$1"
@@ -17,93 +107,5 @@ remove_task() {
   tasks=("${tasks[@]}")  # Remove empty placeholders
 }
 
-langs=('English (en)' 'French (fr)')
-select lang_option in "${langs[@]}"; do
-  case $lang_option in
-    'English (en)')
-      lang='en'
-      break
-      ;;
-    'French (fr)')
-      lang='fr'
-      break
-      ;;
-    *)
-      echo 'Invalid option'
-      exit 1
-      ;;
-  esac
-done
-
 clear
-
-tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase' 'pass')
-selected_tasks=()
-# set -x
-task=""
-need_more_task=true
-while $need_more_task;do
-  clear
-  if [ ${#tasks[@]} -le 1  ];then
-    break
-  fi
-  select task_option in "${tasks[@]}" ; do
-    case $task_option in
-      'Ocr to correcte text')
-        selected_tasks+=('--llm correct_ocr ')
-        remove_task "$task_option"
-        break
-        ;;
-      'Paraphrase text for beginner')
-        selected_tasks+=('--llm paraphrasing ')
-        remove_task "$task_option"
-        break
-        ;;
-      'Ocr then paraphrase')
-        selected_tasks+=('--llm correct_ocr --llm paraphrasing ')
-        remove_task 'Ocr to correcte text'
-        remove_task 'Paraphrase text for beginner'
-        remove_task "$task_option"
-        break
-        ;;
-      'pass')
-        need_more_task=false
-        if [ ${#tasks[@]} -lt 1  ];then
-          echo "We should provide at least one task"
-          exit 1
-        fi
-        break
-        ;;
-      *)
-        echo 'Invalid option'
-        exit 1
-        ;;
-    esac
-  done
-done
-
-task=$(printf "%s" "${selected_tasks[@]}")
-echo "$task"
-
-# exit 1
-clear
-
-file="${1:-/tmp/1.pdf}"
-output="file.md"
-
-cmd=''
-cmd+='CONVERSION=true\n'
-cmd+='\n'
-cmd+='if ! python3 llmtask.py '
-cmd+="--lang $lang "
-cmd+='--ocr /usr/bin/tesseract '
-cmd+="$task "
-cmd+="--file $file "
-cmd+="1>$output"
-cmd+='; then\n'
-cmd+='    CONVERSION=false\n'
-cmd+='    echo "some errors"\n'
-cmd+='fi\n\n'
-cmd+='echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV'
-
-echo -e "$cmd"
+main "$@"
