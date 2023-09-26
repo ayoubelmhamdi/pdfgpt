@@ -3,78 +3,131 @@
 
 
 main(){
+  file="${1:-}"
+  if [ -z "$file" ];then
+    echo "the is no file provided" 
+    exit 1
+  fi
+
+  if [ ! -e "$file" ];then
+    echo "the is no file exist called $file" 
+    exit 1
+  fi
+
+  output="./src/file.md"
+
   cmd=""
-  langs=('English (en)' 'French (fr)')
-  select lang_option in "${langs[@]}"; do
-    case $lang_option in
-      'English (en)')
-        lang='en'
-        break
-        ;;
-      'French (fr)')
-        lang='fr'
-        break
-        ;;
-      *)
-        echo 'Invalid option'
-        exit 1
-        ;;
-    esac
-  done
+  # langs=('English (en)' 'French (fr)')
+  # select lang_option in "${langs[@]}"; do
+  #   case $lang_option in
+  #     'English (en)')
+  #       lang='en'
+  #       break
+  #       ;;
+  #     'French (fr)')
+  #       lang='fr'
+  #       break
+  #       ;;
+  #     *)
+  #       lang='en'
+  #       break
+  #       ;;
+  #   esac
+  # done
   
-  tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase' 'pass')
+  # tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase')
+  # selected_tasks=()
+  # task=""
+  # need_more_task=true
+  # while $need_more_task;do
+  #   clear
+  #   if [ ${#tasks[@]} -le 1  ];then
+  #     break
+  #   fi
+  #   select task_option in "${tasks[@]}" ; do
+  #     case $task_option in
+  #       'Ocr to correcte text')
+  #         selected_tasks+=('--llm correct_ocr ')
+  #         remove_task "$task_option"
+  #         break
+  #         ;;
+  #       'Paraphrase text for beginner')
+  #         selected_tasks+=('--llm paraphrasing ')
+  #         remove_task "$task_option"
+  #         break
+  #         ;;
+  #       'Ocr then paraphrase')
+  #         selected_tasks+=('--llm correct_ocr --llm paraphrasing ')
+  #         remove_task 'Ocr to correcte text'
+  #         remove_task 'Paraphrase text for beginner'
+  #         remove_task "$task_option"
+  #         break
+  #         ;;
+  #       *)
+  #         need_more_task=false
+  #         if [ ${#tasks[@]} -lt 1  ];then
+  #           echo "We should provide at least one task"
+  #           exit 1
+  #         fi
+  #         break
+  #         ;;
+  #     esac
+  #   done
+  # done
+
+  lang=$(select_language)
+
+  tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase')
   selected_tasks=()
-  # set -x
-  task=""
   need_more_task=true
-  while $need_more_task;do
+  default_option=3
+
+  while $need_more_task; do
     clear
-    if [ ${#tasks[@]} -le 1  ];then
+    if [ ${#tasks[@]} -le 1 ]; then
       break
     fi
-    select task_option in "${tasks[@]}" ; do
-      case $task_option in
+
+    echo "Available tasks:" >&2
+    for ((i = 0; i < ${#tasks[@]}; i++)); do
+      echo "$((i + 1)) ${tasks[i]}" >&2
+    done
+
+    read -rp "Enter the task number to add (default is none): " choice
+    clear
+    if [ -z "$choice" ]; then
+      choice=$default_option
+    fi
+    if ((choice >= 1 && choice <= ${#tasks[@]})); then
+      task_index=$((choice - 1))
+      case ${tasks[task_index]} in
         'Ocr to correcte text')
           selected_tasks+=('--llm correct_ocr ')
-          remove_task "$task_option"
-          break
           ;;
         'Paraphrase text for beginner')
           selected_tasks+=('--llm paraphrasing ')
-          remove_task "$task_option"
-          break
           ;;
         'Ocr then paraphrase')
-          selected_tasks+=('--llm correct_ocr --llm paraphrasing ')
-          remove_task 'Ocr to correcte text'
-          remove_task 'Paraphrase text for beginner'
-          remove_task "$task_option"
+          selected_tasks+=('--llm correct_ocr ' '--llm paraphrasing ')
+          unset 'tasks[task_index]'
           break
-          ;;
-        'pass')
-          need_more_task=false
-          if [ ${#tasks[@]} -lt 1  ];then
-            echo "We should provide at least one task"
-            exit 1
-          fi
-          break
-          ;;
-        *)
-          echo 'Invalid option'
-          exit 1
           ;;
       esac
-    done
+      unset 'tasks[task_index]'
+      tasks=("${tasks[@]}")  # Re-index the array
+    else
+      echo "Invalid task number." >&2
+    fi
+    clear
   done
-  
+
+  printf "%s" "${selected_tasks[@]}"
+
   task=$(printf "%s" "${selected_tasks[@]}")
-  echo "$task"
+  # echo "$task"
   
   # exit 1
   clear
-  
-  file="${1:-/tmp/1.pdf}"
-  output="file.md"
   
   cmd=''
   cmd+='CONVERSION=true\n'
@@ -107,5 +160,34 @@ remove_task() {
   tasks=("${tasks[@]}")  # Remove empty placeholders
 }
 
+select_language() {
+  langs=('English (en)' 'French (fr)')
+  default_option=1
+
+  echo "Select a language (default is English):" >&2
+  for ((i=0; i<${#langs[@]}; i++)); do
+    echo "$((i+1)) ${langs[i]}" >&2
+  done
+
+  read -rp "Enter your choice (default is $default_option): " choice >&2
+
+  if [ -z "$choice" ]; then
+    choice=$default_option
+  fi
+
+  case $choice in
+    1)
+      echo 'en'
+      ;;
+    2)
+      echo 'fr'
+      ;;
+    *)
+      echo 'en'
+      ;;
+  esac
+}
+
 clear
+
 main "$@"
