@@ -3,8 +3,7 @@ name: PDF to Markdown
 on:
   push:
     paths:
-      - 'en_PDFs/*.pdf'
-      - 'fr_PDFs/*.pdf'
+      - './convert.sh'
 
 jobs:
   convert:
@@ -15,90 +14,91 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra 1>/dev/null
-          pip install -r requirements.txt 1>/dev/null
-          pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
+      #1- name: Install dependencies
+      #1  run: |
+      #1    sudo apt update
+      #1    sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra 1>/dev/null
+      #1    pip install -r requirements.txt 1>/dev/null
+      #1    pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
 
-      - name: Get changed PDF file name
-        run: |
-          #cat $GITHUB_EVENT_PATH
-          du -h -d0 .
-          jq . $GITHUB_EVENT_PATH
+      #1- name: Get changed PDF file name
+      #1  run: |
+      #1    #cat $GITHUB_EVENT_PATH
+      #1    du -h -d0 .
+      #1    jq . $GITHUB_EVENT_PATH
 
-          HASH0=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH)
-          HASH1=$(jq -r '.commits[1].id' $GITHUB_EVENT_PATH)
-          echo "HASH0:$HASH0"
-          echo "HASH1:$HASH1"
-          #TODO while not empty
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH0 > hash0.json
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH1 > hash1.json
-          FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash0.json | grep pdf | head -1)"
-          [ -z "$FILE" ] && FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash1.json | grep pdf | head -1)"
-          echo "FILE=$FILE"
-          echo "FILE=$FILE" >> $GITHUB_ENV
+      #1    HASH0=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH)
+      #1    HASH1=$(jq -r '.commits[1].id' $GITHUB_EVENT_PATH)
+      #1    echo "HASH0:$HASH0"
+      #1    echo "HASH1:$HASH1"
+      #1    #TODO while not empty
+      #1    curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH0 > hash0.json
+      #1    curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH1 > hash1.json
+      #1    FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash0.json | grep pdf | head -1)"
+      #1    [ -z "$FILE" ] && FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash1.json | grep pdf | head -1)"
+      #1    echo "FILE=$FILE"
+      #1    echo "FILE=$FILE" >> $GITHUB_ENV
 
-          # assert faield if no FILE=null
-          echo "ls $FILE"
-          ls "$FILE"
+      #1    # assert faield if no FILE=null
+      #1    echo "ls $FILE"
+      #1    ls "$FILE"
 
       - name: Convert PDF to Markdown
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          LANG="${FILE%_PDFs/*}"
-          
-          PREFIX="${LANG}_PDFs"
-          OUTPUT="${FILE#"${PREFIX}"/}"
-          OUTPUT="src/${OUTPUT%.pdf}.md"
+          cat ./convert.sh
+          #3LANG="${FILE%_PDFs/*}"
+          #3
+          #3PREFIX="${LANG}_PDFs"
+          #3OUTPUT="${FILE#"${PREFIX}"/}"
+          #3OUTPUT="src/${OUTPUT%.pdf}.md"
 
-          echo "OPENAI_API_KEY=$OPENAI_API_KEY"
-          echo "LANG=$LANG"
-          echo "FILE=$FILE"
-          echo "OUTPUT=$OUTPUT"
+          #3echo "OPENAI_API_KEY=$OPENAI_API_KEY"
+          #3echo "LANG=$LANG"
+          #3echo "FILE=$FILE"
+          #3echo "OUTPUT=$OUTPUT"
 
-          mkdir -p src/ en_PDFs/ fr_PDFs/
+          #3mkdir -p src/ en_PDFs/ fr_PDFs/
 
-          # in debian /bin/tesseract not /bin/tesseract-ocr
-          #python3 pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract --lang "$LANG" > "$OUTPUT" && rm -f "$FILE"
-          #python3 llmtask.py --lang "$LANG" --ocr /usr/bin/tesseract --llm correct_ocr --llm paraphrasing --file "$FILE" 1>"$OUTPUT" && rm -f "$FILE"
-          # readarray -t tasks < ./tasks.txt
-          tasks=()
-          
-          # loop through the file and read each line
-          while IFS="" read -r line || [ -n "$line" ]; do
-            # append the line to the array
-            tasks+=("$line")
-          done < tasks.txt
-          echo "${tasks[*]}"
+          #3# in debian /bin/tesseract not /bin/tesseract-ocr
+          #3#python3 pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract --lang "$LANG" > "$OUTPUT" && rm -f "$FILE"
+          #3#python3 llmtask.py --lang "$LANG" --ocr /usr/bin/tesseract --llm correct_ocr --llm paraphrasing --file "$FILE" 1>"$OUTPUT" && rm -f "$FILE"
+          #3# readarray -t tasks < ./tasks.txt
+          #3tasks=()
+          #3
+          #3# loop through the file and read each line
+          #3while IFS="" read -r line || [ -n "$line" ]; do
+          #3  # append the line to the array
+          #3  tasks+=("$line")
+          #3done < tasks.txt
+          #3echo "${tasks[*]}"
 
-          CONVERSION=true
-          echo eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false; echo some errors ;}"
-          eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false echo; some errors ;}"
+          #3CONVERSION=true
+          #3echo eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false; echo some errors ;}"
+          #3eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false echo; some errors ;}"
 
-          echo "CONVERSION=$CONVERSION \>\> $GITHUB_ENV"
-          echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV
+          #3echo "CONVERSION=$CONVERSION \>\> $GITHUB_ENV"
+          #3echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV
 
-          echo "rm -f $FILE"
-          rm -f "$FILE"
+          #3echo "rm -f $FILE"
+          #3rm -f "$FILE"
 
-          echo "cat /dev/null > ./tasks.txt"
-          cat /dev/null > ./tasks.txt
+          #3echo "cat /dev/null > ./tasks.txt"
+          #3cat /dev/null > ./tasks.txt
 
-      - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: init
-          branch: master
-          skip_fetch: false
-          skip_checkout: false
-          push_options: --force
-          commit_options: --no-verify
-
-      - name: Test if the Conversion is done
-        run: |
-          [ $CONVERSION ] && echo conversion is Done || exit 1
+      #2- name: Commit and push changes
+      #2  env:
+      #2    GITHUB_TOKEN: ${{ secrets.PAT }}
+      #2  uses: stefanzweifel/git-auto-commit-action@v4
+      #2  with:
+      #2    commit_message: init
+      #2    branch: master
+      #2    skip_fetch: false
+      #2    skip_checkout: false
+      #2    push_options: --force
+      #2    commit_options: --no-verify
+      #2
+      #2- name: Test if the Conversion is done
+      #2  run: |
+      #2    [ $CONVERSION ] && echo conversion is Done || exit 1
