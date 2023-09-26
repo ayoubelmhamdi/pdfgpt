@@ -33,7 +33,7 @@ main(){
 
   lang=$(select_language)
 
-  tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase')
+  tasks=('Ocr to correcte text' 'Paraphrase text for beginner' 'Ocr then paraphrase' 'pass')
   selected_tasks=()
   need_more_task=true
   default_option=3
@@ -49,10 +49,17 @@ main(){
       echo "$((i + 1))) ${tasks[i]}" >&2
     done
 
-    read -rp "Enter the task number to add (default is 3): " choice
+    read -rp "Enter the task number to add (default is $default_option): " choice
     clear
     if [ -z "$choice" ]; then
-      choice=$default_option
+      if [ $default_option -eq 3 ];then
+        choice=3
+        default_option=4
+      else
+        choice=4
+      fi
+    elif [ "$choice" -eq 4 ] && [ "$default_option" -eq 3 ];then
+      continue
     fi
     if ((choice >= 1 && choice <= ${#tasks[@]})); then
       task_index=$((choice - 1))
@@ -65,6 +72,10 @@ main(){
           ;;
         'Ocr then paraphrase')
           selected_tasks+=('--llm correct_ocr ' '--llm paraphrasing ')
+          unset 'tasks[task_index]'
+          break
+          ;;
+        'pass')
           unset 'tasks[task_index]'
           break
           ;;
