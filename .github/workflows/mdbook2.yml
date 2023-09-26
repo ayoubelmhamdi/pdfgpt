@@ -57,6 +57,6 @@ jobs:
       - name: Deploy GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: book/html
+          folder: book/
           force: false
           clean-exclude: pr-preview/
