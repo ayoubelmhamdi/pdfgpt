@@ -1,4 +1,4 @@
 # Summary
-Simplification using LLM
+Simplification using LLM:
 
 - [INTRODUCTION](./README.md)
