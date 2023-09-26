@@ -3,7 +3,7 @@
 CONVERSION=true
 
 if ! python3 llmtask.py                \
-    --ocr /usr/bin/tesseract-ocr       \
+    --ocr /usr/bin/tesseract           \
     --lang fr                          \
     --llm correct_ocr  \
     --file 1.pdf \
@@ -13,5 +13,5 @@ then
     echo "some errors"
 fi
 
-echo "Ayoub04"
+echo "Ayoub05"
 echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"
