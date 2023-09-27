@@ -107,37 +107,43 @@ jobs:
           skip_checkout: false
           push_options: --force
           commit_options: --no-verify
-      
-      - name: Test if the Conversion is done
-        run: |
-          [ $CONVERSION ] && echo conversion is Done || exit 1
 
       # ----------------------------------------------------------------------
       # ----------------------------------------------------------------------
       # ----------------------------------------------------------------------
 
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Install latest mdbook
         run: |
           tag=$(curl 'https://api.github.com/repos/rust-lang/mdbook/releases/latest' | jq -r '.tag_name')
           url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
-          mkdir mdbook
+          mkdir mdbook -p
           curl -sSL $url | tar -xz --directory=./mdbook
+
+          tag=$(curl 'https://api.github.com/repos/lzanini/mdbook-katex/releases/latest' | jq -r '.tag_name')
+          url="https://github.com/lzanini/mdbook-katex/releases/download/${tag}/mdbook-katex-${tag}-x86_64-unknown-linux-gnu.tar.gz"
+          mkdir mdbook -p
+          curl -sSL $url | tar -xz --directory=./mdbook
+
           echo `pwd`/mdbook >> $GITHUB_PATH
       - name: Build Book
         run: |
-          # This assumes your book is in the root of your repository.
-          # Just add a `cd` here if you need to change to another directory.
           mdbook build
-          #ln -s book/index.html book/README.html
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+          echo "pwd"
+          pwd
+          echo "ls"
+          ls
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
         with:
-          path: 'book'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
+
+      # ----------------------------------------------------------------------
+      # ----------------------------------------------------------------------
+      # ----------------------------------------------------------------------
+
+      - name: Test if the Conversion is done
+        run: |
+          [ $CONVERSION ] && echo conversion is Done || exit 1
