@@ -6,7 +6,7 @@ src = "src"
 title = "Paraphrasing the Pdfs"
 
 [build]
-create-missing = false
+create-missing = true
 build-dir = "book"
 
 [output.html]
