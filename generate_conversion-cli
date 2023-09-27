@@ -3,14 +3,26 @@
 
 
 main(){
-  file="${1:-}"
+  working_dir="${1:-}"
+  file="${2:-}"
+
+  if [ -z "$working_dir" ];then
+    echo "the is no directory provided" 
+    exit 1
+  fi
+
+  if [ ! -d "$working_dir" ];then
+    echo "this ${working_dir} directory does not exist" 
+    exit 1
+  fi
+
   if [ -z "$file" ];then
     echo "the is no file provided" 
     exit 1
   fi
 
   if [ ! -e "$file" ];then
-    echo "the is no file exist called $file" 
+    echo "this ${file} file does not exist" 
     exit 1
   fi
 
@@ -109,6 +121,7 @@ main(){
   cmd+=': "${TMPDIR:=/tmp}"\n'
   cmd+='\n'
   cmd+='tmp_name="$TMPDIR/'"$full_name"'"\n'
+  cmd+='rm -f "$tmp_name"\n\n'
   cmd+='if ! wget -q --output-document "$tmp_name" "'"$url"'";then\n'
   cmd+='  echo "Can not use wget to download this file."\n'
   cmd+='  exit 1\n'
@@ -129,6 +142,7 @@ main(){
   cmd+='fi\n\n'
   cmd+="echo '- [${name}](${summary_output})' >> ./src/SUMMARY.md"
   
+  cd "$working_dir" || exit
   echo -e "$cmd" > ./convert.sh
 }
 
