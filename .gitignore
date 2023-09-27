@@ -7,3 +7,5 @@ vscode/
 venv/
 .vscode/
 book/
+.envrc
+.mdbook
