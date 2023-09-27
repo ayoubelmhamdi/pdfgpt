@@ -1,8 +1,9 @@
 #!/bin/bash
 
+
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
-    --lang fr                          \
+    --lang en                          \
     --llm correct_ocr  \
     --file p10.pdf \
     1>./src/p10.md
@@ -11,4 +12,4 @@ then
     exit 1
 fi
 
-echo '- [p10]()' >> ./src/SUMMARY.md
+echo '- [p10](./p10.md)' >> ./src/SUMMARY.md
