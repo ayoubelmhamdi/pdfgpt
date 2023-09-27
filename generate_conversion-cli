@@ -20,7 +20,7 @@ main(){
           name="${name%.pdf}"
           output="./src/${name}.md"
           if [ -e "$output" ];then
-            output="./src/${name}-$(date +%Y-%m-%d-%H:%M).md"
+            output="./src/${name}-$(date +%Y-%m-%d-%H_%M).md"
           fi
           ;;
       *)
