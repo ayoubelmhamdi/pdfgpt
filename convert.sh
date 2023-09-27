@@ -4,10 +4,10 @@ CONVERSION=true
 
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
-    --lang en                          \
+    --lang fr                          \
     --llm correct_ocr  \
     --file 1.pdf \
-    1>./src/1-2023-09-26-12:58.md
+    1>./src/1-2023-09-27-08:45.md
 then
     CONVERSION=false
     echo "some errors"
