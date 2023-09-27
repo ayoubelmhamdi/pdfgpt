@@ -30,7 +30,17 @@ main(){
       *.pdf) 
           full_name="${file##*/}"
           url="$(curl "https://bashupload.com/$full_name" --data-binary "@$file" | grep -o "https://bashupload.com/.*/${full_name}")"
+          if [ $? -ne 0 ];then
+            echo "curl status is not 0"
+            exit 1
+          fi
 
+          if [ -z "$url" ];then
+            echo "the url is empty, curl is failed"
+            exit 1
+          fi
+
+          sleep 1
           clear
 
           name="${full_name%.pdf}"
@@ -147,7 +157,7 @@ main(){
 
   git pull
   git add ./convert.sh
-  git commit -m"update ./convert.sh in: $(date +%Y-%m-%d-%H_%M)" ./convert.sh
+  git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh
   git push -u origin master
 }
 
