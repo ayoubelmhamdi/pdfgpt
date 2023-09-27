@@ -130,7 +130,7 @@ main(){
   cmd+='clear\n'
 
   cmd+='\n'
-  cmd+='if ! echo python3 llmtask.py                \\\n'
+  cmd+='if ! python3 llmtask.py                \\\n'
   cmd+='    --ocr /usr/bin/tesseract           \\\n'
   cmd+="    --lang $lang                          \\\\\n"
   cmd+="    $task \\\\\n"
