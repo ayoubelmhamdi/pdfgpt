@@ -57,45 +57,6 @@ jobs:
           cat -n ./convert.sh
           echo "bash ./convert.sh"
           bash ./convert.sh
-          #3LANG="${FILE%_PDFs/*}"
-          #3
-          #3PREFIX="${LANG}_PDFs"
-          #3OUTPUT="${FILE#"${PREFIX}"/}"
-          #3OUTPUT="src/${OUTPUT%.pdf}.md"
-
-          #3echo "OPENAI_API_KEY=$OPENAI_API_KEY"
-          #3echo "LANG=$LANG"
-          #3echo "FILE=$FILE"
-          #3echo "OUTPUT=$OUTPUT"
-
-          #3mkdir -p src/ en_PDFs/ fr_PDFs/
-
-          #3# in debian /bin/tesseract not /bin/tesseract-ocr
-          #3#python3 pdf_to_paraphrase.py "$FILE" --ocr /usr/bin/tesseract --lang "$LANG" > "$OUTPUT" && rm -f "$FILE"
-          #3#python3 llmtask.py --lang "$LANG" --ocr /usr/bin/tesseract --llm correct_ocr --llm paraphrasing --file "$FILE" 1>"$OUTPUT" && rm -f "$FILE"
-          #3# readarray -t tasks < ./tasks.txt
-          #3tasks=()
-          #3
-          #3# loop through the file and read each line
-          #3while IFS="" read -r line || [ -n "$line" ]; do
-          #3  # append the line to the array
-          #3  tasks+=("$line")
-          #3done < tasks.txt
-          #3echo "${tasks[*]}"
-
-          #3CONVERSION=true
-          #3echo eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false; echo some errors ;}"
-          #3eval "python3 llmtask.py ${tasks[*]} --lang $LANG --ocr /usr/bin/tesseract --file $FILE 1>$OUTPUT || { CONVERSION=false echo; some errors ;}"
-
-          #3echo "CONVERSION=$CONVERSION \>\> $GITHUB_ENV"
-          #3echo "CONVERSION=$CONVERSION" >> $GITHUB_ENV
-
-          #3echo "rm -f $FILE"
-          #3rm -f "$FILE"
-
-          #3echo "cat /dev/null > ./tasks.txt"
-          #3cat /dev/null > ./tasks.txt
-
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
@@ -107,10 +68,12 @@ jobs:
           skip_checkout: false
           push_options: --force
           commit_options: --no-verify
-
-      # ----------------------------------------------------------------------
-      # ----------------------------------------------------------------------
-      # ----------------------------------------------------------------------
+      # - name: Test if the Conversion is done
+      #   run: |
+      #     [ $CONVERSION ] && echo conversion is Done || exit 1
+      # # ----------------------------------------------------------------------
+      # # ----------------------------------------------------------------------
+      # # ----------------------------------------------------------------------
 
       - uses: actions/checkout@v3
       - name: Install latest mdbook
@@ -129,21 +92,9 @@ jobs:
       - name: Build Book
         run: |
           mdbook build
-          echo "pwd"
-          pwd
-          echo "ls"
-          ls
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./book
-
-      # ----------------------------------------------------------------------
-      # ----------------------------------------------------------------------
-      # ----------------------------------------------------------------------
-
-      - name: Test if the Conversion is done
-        run: |
-          [ $CONVERSION ] && echo conversion is Done || exit 1
