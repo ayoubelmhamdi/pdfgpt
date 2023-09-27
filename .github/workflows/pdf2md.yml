@@ -57,6 +57,7 @@ jobs:
           cat -n ./convert.sh
           echo "bash ./convert.sh"
           bash ./convert.sh
+          git add ./src/*.md
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
