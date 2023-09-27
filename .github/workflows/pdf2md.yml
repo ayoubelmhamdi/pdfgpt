@@ -75,6 +75,16 @@ jobs:
       # # ----------------------------------------------------------------------
       # # ----------------------------------------------------------------------
 
+
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # To push a branch 
+      pages: write  # To push to a GitHub Pages site
+      id-token: write # To update the deployment status
+    environment: # specify the name of the environment that contains the secret
+      name: my-environment
+    steps:
       - uses: actions/checkout@v3
       - name: Install latest mdbook
         run: |
@@ -91,7 +101,10 @@ jobs:
           echo `pwd`/mdbook >> $GITHUB_PATH
       - name: Build Book
         run: |
+          echo "mdbook build"
           mdbook build
+          echo "cat ./src/SUMMARY.md"
+          cat ./src/SUMMARY.md
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
