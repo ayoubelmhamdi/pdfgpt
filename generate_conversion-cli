@@ -98,7 +98,6 @@ main(){
   
   cmd=''
   cmd+='#!/bin/bash\n\n'
-  cmd+='CONVERSION=true\n'
   cmd+='\n'
   cmd+='if ! python3 llmtask.py                \\\n'
   cmd+='    --ocr /usr/bin/tesseract           \\\n'
@@ -107,11 +106,10 @@ main(){
   cmd+="    --file $file \\\\\n"
   cmd+="    1>$output\n"
   cmd+='then\n'
-  cmd+='    CONVERSION=false\n'
   cmd+='    echo "some errors"\n'
   cmd+='    exit 1\n'
   cmd+='fi\n\n'
-  cmd+='echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"'
+  cmd+="echo '- [${name}](${output})' >> ./src/SUMMARY.md"
   
   echo -e "$cmd" > ./convert.sh
 }
