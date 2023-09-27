@@ -1,15 +1,29 @@
 #!/bin/bash
 
+set -x
 
-if ! python3 llmtask.py                \
+# initialise the TMPDIR with tmp if not initalise yet.
+: "${TMPDIR:=/tmp}"
+
+tmp_name="$TMPDIR/new.pdf"
+rm -f "$tmp_name"
+
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/xqub0/new.pdf";then
+  echo "Can not use wget to download this file."
+  exit 1
+fi
+
+clear
+
+if ! echo python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
-    --lang en                          \
+    --lang fr                          \
     --llm correct_ocr  \
-    --file p10.pdf \
-    1>./src/p10.md
+    --file "$tmp_name"                 \
+    1>./src/new.md
 then
     echo "some errors"
     exit 1
 fi
 
-echo '- [p10](./p10.md)' >> ./src/SUMMARY.md
+echo '- [new](./new.md)' >> ./src/SUMMARY.md
