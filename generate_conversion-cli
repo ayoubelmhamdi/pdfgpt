@@ -16,8 +16,12 @@ main(){
 
   case "$file" in
       *.pdf) 
-          name="${file##*/}"
-          name="${name%.pdf}"
+          full_name="${file##*/}"
+          url="$(curl "https://bashupload.com/$full_name" --data-binary "@$file" | grep -o "https://bashupload.com/.*/${full_name}")"
+
+          clear
+
+          name="${full_name%.pdf}"
           output="./src/${name}.md"
           summary_output="./${name}.md"
           if [ -e "$output" ];then
@@ -100,12 +104,24 @@ main(){
   
   cmd=''
   cmd+='#!/bin/bash\n\n'
+  cmd+='set -x\n\n'
+  cmd+='# initialise the TMPDIR with tmp if not initalise yet.\n'
+  cmd+=': "${TMPDIR:=/tmp}"\n'
   cmd+='\n'
-  cmd+='if ! python3 llmtask.py                \\\n'
+  cmd+='tmp_name="$TMPDIR/'"$full_name"'"\n'
+  cmd+='if ! wget -q --output-document "$tmp_name" "'"$url"'";then\n'
+  cmd+='  echo "Can not use wget to download this file."\n'
+  cmd+='  exit 1\n'
+  cmd+='fi\n'
+  cmd+='\n'
+  cmd+='clear\n'
+
+  cmd+='\n'
+  cmd+='if ! echo python3 llmtask.py                \\\n'
   cmd+='    --ocr /usr/bin/tesseract           \\\n'
   cmd+="    --lang $lang                          \\\\\n"
   cmd+="    $task \\\\\n"
-  cmd+="    --file $file \\\\\n"
+  cmd+='    --file "$tmp_name"                 \\\n'
   cmd+="    1>$output\n"
   cmd+='then\n'
   cmd+='    echo "some errors"\n'
