@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
     --lang fr                          \
