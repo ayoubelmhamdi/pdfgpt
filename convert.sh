@@ -1,17 +1,15 @@
 #!/bin/bash
 
-CONVERSION=true
 
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
-    --lang en                          \
-    --llm correct_ocr  \
+    --lang fr                          \
+    --llm correct_ocr --llm paraphrasing  \
     --file 1.pdf \
-    1>./src/1-2023-09-27-08:49.md
+    1>./src/1-2023-09-27-09:14.md
 then
-    CONVERSION=false
     echo "some errors"
     exit 1
 fi
 
-echo "CONVERSION=$CONVERSION" >> "$GITHUB_ENV"
+echo '- [1](./src/1-2023-09-27-09:14.md)' >> ./src/SUMMARY.md
