@@ -1,5 +1,5 @@
 # Summary
-Simplification using LLM 31
+Simplification using LLM 32
 
 - [INTRODUCTION](./README.md)
 - [p10]()
