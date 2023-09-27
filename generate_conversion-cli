@@ -144,6 +144,11 @@ main(){
   
   cd "$working_dir" || exit
   echo -e "$cmd" > ./convert.sh
+
+  git pull
+  git add ./convert.sh
+  git commit -m"update ./convert.sh in: $(date +%Y-%m-%d-%H_%M)" ./convert.sh
+  git push -u origin master
 }
 
 remove_task() {
