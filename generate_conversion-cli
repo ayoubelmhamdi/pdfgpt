@@ -21,6 +21,7 @@ main(){
           output="./src/${name}.md"
           if [ -e "$output" ];then
             output="./src/${name}-$(date +%Y-%m-%d-%H_%M).md"
+            summary_output="./${name}-$(date +%Y-%m-%d-%H_%M).md"
           fi
           ;;
       *)
@@ -109,7 +110,7 @@ main(){
   cmd+='    echo "some errors"\n'
   cmd+='    exit 1\n'
   cmd+='fi\n\n'
-  cmd+="echo '- [${name}](${output})' >> ./src/SUMMARY.md"
+  cmd+="echo '- [${name}](${summary_output})' >> ./src/SUMMARY.md"
   
   echo -e "$cmd" > ./convert.sh
 }
