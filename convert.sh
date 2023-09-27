@@ -3,13 +3,13 @@
 
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
-    --lang en                          \
+    --lang fr                          \
     --llm correct_ocr  \
-    --file 1.pdf \
-    1>./src/1-2023-09-27-10_29.md
+    --file p10.pdf \
+    1>./src/p10.md
 then
     echo "some errors"
     exit 1
 fi
 
-echo '- [1](./1-2023-09-27-10_29.md)' >> ./src/SUMMARY.md
+echo '- [p10]()' >> ./src/SUMMARY.md
