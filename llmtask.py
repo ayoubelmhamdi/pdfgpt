@@ -53,6 +53,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--llm", type=str, action="extend", nargs="+", help="Task for LLM"
     )
+    parser.add_argument("--provider", type=str, help="The Provider for free GPT")
     parser.add_argument("--file", type=str, help="Path to PDF file")
 
     args = parser.parse_args(sys.argv[1:])
@@ -110,7 +111,8 @@ if __name__ == "__main__":
     lists = CreateParaphrasing(
         lang=lang,
         input_texts=garbage_texts,
-        Tasks=args.llm,  # "child"],
+        Tasks=args.llm,
+        Provider=args.provider,
     ).list_tasks()
 
     for item in lists:
