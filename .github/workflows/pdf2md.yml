@@ -102,10 +102,10 @@ jobs:
           echo `pwd`/mdbook >> $GITHUB_PATH
       - name: Build Book
         run: |
-          echo "mdbook build"
-          mdbook build
           echo "cat ./src/SUMMARY.md"
           cat ./src/SUMMARY.md
+          echo "mdbook build"
+          mdbook build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
