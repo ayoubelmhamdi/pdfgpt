@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=2016
+# shellcheck disable=2016,2001
 
 
 main(){
@@ -29,13 +29,8 @@ main(){
   case "$file" in
       *.pdf)
           full_name="${file##*/}"
-
-          # echo curl "https://bashupload.com/$full_name" --data-binary "@$file"
-          # url="$(curl "https://bashupload.com/$full_name" --data-binary "@$file" | grep -o "https://bashupload.com/.*/${full_name}")"
-
-          encoded_full_name=$(echo "$full_name" | sed 's/ /%20/g')
-          encoded_file=$(echo "$file" | sed 's/ /%20/g')
-          if ! url="$(curl -s "https://bashupload.com/${encoded_full_name}" --data-binary "@${file}")";then
+          full_name=$(echo "$full_name" | sed 's/[^a-zA-Z0-9._-]//g')
+          if ! url="$(curl -s "https://bashupload.com/${full_name}" --data-binary "@${file}")";then
             echo "curl error msg:"
             echo "$url"
             exit 1
