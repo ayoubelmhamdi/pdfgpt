@@ -162,7 +162,7 @@ main(){
   cmd+="    --lang $lang                          \\\\\n"
   cmd+="    $task \\\\\n"
   cmd+='    --file "$tmp_name"                 \\\n'
-  cmd+="    1>$output\n"
+  cmd+="    1> '${output}'\n"
   cmd+='then\n'
   cmd+='    echo "some errors"\n'
   cmd+='    exit 1\n'
