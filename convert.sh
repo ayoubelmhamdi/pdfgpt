@@ -5,10 +5,10 @@ set -x
 # initialise the TMPDIR with tmp if not initalise yet.
 : "${TMPDIR:=/tmp}"
 
-tmp_name="$TMPDIR/1.pdf"
+tmp_name="$TMPDIR/newa.pdf"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/xSzT9/1.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/e8FmL/newa.pdf";then
   echo "Can not use wget to download this file."
   exit 1
 fi
@@ -17,14 +17,14 @@ clear
 
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
-    --lang fr                          \
+    --lang en                          \
     --llm correct_ocr --llm paraphrasing  \
     --file "$tmp_name"                 \
     --provider Aivvm                   \
-    1> './src/1.md'
+    1> './src/newa.md'
 then
     echo "some errors" >&2
     exit 1
 fi
 
-echo '- [1](./1.md)' >> ./src/SUMMARY.md
+echo '- [newa](./newa.md)' >> ./src/SUMMARY.md
