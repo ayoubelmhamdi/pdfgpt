@@ -157,9 +157,10 @@ main(){
   cmd+="    --lang $lang                          \\\\\n"
   cmd+="    $task \\\\\n"
   cmd+='    --file "$tmp_name"                 \\\n'
+  cmd+='    --provider Aivvm                   \\\n'
   cmd+="    1> '${output}'\n"
   cmd+='then\n'
-  cmd+='    echo "some errors"\n'
+  cmd+='    echo "some errors" >&2\n'
   cmd+='    exit 1\n'
   cmd+='fi\n\n'
   cmd+="echo '- [${name}](${summary_output})' >> ./src/SUMMARY.md"
