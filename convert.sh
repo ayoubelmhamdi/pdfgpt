@@ -8,7 +8,7 @@ set -x
 tmp_name="$TMPDIR/Northwestern_Thesis_Proposal_Template__1_ (43).pdf"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/p5VNy/Gb0nC.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/322Wr/QKQkv.pdf";then
   echo "Can not use wget to download this file."
   exit 1
 fi
@@ -20,7 +20,7 @@ if ! python3 llmtask.py                \
     --lang fr                          \
     --llm correct_ocr --llm paraphrasing  \
     --file "$tmp_name"                 \
-    1>./src/Northwestern_Thesis_Proposal_Template__1_ (43).md
+    1> './src/Northwestern_Thesis_Proposal_Template__1_ (43).md'
 then
     echo "some errors"
     exit 1
