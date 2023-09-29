@@ -2,6 +2,7 @@
 # shellcheck disable=2016,2001
 
 
+
 main(){
   working_dir="${1:-}"
   file="${2:-}"
@@ -166,9 +167,10 @@ main(){
   cmd+="echo '- [${name}](${summary_output})' >> ./src/SUMMARY.md"
 
   cd "$working_dir" || exit
+
+  git pull # for prevent merge
   echo -e "$cmd" > ./convert.sh
 
-  git pull
   git add ./convert.sh
   git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh
   git push -u origin master
