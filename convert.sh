@@ -8,7 +8,7 @@ set -x
 tmp_name="$TMPDIR/new_f.pdf"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/JkIpo/new_f.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/YrbXL/new_f.pdf";then
   echo "Can not use wget to download this file."
   exit 1
 fi
