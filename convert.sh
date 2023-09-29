@@ -5,10 +5,10 @@ set -x
 # initialise the TMPDIR with tmp if not initalise yet.
 : "${TMPDIR:=/tmp}"
 
-tmp_name="$TMPDIR/new_d.pdf"
+tmp_name="$TMPDIR/new_e.pdf"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/I3WN3/new_d.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/a9Z7X/new_e.pdf";then
   echo "Can not use wget to download this file."
   exit 1
 fi
@@ -21,10 +21,10 @@ if ! python3 llmtask.py                \
     --llm correct_ocr  \
     --file "$tmp_name"                 \
     --provider Aivvm                   \
-    1> './src/new_d.md'
+    1> './src/new_e.md'
 then
     echo "some errors" >&2
     exit 1
 fi
 
-echo '- [new_d](./new_d.md)' >> ./src/SUMMARY.md
+echo '- [new_e](./new_e.md)' >> ./src/SUMMARY.md
