@@ -51,12 +51,20 @@ jobs:
         env: # pass the secret as an environment variable to the script
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
+          echo 
+          echo ls "/home/runner/.local/lib/python3.10/site-packages/pptgpt/"
+          ls "/home/runner/.local/lib/python3.10/site-packages/pptgpt/"
+
           echo "mkdir -p ./src/"
           mkdir -p ./src/
+
           echo "cat -n ./convert.sh"
           cat -n ./convert.sh
+
           echo "bash ./convert.sh"
           bash ./convert.sh
+
+          echo "git add ./src/*.md"
           git add ./src/*.md
       - name: Commit and push changes
         env:
