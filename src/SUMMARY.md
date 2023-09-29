@@ -7,3 +7,4 @@ Simplification using LLM
 - [new_d](./new_d.md)
 - [new_e](./new_e.md)
 - [new_e](./new_e.md)
+- [new_e](./new_e.md)
