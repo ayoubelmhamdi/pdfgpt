@@ -13,7 +13,6 @@ if ! wget -q --output-document "$tmp_name" "https://bashupload.com/a9Z7X/new_e.p
   exit 1
 fi
 
-
 clear
 
 if ! python3 llmtask.py                \
