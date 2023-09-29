@@ -14,3 +14,4 @@ Simplification using LLM
 - [Northwestern_Thesis_Proposal_Template__1_43](./Northwestern_Thesis_Proposal_Template__1_43.md)
 - [new_i](./new_i.md)
 - [new_j](./new_j.md)
+- [Northwestern_Thesis_Proposal_Template__1_43](./Northwestern_Thesis_Proposal_Template__1_43.md)
