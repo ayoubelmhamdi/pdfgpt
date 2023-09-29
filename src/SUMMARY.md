@@ -9,3 +9,4 @@ Simplification using LLM
 - [new_e](./new_e.md)
 - [new_e](./new_e.md)
 - [test01](./test01.md)
+- [new_f](./new_f.md)
