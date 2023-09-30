@@ -146,7 +146,7 @@ main(){
   cmd+='tmp_name="$TMPDIR/'"$full_name"'"\n'
   cmd+='rm -f "$tmp_name"\n\n'
   cmd+='if ! wget -q --output-document "$tmp_name" "'"$url"'";then\n'
-  cmd+='  echo "Can not use wget to download this file."\n'
+  cmd+='  echo "Can not use wget to download this file." >&2\n'
   cmd+='  exit 1\n'
   cmd+='fi\n'
   cmd+='\n'
