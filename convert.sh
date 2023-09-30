@@ -21,11 +21,8 @@ if ! python3 llmtask.py                \
     --lang en                          \
     --llm correct_ocr  \
     --file "$tmp_name"                 \
-    --provider Aivvm                   \
-    1> './src/a2.md'
+    --provider Aivvm
 then
     echo "some errors" >&2
     exit 1
 fi
-
-echo '- [a2](./a2.md)' >> ./src/SUMMARY.md
