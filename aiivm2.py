@@ -14,6 +14,7 @@ def get_ai_response(admin: str | None, user: str | None) -> str:
         "accept": "*/*",
         "accept-language": "hu-HU,hu;q=0.9,en-US;q=0.8,en;q=0.7",
         "content-type": "application/json",
+        "cookie": "cf_clearance=s8N4qTsj5oQ4aIBCEHIJo_uGhFnEh5mh4GtepgqPgUA-1696105078-0-1-a0f25793.72a8ffa2.64df2d5f-0.2.1696105078",
         "sec-ch-ua": '"Kuki";v="116", "Not)A;Brand";v="24", "Pici Pocoro";v="102"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"Bandóz"',
