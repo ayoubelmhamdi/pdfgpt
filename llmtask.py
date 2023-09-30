@@ -1,14 +1,42 @@
 #!/usr/bin/env python3
 import argparse
+import mimetypes
 import os
 import sys
 
+import magic
 import pytesseract
 from dotenv import load_dotenv
 from pdf2image.pdf2image import convert_from_path
 from pptgpt import CreateParaphrasing
 
 load_dotenv(".env", verbose=True, override=True)
+
+
+def read_txt_file(file_path):
+    try:
+        with open(file_path, "r") as file:
+            return file.read()
+    except FileNotFoundError as e:
+        print(f"Error: The file '{file_path}' was not found: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return None
+
+
+def detect_file_type(file_path):
+    try:
+        m = magic.Magic()
+        encoded_file_type = m.from_file(file_path)
+        if "ASCII text" in encoded_file_type:
+            return "txt"
+        elif "PDF" in encoded_file_type:
+            return "pdf"
+        else:
+            return None
+    except magic.MagicException as e:
+        print(f"Error: {e}")
+        sys.exit(1)
 
 
 def pdf_to_images(pdf=None):
@@ -54,21 +82,19 @@ if __name__ == "__main__":
         "--llm", type=str, action="extend", nargs="+", help="Task for LLM"
     )
     parser.add_argument("--provider", type=str, help="The Provider for free GPT")
-    parser.add_argument("--file", type=str, help="Path to PDF file")
+    parser.add_argument("--file", type=str, help="Path to input file")
 
     args = parser.parse_args(sys.argv[1:])
-
-    if not os.path.exists(args.file):
-        print(f"File {args.file} does not exist.", file=sys.stderr)
-        sys.exit(1)
 
     if args.file is None:
         print("Please provide a Pdf file.", file=sys.stderr)
         sys.exit(2)
 
-    if args.ocr is None:
-        print("Please provide a ocr FILEPATH.", file=sys.stderr)
-        sys.exit(2)
+    if not os.path.exists(args.file):
+        print(f"File {args.file} does not exist.", file=sys.stderr)
+        sys.exit(1)
+
+    #################################################
 
     if args.lang is not None:
         lang = args.lang
@@ -84,29 +110,28 @@ if __name__ == "__main__":
 
     #################################################
 
-    pdf = args.file
-    ocr_path = args.ocr
-    pytesseract.pytesseract.tesseract_cmd = ocr_path
+    file_type = detect_file_type(args.file)
+
+    if file_type == "pdf":
+        if args.ocr is None:
+            print("Please provide an OCR FILEPATH.", file=sys.stderr)
+            sys.exit(2)
+
+        pytesseract.pytesseract.tesseract_cmd = args.ocr
+        images = pdf_to_images(args.file)
+        garbage_texts = images_to_garbage_texts(images)
+        print("images ✔", file=sys.stderr)
+    elif file_type == "txt":
+        garbage_texts = read_txt_file(args.file)
+        print("Texts ✔", file=sys.stderr)
+    else:
+        print("The file type is not recognized as PDF or TXT.", file=sys.stderr)
+        sys.exit(1)
 
     #################################################
-
-    images = pdf_to_images(pdf)
-    garbage_texts = images_to_garbage_texts(images)
-    print("images ✔", file=sys.stderr)
-
-    #################################################
-
-    # TODO: use open with to store to src/file.pdf.garbage.md
-    # TODO: paraphrasing to src/file.pdf.paraphrasing.md
-
-    # print("# -------- GARBAGE TEXT -------\n")
-    # for page in garbage_texts:
-    #     print(page, "\n\n")
-    # print("Garbage_texts ✔", file=sys.stderr)
-    # print("# -------- LLM TEXTS -------\n")
-    # # sys.exit(0)
-
-    #################################################
+    if garbage_texts is None:
+        print("garbage_texts is None", file=sys.stderr)
+        sys.exit(1)
 
     lists = CreateParaphrasing(
         lang=lang,
