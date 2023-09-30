@@ -8,6 +8,7 @@ set -x
 tmp_name="$TMPDIR/a2.pdf"
 rm -f "$tmp_name"
 
+
 if ! wget -q --output-document "$tmp_name" "https://bashupload.com/shefM/a2.pdf";then
   echo "Can not use wget to download this file."
   exit 1
