@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html lang="En" class="sidebar-visible no-js navy">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Northwestern_Thesis_Proposal_Template__1_43 - Paraphrasing the Pdfs</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="css/tavianator.css">
+        
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+        
+        <script src="tavianator.js"></script>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBDQXGZ6R1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EBDQXGZ6R1');
+        </script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./theme/tabbed-code-blocks.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> INTRODUCTION</a></li><li class="chapter-item expanded "><a href="mediacal_summilation.html"><strong aria-hidden="true">2.</strong> medical_similation</a></li><li class="chapter-item expanded "><a href="new_l.html"><strong aria-hidden="true">3.</strong> new_l</a></li><li class="chapter-item expanded "><a href="a2.html"><strong aria-hidden="true">4.</strong> a2</a></li><li class="chapter-item expanded "><a href="a2.html"><strong aria-hidden="true">5.</strong> a2</a></li><li class="chapter-item expanded "><a href="a2-2023-09-30-13_53.html"><strong aria-hidden="true">6.</strong> a2</a></li><li class="chapter-item expanded "><a href="a2-2023-09-30-13_53.html"><strong aria-hidden="true">7.</strong> a2</a></li><li class="chapter-item expanded "><a href="1.html"><strong aria-hidden="true">8.</strong> 1</a></li><li class="chapter-item expanded "><a href="Northwestern_Thesis_Proposal_Template__1_43.html" class="active"><strong aria-hidden="true">9.</strong> Northwestern_Thesis_Proposal_Template__1_43</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Paraphrasing the Pdfs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/ayoubelmhamdi/pdfgpt" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/ayoubelmhamdi/pdfgpt/tree/master/src/Northwestern_Thesis_Proposal_Template__1_43.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p>Bien sûr, voici une version simplifiée du texte en utilisant le format Markdown :</p>
+<h1 id="simplification-de-texte-pour-débutant"><a class="header" href="#simplification-de-texte-pour-débutant">Simplification de texte pour débutant</a></h1>
+<h2 id="Étape-1--expliquez-les-mots-difficiles"><a class="header" href="#Étape-1--expliquez-les-mots-difficiles">Étape 1 : Expliquez les mots difficiles</a></h2>
+<p>Si un mot est difficile, expliquez-le simplement. Par exemple, &quot;domaine&quot; signifie &quot;sujet&quot; ou &quot;champ d'intérêt&quot;.</p>
+<h2 id="Étape-2--utilisez-des-phrases-courtes"><a class="header" href="#Étape-2--utilisez-des-phrases-courtes">Étape 2 : Utilisez des phrases courtes</a></h2>
+<p>Évitez les phrases longues. Utilisez des phrases courtes et simples pour que tout le monde comprenne.</p>
+<h2 id="Étape-3--utilisez-des-mots-simples"><a class="header" href="#Étape-3--utilisez-des-mots-simples">Étape 3 : Utilisez des mots simples</a></h2>
+<p>Utilisez des mots que tout le monde connaît. Par exemple, au lieu de &quot;utilisez&quot;, dites &quot;employez&quot;.</p>
+<h2 id="Étape-4--ajoutez-des-exemples"><a class="header" href="#Étape-4--ajoutez-des-exemples">Étape 4 : Ajoutez des exemples</a></h2>
+<p>Donnez des exemples faciles à comprendre. Par exemple, si vous parlez de vélos, dites : &quot;comme un vélo&quot;.</p>
+<h2 id="Étape-5--Évitez-les-mots-compliqués"><a class="header" href="#Étape-5--Évitez-les-mots-compliqués">Étape 5 : Évitez les mots compliqués</a></h2>
+<p>Ne parlez pas de sujets difficiles. Rendez les idées plus simples en les divisant en parties plus petites.</p>
+<h2 id="Étape-6--utilisez-lordre-sujet-verbe-objet"><a class="header" href="#Étape-6--utilisez-lordre-sujet-verbe-objet">Étape 6 : Utilisez l'ordre sujet-verbe-objet</a></h2>
+<p>Mettez d'abord le sujet, puis le verbe, puis l'objet dans vos phrases. Par exemple, &quot;le chat mange la souris&quot;.</p>
+<h2 id="Étape-7--Évitez-les-mots-inutiles"><a class="header" href="#Étape-7--Évitez-les-mots-inutiles">Étape 7 : Évitez les mots inutiles</a></h2>
+<p>Ne mettez pas trop de mots dans une phrase. Utilisez des mots qui montrent comment les idées sont liées.</p>
+<h2 id="Étape-8--vérifiez-votre-travail"><a class="header" href="#Étape-8--vérifiez-votre-travail">Étape 8 : Vérifiez votre travail</a></h2>
+<p>Relisez-vous pour vous assurer que tout est clair et facile à lire.</p>
+<p>Voilà, j'ai formaté le texte en Markdown en suivant ces étapes pour le rendre plus simple à comprendre.
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+<span data-translate="error">Error</span>
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error</p>
+<h1 id="nombre-de-points-pour-estimation"><a class="header" href="#nombre-de-points-pour-estimation">Nombre de points pour estimation</a></h1>
+<p>Le nombre de points que nous allons utiliser pour notre estimation est de 10 000.</p>
+<h1 id="compteur-pour-les-points-dans-le-cercle"><a class="header" href="#compteur-pour-les-points-dans-le-cercle">Compteur pour les points dans le cercle</a></h1>
+<p>Nous allons également avoir un compteur pour les points qui se trouvent à l'intérieur du cercle, que nous allons appeler &quot;count_inside&quot;.</p>
+<p>Nous avons corrigé les erreurs d'orthographe, de grammaire, de ponctuation et de formatage dans le texte.</p>
+<h1 id="liste-pour-stocker-les-coordonnées-des-points-dans-et-hors-du-cercle"><a class="header" href="#liste-pour-stocker-les-coordonnées-des-points-dans-et-hors-du-cercle">Liste pour stocker les coordonnées des points dans et hors du cercle</a></h1>
+<ul>
+<li><code>x_inside = []</code></li>
+<li><code>y_inside = []</code></li>
+<li><code>x_outside = []</code></li>
+<li><code>y_outside = []</code></li>
+</ul>
+<h2 id="chapitre-2-generalites-sur-la-methode-de-monte-carlo"><a class="header" href="#chapitre-2-generalites-sur-la-methode-de-monte-carlo">CHAPITRE 2: GENERALITES SUR LA METHODE DE MONTE CARLO</a></h2>
+<p>J'ai corrigé les espaces et les sauts de ligne pour rendre le texte plus lisible et correct.</p>
+<h1 id="boucle-pour-générer-des-points-aléatoires"><a class="header" href="#boucle-pour-générer-des-points-aléatoires">Boucle pour générer des points aléatoires</a></h1>
+<pre><code class="language-python">for i in range(num_points):
+    # Générer des coordonnées x et y aléatoires
+    import random
+    x = random.uniform(-1, 1)
+    y = random.uniform(-1, 1)
+</code></pre>
+<p>Bien sûr, voici la version corrigée du texte en utilisant le format Markdown.</p>
+<h1 id="calcul-de-la-distance-par-rapport-à-lorigine-00"><a class="header" href="#calcul-de-la-distance-par-rapport-à-lorigine-00">Calcul de la distance par rapport à l'origine (0,0)</a></h1>
+<p>Pour calculer la distance d'un point à l'origine (0,0), utilisez cette formule simple :</p>
+<pre><code>distance = racine carrée de (x au carré + y au carré)
+</code></pre>
+<p>En d'autres termes, pour trouver la distance, suivez ces étapes :</p>
+<ol>
+<li>Prenez la valeur de x (l'abscisse du point).</li>
+<li>Élevez cette valeur au carré.</li>
+<li>Prenez la valeur de y (l'ordonnée du point).</li>
+<li>Élevez cette valeur au carré.</li>
+<li>Additionnez les deux carrés.</li>
+<li>Prenez la racine carrée du résultat obtenu.</li>
+</ol>
+<p>Par exemple, si vous avez un point à (3,4), voici comment vous trouveriez la distance :</p>
+<ol>
+<li>x = 3</li>
+<li>3^2 = 9</li>
+<li>y = 4</li>
+<li>4^2 = 16</li>
+<li>9 + 16 = 25</li>
+<li>La racine carrée de 25 est 5.</li>
+</ol>
+<p>Donc, la distance de (3,4) à l'origine est de 5 unités. C'est aussi simple que ça !</p>
+<h1 id="simplification-du-code-en-markdown"><a class="header" href="#simplification-du-code-en-markdown">Simplification du Code en Markdown</a></h1>
+<h2 id="vérification-de-la-position-dun-point-par-rapport-à-un-cercle"><a class="header" href="#vérification-de-la-position-dun-point-par-rapport-à-un-cercle">Vérification de la Position d'un Point par Rapport à un Cercle</a></h2>
+<p>Si la distance entre un point et le centre d'un cercle est de 4 unités ou moins, alors le point est à l'intérieur du cercle.</p>
+<pre><code class="language-python">if distance &lt;= 4:
+    count_inside += 1
+    x_inside.append(x)
+    y_inside.append(y)
+else:
+    x_outside.append(x)
+    y_outside.append(y)
+</code></pre>
+<p>J'ai corrigé les erreurs de ponctuation et de formatage pour rendre le texte plus clair.</p>
+<h1 id="calculer-pi-avec-des-points-dans-et-hors-du-cercle"><a class="header" href="#calculer-pi-avec-des-points-dans-et-hors-du-cercle">Calculer Pi avec des points dans et hors du cercle</a></h1>
+<p>Pour calculer Pi, nous pouvons utiliser le nombre de points à l'intérieur et à l'extérieur d'un cercle. Voici comment :</p>
+<ol>
+<li>Prenez un grand morceau de papier et dessinez un cercle.</li>
+<li>Lancez des fléchettes au hasard sur le papier.</li>
+<li>Comptez combien de fléchettes tombent à l'intérieur du cercle (appelez cela &quot;count_inside&quot;).</li>
+<li>Comptez combien de fléchettes tombent à l'extérieur du cercle (appelez cela &quot;num_points&quot; - le nombre total de fléchettes lancées).</li>
+</ol>
+<p>Maintenant, pour calculer Pi, utilisez cette formule simple :</p>
+<p><strong>pi = 4 * count_inside / num_points</strong></p>
+<p>Par exemple, si vous avez lancé 100 fléchettes et 78 sont tombées à l'intérieur du cercle, vous pouvez calculer Pi comme suit :</p>
+<p><strong>pi = 4 * 78 / 100 = 3.12</strong></p>
+<p>C'est une manière simple de calculer une estimation de Pi en utilisant des fléchettes et un cercle !</p>
+<h1 id="créer-un-graphique-pour-visualiser-les-points-dans-et-hors-du-cercle"><a class="header" href="#créer-un-graphique-pour-visualiser-les-points-dans-et-hors-du-cercle">Créer un graphique pour visualiser les points dans et hors du cercle</a></h1>
+<p>Pour créer un graphique qui montre des points à l'intérieur et à l'extérieur d'un cercle, nous allons suivre ces étapes simples :</p>
+<h2 id="Étape-1--préparer-le-graphique"><a class="header" href="#Étape-1--préparer-le-graphique">Étape 1 : Préparer le graphique</a></h2>
+<p>Nous allons d'abord préparer le graphique. C'est comme préparer une feuille de papier pour dessiner.</p>
+<pre><code class="language-python">fig, ax = plt.subplots()
+ax.set_aspect('equal', 'box')
+</code></pre>
+<h2 id="Étape-2--tracer-les-points-à-lintérieur-et-à-lextérieur-du-cercle"><a class="header" href="#Étape-2--tracer-les-points-à-lintérieur-et-à-lextérieur-du-cercle">Étape 2 : Tracer les points à l'intérieur et à l'extérieur du cercle</a></h2>
+<p>Nous allons maintenant dessiner des points à l'intérieur du cercle en bleu et des points à l'extérieur du cercle en rouge. Imaginez que vous mettiez des points sur ce papier.</p>
+<pre><code class="language-python">ax.scatter(x_inside, y_inside, color='blue', marker='.')
+ax.scatter(x_outside, y_outside, color='red', marker='.')
+</code></pre>
+<p>C'est comme si vous preniez des marqueurs de différentes couleurs pour dessiner les points. Les points bleus sont à l'intérieur du cercle, et les points rouges sont à l'extérieur.</p>
+<p>Voilà, maintenant vous avez un graphique qui montre clairement les points à l'intérieur et à l'extérieur du cercle.</p>
+<h1 id="ajouter-un-cercle-inscrit-dans-le-carré-pour-représenter-le-cercle-unité"><a class="header" href="#ajouter-un-cercle-inscrit-dans-le-carré-pour-représenter-le-cercle-unité">Ajouter un cercle inscrit dans le carré pour représenter le cercle unité</a></h1>
+<p>Pour dessiner un cercle inscrit dans un carré afin de représenter un cercle unité, vous pouvez utiliser le code Python suivant :</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+
+# Créer un objet cercle avec un centre à (0, 0) et un rayon de 1, de couleur verte et sans remplissage
+circle = plt.Circle((0, 0), 1, color='green', fill=False)
+
+# Ajouter le cercle à votre graphique
+ax.add_artist(circle)
+</code></pre>
+<p>Ce code utilise la bibliothèque Matplotlib pour créer un cercle vert de rayon 1 centré à l'origine (0, 0) et l'ajoute à votre graphique. Vous pouvez personnaliser les paramètres comme la couleur et le remplissage selon vos préférences.
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+<span data-translate="error">Error</span>
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error
+Error</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./theme/tabbed-code-blocks.js"></script>
+        <script src="./theme/highlight.css"></script>
+
+
+    </div>
+    </body>
+</html>
