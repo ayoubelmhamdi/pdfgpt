@@ -2,5 +2,5 @@
 
 set -x
 
-"${0%/*}/aiivm2.py"
 
+"${0%/*}/aiivm2.py"
