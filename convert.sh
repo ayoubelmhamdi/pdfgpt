@@ -15,6 +15,7 @@ fi
 
 clear
 
+
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
     --lang fr                          \
