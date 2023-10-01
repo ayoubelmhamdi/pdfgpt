@@ -28,7 +28,8 @@ main(){
   fi
 
   case "$file" in
-      *.pdf)
+      *.md)
+          extension="md"
           full_name="${file##*/}"
           full_name=$(echo "$full_name" | sed 's/[^a-zA-Z0-9._-]//g')
           if ! url="$(curl -s "https://bashupload.com/${full_name}" --data-binary "@${file}")";then
@@ -39,7 +40,7 @@ main(){
 
           echo "curl result:"
           echo "$url"
-          if ! url="$(echo "$url" | grep -o "https://bashupload.com/.*pdf")";then
+          if ! url="$(echo "$url" | grep -o "https://bashupload.com/.*${extension}")";then
             echo "grep error msg:"
             echo "$url"
             exit 1
@@ -56,7 +57,7 @@ main(){
           sleep 1
           clear
 
-          name="${full_name%.pdf}"
+          name="${full_name%."${extension}"}"
           output="./src/${name}.md"
           summary_output="./${name}.md"
           if [ -e "$output" ];then
@@ -168,12 +169,12 @@ main(){
 
   cd "$working_dir" || exit
 
-  git pull # for prevent merge
+  # git pull # for prevent merge
   echo -e "$cmd" > ./convert.sh
 
-  git add ./convert.sh
-  git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh
-  git push -u origin master
+  # git add ./convert.sh
+  # git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh
+  # git push -u origin master
 }
 
 remove_task() {
