@@ -27,9 +27,9 @@ main(){
     exit 1
   fi
 
+  extension="md"
   case "$file" in
-      *.pdf)
-          extension="pdf"
+     *."$extension")
           full_name="${file##*/}"
           full_name=$(echo "$full_name" | sed 's/[^a-zA-Z0-9._-]//g')
           if ! url="$(curl -s "https://bashupload.com/${full_name}" --data-binary "@${file}")";then
