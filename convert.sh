@@ -8,7 +8,7 @@ set -x
 tmp_name="$TMPDIR/Northwestern_Thesis_Proposal_Template__1_43.pdf"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/pvrhm/VMpJ9.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/cy2qz/wtu6V.pdf";then
   echo "Can not use wget to download this file." >&2
   exit 1
 fi
