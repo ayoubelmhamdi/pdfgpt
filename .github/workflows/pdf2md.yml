@@ -20,32 +20,32 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt update
+          sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra 1>/dev/null
+          pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
           pip install -r requirements.txt 1>/dev/null
-      #2    sudo apt update
-      #2    sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra 1>/dev/null
-      #2    pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
 
-      #2#1- name: Get changed PDF file name
-      #2#1  run: |
-      #2#1    #cat $GITHUB_EVENT_PATH
-      #2#1    du -h -d0 .
-      #2#1    jq . $GITHUB_EVENT_PATH
+      #1- name: Get changed PDF file name
+      #1  run: |
+      #1    #cat $GITHUB_EVENT_PATH
+      #1    du -h -d0 .
+      #1    jq . $GITHUB_EVENT_PATH
 
-      #2#1    HASH0=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH)
-      #2#1    HASH1=$(jq -r '.commits[1].id' $GITHUB_EVENT_PATH)
-      #2#1    echo "HASH0:$HASH0"
-      #2#1    echo "HASH1:$HASH1"
-      #2#1    #TODO while not empty
-      #2#1    curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH0 > hash0.json
-      #2#1    curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH1 > hash1.json
-      #2#1    FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash0.json | grep pdf | head -1)"
-      #2#1    [ -z "$FILE" ] && FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash1.json | grep pdf | head -1)"
-      #2#1    echo "FILE=$FILE"
-      #2#1    echo "FILE=$FILE" >> $GITHUB_ENV
+      #1    HASH0=$(jq -r '.commits[0].id' $GITHUB_EVENT_PATH)
+      #1    HASH1=$(jq -r '.commits[1].id' $GITHUB_EVENT_PATH)
+      #1    echo "HASH0:$HASH0"
+      #1    echo "HASH1:$HASH1"
+      #1    #TODO while not empty
+      #1    curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH0 > hash0.json
+      #1    curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$HASH1 > hash1.json
+      #1    FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash0.json | grep pdf | head -1)"
+      #1    [ -z "$FILE" ] && FILE="$( jq -r '.files[] | select(.status == "added") | .filename'  hash1.json | grep pdf | head -1)"
+      #1    echo "FILE=$FILE"
+      #1    echo "FILE=$FILE" >> $GITHUB_ENV
 
-      #2#1    # assert faield if no FILE=null
-      #2#1    echo "ls $FILE"
-      #2#1    ls "$FILE"
+      #1    # assert faield if no FILE=null
+      #1    echo "ls $FILE"
+      #1    ls "$FILE"
 
       - name: Convert PDF to Markdown
         env: # pass the secret as an environment variable to the script
@@ -85,16 +85,16 @@ jobs:
       #3# # ----------------------------------------------------------------------
 
 
-  # de#3ploy:
-  #   #3runs-on: ubuntu-latest
-  #   #3permissions:
-  #   #3  contents: write  # To push a branch 
-  #   #3  pages: write  # To push to a GitHub Pages site
-  #   #3  id-token: write # To update the deployment status
-  #   #3environment: # specify the name of the environment that contains the secret
-  #   #3  name: my-environment
-  #   #3steps:
-  #   #3  - uses: actions/checkout@v3
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write  # To push a branch 
+  #     pages: write  # To push to a GitHub Pages site
+  #     id-token: write # To update the deployment status
+  #   environment: # specify the name of the environment that contains the secret
+  #     name: my-environment
+  #   steps:
+  #     - uses: actions/checkout@v3
       #3- name: Install latest mdbook
       #3  run: |
       #3    # tag=$(curl 'https://api.github.com/repos/rust-lang/mdbook/releases/latest' | jq -r '.tag_name')
