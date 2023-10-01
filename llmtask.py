@@ -28,7 +28,7 @@ def detect_file_type(file_path):
     try:
         m = magic.Magic()
         encoded_file_type = m.from_file(file_path)
-        if "ASCII text" in encoded_file_type:
+        if "text" in encoded_file_type:
             return "txt"
         elif "PDF" in encoded_file_type:
             return "pdf"
