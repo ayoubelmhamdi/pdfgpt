@@ -66,23 +66,23 @@ jobs:
 
           echo "git add ./src/*.md"
           git add ./src/*.md
-      #3- name: Commit and push changes
-      #3  env:
-      #3    GITHUB_TOKEN: ${{ secrets.PAT }}
-      #3  uses: stefanzweifel/git-auto-commit-action@v4
-      #3  with:
-      #3    commit_message: init
-      #3    branch: master
-      #3    skip_fetch: false
-      #3    skip_checkout: false
-      #3    push_options: --force
-      #3    commit_options: --no-verify
-      #3# - name: Test if the Conversion is done
-      #3#   run: |
-      #3#     [ $CONVERSION ] && echo conversion is Done || exit 1
-      #3# # ----------------------------------------------------------------------
-      #3# # ----------------------------------------------------------------------
-      #3# # ----------------------------------------------------------------------
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: init
+          branch: master
+          skip_fetch: false
+          skip_checkout: false
+          push_options: --force
+          commit_options: --no-verify
+      # - name: Test if the Conversion is done
+      #   run: |
+      #     [ $CONVERSION ] && echo conversion is Done || exit 1
+      # # ----------------------------------------------------------------------
+      # # ----------------------------------------------------------------------
+      # # ----------------------------------------------------------------------
 
 
   # deploy:
@@ -95,30 +95,30 @@ jobs:
   #     name: my-environment
   #   steps:
   #     - uses: actions/checkout@v3
-      #3- name: Install latest mdbook
-      #3  run: |
-      #3    # tag=$(curl 'https://api.github.com/repos/rust-lang/mdbook/releases/latest' | jq -r '.tag_name')
-      #3    tag="v0.4.34"
-      #3    url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
-      #3    mkdir mdbook -p
-      #3    curl -sSL $url | tar -xz --directory=./mdbook
+      - name: Install latest mdbook
+        run: |
+          # tag=$(curl 'https://api.github.com/repos/rust-lang/mdbook/releases/latest' | jq -r '.tag_name')
+          tag="v0.4.34"
+          url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
+          mkdir mdbook -p
+          curl -sSL $url | tar -xz --directory=./mdbook
 
-      #3    # tag=$(curl 'https://api.github.com/repos/lzanini/mdbook-katex/releases/latest' | jq -r '.tag_name')
-      #3    tag="v0.5.7"
-      #3    url="https://github.com/lzanini/mdbook-katex/releases/download/${tag}/mdbook-katex-${tag}-x86_64-unknown-linux-gnu.tar.gz"
-      #3    mkdir mdbook -p
-      #3    curl -sSL $url | tar -xz --directory=./mdbook
+          # tag=$(curl 'https://api.github.com/repos/lzanini/mdbook-katex/releases/latest' | jq -r '.tag_name')
+          tag="v0.5.7"
+          url="https://github.com/lzanini/mdbook-katex/releases/download/${tag}/mdbook-katex-${tag}-x86_64-unknown-linux-gnu.tar.gz"
+          mkdir mdbook -p
+          curl -sSL $url | tar -xz --directory=./mdbook
 
-      #3    echo `pwd`/mdbook >> $GITHUB_PATH
-      #3- name: Build Book
-      #3  run: |
-      #3    echo "cat ./src/SUMMARY.md"
-      #3    cat ./src/SUMMARY.md
-      #3    echo "mdbook build"
-      #3    mdbook build
-      #3- name: Deploy
-      #3  uses: peaceiris/actions-gh-pages@v3
-      #3  if: ${{ github.ref == 'refs/heads/master' }}
-      #3  with:
-      #3    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #3    publish_dir: ./book
+          echo `pwd`/mdbook >> $GITHUB_PATH
+      - name: Build Book
+        run: |
+          echo "cat ./src/SUMMARY.md"
+          cat ./src/SUMMARY.md
+          echo "mdbook build"
+          mdbook build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
