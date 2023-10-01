@@ -169,12 +169,12 @@ main(){
 
   cd "$working_dir" || exit
 
-  # git pull # for prevent merge
+  git pull # for prevent merge
   echo -e "$cmd" > ./convert.sh
 
-  # git add ./convert.sh
-  # git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh
-  # git push -u origin master
+  git add ./convert.sh
+  git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh
+  git push -u origin master
 }
 
 remove_task() {
