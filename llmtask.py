@@ -116,6 +116,10 @@ if __name__ == "__main__":
         if args.ocr is None:
             print("Please provide an OCR FILEPATH.", file=sys.stderr)
             sys.exit(2)
+        if not os.path.exists(args.ocr):
+            print(f"File {args.ocr} does not exist.", file=sys.stderr)
+            sys.exit(1)
+
 
         pytesseract.pytesseract.tesseract_cmd = args.ocr
         images = pdf_to_images(args.file)
@@ -142,3 +146,7 @@ if __name__ == "__main__":
 
     for item in lists:
         print(item)
+
+    ## Generate the text file
+    # for item in garbage_texts:
+    #     print(item)
