@@ -4,7 +4,7 @@ import cloudscraper
 
 scraper = cloudscraper.create_scraper()  # returns a CloudScraper instance
 
-user="calcauer 1+9"
+user="calcauer 2+98"
 admin="You are chatgpt"
 
 json_data = {
