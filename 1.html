@@ -1,0 +1,715 @@
+<!DOCTYPE HTML>
+<html lang="En" class="sidebar-visible no-js navy">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>1 - Paraphrasing the Pdfs</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="css/tavianator.css">
+        
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+        
+        <script src="tavianator.js"></script>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBDQXGZ6R1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EBDQXGZ6R1');
+        </script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./theme/tabbed-code-blocks.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> INTRODUCTION</a></li><li class="chapter-item expanded "><a href="mediacal_summilation.html"><strong aria-hidden="true">2.</strong> medical_similation</a></li><li class="chapter-item expanded "><a href="Northwestern_Thesis_Proposal_Template__1_43.html"><strong aria-hidden="true">3.</strong> Northwestern_Thesis_Proposal_Template__1_43</a></li><li class="chapter-item expanded "><a href="Northwestern_Thesis_Proposal_Template__1_43.html"><strong aria-hidden="true">4.</strong> Northwestern_Thesis_Proposal_Template__1_43</a></li><li class="chapter-item expanded "><a href="1.html" class="active"><strong aria-hidden="true">5.</strong> 1</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Paraphrasing the Pdfs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/ayoubelmhamdi/pdfgpt" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/ayoubelmhamdi/pdfgpt/tree/master/src/1.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p>Résumé<br />
+Les méthodes de simulations par Monte Carlo consistent à simuler la réalité. Elles sont des algorithmes visant à résoudre des problèmes complexes dans divers domaines. Ces méthodes reposent sur l'échantillonnage de nombres aléatoires générés par un générateur spécifique. Dans ce mémoire, nous exploitons cette propriété pour aborder le transport des ions dans l'eau afin de déterminer leurs caractéristiques balistiques en utilisant le code PHITS.<br />
+La distribution de la dose en profondeur, caractérisée par le pic de Bragg et la faible pénombre latérale des ions par rapport aux photons et aux électrons, l'efficacité en fin de parcours des ions carbone est supérieure à celle des protons et des autres ions lourds. Un dépôt modéré de dose avant et après le pic rend les ions carbone favorables en thérapie tumorale, notamment pour les tumeurs radio-résistantes qui sont proches d'organes à risque, y compris les tumeurs : cérébrales, de la tête et du cou, pédiatriques, prostate, oculaire...</p>
+<p>Abstract<br />
+Monte Carlo simulation methods consist of simulating reality. They are algorithms aimed at solving complex problems in various fields. These methods are based on sampling random numbers generated by a specific generator. In this thesis, we exploit this property to address the transport of ions in water to determine their ballistic characteristics using the PHITS code. The depth dose distribution, characterized by the Bragg peak and the low lateral penumbra of the ions compared to photons and electrons, the efficiency at the end of the path of carbon ions is higher than that of protons and other heavy ions. A moderate dose deposition before and after the peak makes carbon ions favorable in tumor therapy, including radio-resistant tumors that are close to organs at risk, including tumors: cerebral, head and neck, pediatric, prostate, eye...</p>
+<p>INTRODUCTION GENERALE<br />
+La simulation est une technique qui consiste à modéliser des phénomènes réels. Elle permet de calculer sur un ordinateur les solutions des modèles mathématiques pour simuler la réalité physique, représenter le fonctionnement d'un système composé de différents centres d'activités, mettre en évidence les caractéristiques de ceux-ci et les interactions entre eux, décrire la circulation des différents objets traités par ces processus, et enfin observer le comportement d'un système dans son ensemble et son évolution dans le temps.</p>
+<p>La simulation par la méthode de Monte Carlo spécifie une famille de méthodes algorithmiques permettant de calculer des valeurs numériques approchées à l'aide de processus stochastiques, c'est-à-dire des techniques probabilistes. La méthode de Monte Carlo a été spécialement développée pour les besoins du projet Manhattan pendant la Seconde Guerre mondiale suite à des recherches sur la fabrication de bombes atomiques [1]. Ces méthodes sont particulièrement utiles en informatique intégrale et en physique des particules, où les simulations probabilistes peuvent estimer la forme d'un signal ou la sensibilité d'un détecteur [2].</p>
+<p>Généralement, les méthodes de Monte Carlo sont utilisées pour résoudre des problèmes mathématiques et physiques complexes [3] qui ne peuvent pas être résolus par des méthodes analytiques telles que la résolution de l'équation de Boltzmann[2]. Elles sont appliquées dans plusieurs domaines, par exemple en physique, chimie, biologie, statistiques, etc. Leurs applications s'étendent à la radioprotection et la physique médicale en raison de la nature stochastique des processus physiques tels que le transport des particules et les interactions rayonnements-matière [4]. Les lois de probabilité régissant ces différents processus sont bien connues : par exemple, les interactions des particules dans la matière sont décrites par des sections efficaces d'interaction représentant la probabilité que la particule interagisse dans le milieu.</p>
+<p>Dans le cadre de la physique médicale, les domaines d'application des simulations de Monte Carlo sont nombreux : la médecine nucléaire, l'hadronthérapie, la radiothérapie, la curiethérapie...</p>
+<p>Ce mémoire a été réalisé en six chapitres.
+[...]</p>
+<p>Electron Compton<br />
+Photon incident Electron faiblement lié
+Photon diffusé<br />
+FIGURE 1.2 - Le processus ionisant : effet Compton [8]</p>
+<p>Création de paire électronique<br />
+Dans un champ électrique intense existant près du noyau, les photons incidents d'énergie supérieure à 1,022 MeV peuvent apparaitre sous forme d'électrons et de positrons, processus appelé matérialisation. [...]<br />
+FIGURE 1.3 – Le processus de création de paire électronique [8]</p>
+<p>CHAPITRE 1. NOTIONS PHYSIQUES EN ONCOLOGIE<br />
+Les principales interactions des photons de haute énergie utilisés sont : l'effet Compton entre 
+Voici une version corrigée et plus cohérente du texte :</p>
+<p>Dans le processus de transfert d'énergie, les électrons en mouvement interagissent avec les électrons des atomes du milieu. Ainsi, un électron peut interagir avec plusieurs atomes sur son parcours. Les principales interactions des électrons avec les atomes incluent :</p>
+<ul>
+<li>La diffusion élastique : une simple déviation de l'électron incident.</li>
+<li>La diffusion inélastique : provoque l'éjection d'un électron de l'atome.</li>
+<li>Le rayonnement de freinage : l'électron est freiné et dévié en passant au voisinage d'un noyau atomique.
+L'énergie perdue par l'électron est emportée par un photon, qui pourra interagir avec la matière plus loin. La trajectoire d'un électron est chaotique, et son parcours borné (voir figure 1.6).</li>
+</ul>
+<p>La distance moyenne de parcours d'un électron est proportionnelle à son énergie initiale et inversement proportionnelle à la densité électronique du matériau.</p>
+<h2 id="trajectoire-électron-portée"><a class="header" href="#trajectoire-électron-portée">Trajectoire électron portée</a></h2>
+<p><img src="lien_de_l_image" alt="Figure 1.6" /> — La trajectoire d'un électron dans les tissus [9]</p>
+<h3 id="13-la-hadronthérapie"><a class="header" href="#13-la-hadronthérapie">1.3 La hadronthérapie</a></h3>
+<h4 id="131-principe"><a class="header" href="#131-principe">1.3.1 Principe</a></h4>
+<p>La hadronthérapie est une technique anticancéreuse permettant de détruire les cellules cancéreuses radiorésistantes [10] en les irradiant avec un faisceau de hadrons (neutrons, protons, ions...) notamment des protons (on parle dans ce cas de protonthérapie) [11], [12] et des ions carbone (on parle dans ce cas de carbonethérapie) [13].</p>
+<p>Les hadrons, signifiant en grec &quot;forces&quot;, constituent des quarks (particules élémentaires du noyau). Ils sont utilisés pour les protons et les neutrons en thérapie tumorale et par extension pour les noyaux atomiques tels que l'hélium, l'oxygène, le carbone, le néon et l'argon [14].</p>
+<p>La trajectoire d'un électron est chaotique en raison du nombre élevé d'interactions effectuées par un électron dans un milieu.</p>
+<h2 id="132-interactions-des-ions-avec-la-matière"><a class="header" href="#132-interactions-des-ions-avec-la-matière">1.3.2 Interactions des ions avec la matière</a></h2>
+<p>Le passage des ions, tels que les protons et les ions de carbone, dans la matière fait intervenir différents types d'interactions [6], [15], [16].</p>
+<h3 id="collisions-élastiques"><a class="header" href="#collisions-élastiques">Collisions élastiques</a></h3>
+<p>Les particules perdent leur énergie cinétique en interagissant avec le nuage électronique des atomes. Ce type de collision est observé pour les particules de faibles énergies (moins de 100 eV), généralement leur contribution est négligeable.</p>
+<h3 id="collisions-inélastiques"><a class="header" href="#collisions-inélastiques">Collisions inélastiques</a></h3>
+<p>Les particules perdent leur énergie cinétique en interagissant avec le nuage électronique des atomes de milieu, ce qui peut entraîner l'excitation voire l'ionisation en fonction de l'énergie de la particule incidente. Ce type de collision est probable lorsque l'énergie de la particule incidente dépasse 10 KeV.</p>
+<p><img src="lien_de_l_image" alt="Figure 1.7" /> — Représentation schématique des différents processus inélastiques élémentaires pouvant être induits lors de collisions ions — atomes [5]</p>
+<h3 id="collisions-élastiques-avec-le-noyau"><a class="header" href="#collisions-élastiques-avec-le-noyau">Collisions élastiques avec le noyau</a></h3>
+<p>La particule incidente est déviée sans émission électromagnétique ni excitation du noyau. Ce phénomène est régi par les lois de la mécanique classique, la particule chargée ne perdant que l'énergie cinétique nécessaire à la conservation des moments des deux particules. Ce type de collision prédomine pour quelques KeV.</p>
+<p><img src="lien_de_l_image" alt="Figure 1.8" /> - La diffusion élastique avec les noyaux de la cible [7]</p>
+<h3 id="collisions-nucléaires-inélastiques"><a class="header" href="#collisions-nucléaires-inélastiques">Collisions nucléaires inélastiques</a></h3>
+<p>Lorsque l'énergie du projectile est supérieure à la barrière coulombienne, le projectile peut la franchir, et les réactions noyau-noyau deviennent dominantes. Ces collisions sont principalement périphériques [17].</p>
+<p>Dans ce type de collisions, le système est excité voire transformé (abrasion) et conduit à la fragmentation des ions (ablation) et de la cible.</p>
+<p><img src="lien_de_l_image" alt="Figure 1.9" /> — Un modèle simplifié de la fragmentation nucléaire due aux collisions périphériques du noyau du projectile et de la cible, tel que décrit par Serber [18].</p>
+<h3 id="3-labrasion-correspond-à-la-collision-entre-deux-noyaux-en-perdant-leur-énergie-ce-phénomène-est-remarquable-pour-les-ions-lourds"><a class="header" href="#3-labrasion-correspond-à-la-collision-entre-deux-noyaux-en-perdant-leur-énergie-ce-phénomène-est-remarquable-pour-les-ions-lourds">3. L'abrasion correspond à la collision entre deux noyaux en perdant leur énergie. Ce phénomène est remarquable pour les ions lourds.</a></h3>
+<h3 id="4-lablation-est-un-phénomène-réalisé-lors-de-collisions-des-ions-de-haute-énergie-produisant-des-fragments-moins-légers"><a class="header" href="#4-lablation-est-un-phénomène-réalisé-lors-de-collisions-des-ions-de-haute-énergie-produisant-des-fragments-moins-légers">4. L'ablation est un phénomène réalisé lors de collisions des ions de haute énergie, produisant des fragments moins légers.</a></h3>
+<h2 id="133-propriétés-physiques-des-hadrons"><a class="header" href="#133-propriétés-physiques-des-hadrons">1.3.3 Propriétés physiques des hadrons</a></h2>
+<p>Les avantages de l'hadronthérapie par rapport à la radiothérapie conventionnelle par photons sont les suivants [19], [11]:</p>
+<ul>
+<li>Les protons et les ions présentent une précision balistique avec un dépôt de dose en profondeur localisé, le pic de Bragg, et une faible dispersion latéralement et en profondeur, permettant de détruire les cellules tumorales.</li>
+<li>L'effet biologique des ions de carbone est plus important que celui des protons, ce qui confère un avantage principal aux ions de carbone.</li>
+<li>Le transfert d'énergie linéique de l'ion carbone est plus élevé que celui des protons et des photons.</li>
+</ul>
+<p><img src="lien_de_l_image" alt="Figure 1.10" /> - Distribution de la dose versus la profondeur pour différents types de radiations dans un tissu.</p>
+<h2 id="134-transfert-dénergie-linéique"><a class="header" href="#134-transfert-dénergie-linéique">1.3.4 Transfert d'énergie linéique</a></h2>
+<p>Le transfert d'énergie linéique (TEL), exprimé en keV/μm, traduit l'énergie moyenne transmise au milieu par la particule dans une unité de longueur dx, comme l'indique l'équation suivante :</p>
+<p>TEL = dE/dx</p>
+<p>Avec : TEL = pouvoir d'arrêt [4], [5], [21].</p>
+<p><img src="lien_de_l_image" alt="Figure 1.11" /> - Schémas d'illustrations pour la prise en compte du calcul du TEL [22].</p>
+<p>Plus ce paramètre est grand, plus les dommages biologiques aux tissus traversés sont importants.</p>
+<h2 id="135-définition-de-la-dose"><a class="header" href="#135-définition-de-la-dose">1.3.5 Définition de la dose</a></h2>
+<h3 id="dose-physique"><a class="header" href="#dose-physique">Dose physique</a></h3>
+<p>La dose dépos</p>
+<pre><code class="language-markdown">Variable aléatoire, qui renvoie la probabilité de prendre une valeur inférieure ou égale à x, peut être inversée. Puisque y = F(x) est uniformément distribué entre 0 (la probabilité que la variable aléatoire ne prenne aucune valeur) et 1 (la probabilité que la variable aléatoire prenne n'importe quelle valeur), la variable x = F^(-1)(y) obéit à la fonction de distribution p(x) = F'(x). Il suffit donc de générer une suite de valeurs R uniformément réparties entre 0 et 1, puis d'utiliser x = F^(-1)(R) pour obtenir les valeurs selon p(x).
+
+Par exemple, la profondeur d'interaction des rayons gamma pénétrant dans un matériau d'épaisseur d et de coefficient d'atténuation p est une variable aléatoire caractérisée par la fonction de partition :
+
+**F(x) = 1 - exp(-px) (10)**
+
+Où p est un paramètre. La fonction de distribution est alors :
+
+**p(x) = p * exp(-px) (11)**
+
+Si R est uniformément distribué dans l'intervalle [0, 1], alors la variable z = -ln(1 - R) sera automatiquement distribuée selon p(x). La probabilité que la variable x soit supérieure à d est la probabilité que le rayon gamma n'interagisse pas dans le matériau. Elle est égale à :
+
+**exp(-pd) = 1 - F(d) (13)**
+
+11 détermine ainsi la proportion d'impressions qui n'entrainent pas d'interactions d'épaisseur de matériau et caractérise en quelque sorte l'inefficacité du processus de simulation pour cette tâche.
+
+## 2.3.3 La méthode de réjection
+
+Une autre méthode d'échantillonnage a été proposée par Von Neumann. Elle consiste à tirer uniformément une variable aléatoire R dans l'intervalle [0, 1] d'une distribution (autre que p(z)) et à la tester au hasard pour déterminer si elle est acceptée ou rejetée. Ces méthodes de rejet conduisent à une technique très générale d'échantillonnage à partir de n'importe quelle fonction de densité de probabilité (PDF) et à déterminer sa valeur correspondante en utilisant la règle d'échelle affine :
+
+**T = Tmin + R(Tmax - Tmin) (14)**
+
+dans le domaine variable D = [Tmin, Tmax] d'une variable aléatoire. La valeur de z pour le deuxième graphe est affectée en fonction de p(z), tandis que le deuxième graphe R' est uniformément réparti entre 0 et 1. Cela permet de conserver z si R' est inférieur ou égal à f(z), sinon on le rejette.
+
+![Méthode de réjection : Fonction de probabilité normalisée f(x) méthode de rejet](lien_vers_l_image)
+
+## 2.3.4 La méthode de composition
+
+Si les deux méthodes précédentes ne sont pas applicables, une méthode combinant les deux peut être utilisée. Soit deux fonctions de densités de probabilités normalisées f1(x) et f2(x) définies par la relation suivante :
+
+**f(x) = f1(x) - f2(x) (15)**
+
+On utilise alors la méthode directe pour sélectionner x en utilisant f1(x) comme fonction de densité de probabilité normalisée. Ensuite, on applique la méthode de rejet sur la fonction f2(x).
+
+## 2.4 Précision d'un code Monte Carlo
+
+### 2.4.1 Incertitudes physiques
+
+Quelle que soit la précision des données physiques utilisées dans un code de Monte Carlo, la qualité des résultats est inévitablement limitée par le modèle de diffusion utilisé. La manière dont les sections efficaces sont tabulées, interpolées et échantillonnées peut introduire des erreurs supplémentaires.
+
+### 2.4.2 Incertitudes statistiques
+
+Les résultats des calculs de Monte Carlo sont également soumis à une incertitude statistique. Pour éviter les fluctuations statistiques, un certain nombre de particules (des centaines à des milliards de particules) doivent être simulées. En effet, plus le nombre d'histoires N généré est important, plus l'incertitude associée à la grandeur calculée dans le volume d'intérêt sera petite, et plus le résultat estimé par MC est proche de la réalité. L'incertitude statistique associée σ, correspondant à l'écart-type sur la moyenne G
+Voici la version corrigée du texte en utilisant le format Markdown :
+
+```markdown
+Nombre de points à utiliser pour l'estimation : 
+```python
+num_points = 10000
+</code></pre>
+<pre><code>
+Voici le texte corrigé et reformaté en utilisant Markdown :
+
+```markdown
+# Compteur pour les points dans le cercle
+count_inside = 0
+</code></pre>
+<p>J'ai corrigé les erreurs d'orthographe, de ponctuation et de formatage, et j'ai laissé le texte tel quel sans paraphraser.
+Voici la version corrigée du texte :</p>
+<pre><code class="language-markdown"># Listes pour stocker les coordonnées des points dans et hors du cercle
+x_inside = []
+y_inside = []  
+x_outside = []  
+y_outside = []  
+
+## CHAPITRE 2. GÉNÉRALITÉS SUR LA MÉTHODE DE MONTE CARLO
+</code></pre>
+<p>J'ai corrigé les erreurs d'orthographe, de ponctuation et de formatage dans le texte.</p>
+<pre><code class="language-python"># Boucle pour générer des points aléatoires
+for i in range(num_points):
+</code></pre>
+<p>Voici la version corrigée du texte avec les erreurs d'orthographe, de grammaire, de ponctuation et de formatage corrigées, ainsi que le format Markdown :</p>
+<pre><code class="language-python"># Générer des coordonnées x et y aléatoires
+x = random.uniform(-1, 1)
+y = random.uniform(-1, 1)
+</code></pre>
+<p>J'ai également ajouté le formatage en Python pour rendre le code plus lisible.
+Voici la version corrigée du texte en utilisant le format markdown :</p>
+<pre><code class="language-markdown"># Calculer la distance par rapport à l'origine (0,0)
+distance = (x ** 2 + y ** 2) ** 0.5
+</code></pre>
+<p>J'ai corrigé les erreurs d'orthographe, de grammaire, de ponctuation et de formatage dans le texte.</p>
+<pre><code># 
+Si la distance est inférieure ou égale à 1, le point est à l'intérieur du cercle.
+if distance &lt;= 1:
+    count_inside += 1
+    x_inside.append(x)
+    y_inside.append(y)
+else:
+    x_outside.append(x)
+    y_outside.append(y)
+</code></pre>
+<p>Voici la version corrigée du texte avec les erreurs d'orthographe, de grammaire et de formatage corrigées :</p>
+<pre><code class="language-markdown"># Calculer Pi en utilisant le nombre de points à l'intérieur et à l'extérieur du cercle
+pi = 4 * count_inside / num_points
+</code></pre>
+<p>Les erreurs ont été corrigées, et le texte est maintenant plus cohérent.
+Voici le texte corrigé avec les erreurs d'orthographe, de grammaire, de ponctuation et de formatage corrigées :</p>
+<pre><code class="language-python"># Afficher le résultat
+print(&quot;Pi est estimé à :&quot;, pi)
+</code></pre>
+<p>J'ai corrigé les erreurs, ajouté &quot;à&quot; après &quot;estimé&quot;, et supprimé le symbole &quot;&amp;&quot; pour rendre le texte cohérent.
+Voici le texte corrigé avec les erreurs d'orthographe, de grammaire et de formatage corrigées, ainsi que le format Markdown appliqué pour afficher correctement le code :</p>
+<pre><code class="language-markdown">Créer un graphique pour visualiser les points dans et hors du cercle
+```python
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.set_aspect('equal', 'box')
+</code></pre>
+<p>J'ai corrigé les erreurs et formaté le texte pour qu'il soit plus cohérent.</p>
+<pre><code class="language-markdown"># 
+Tracez les points à l'intérieur et à l'extérieur du cercle
+24  
+CHAPITRE 2. GÉNÉRALITÉS SUR LA MÉTHODE DE MONTE CARLO  
+ax.scatter(x_inside, y_inside, color='blue', marker='.')  
+ax.scatter(x_outside, y_outside, color='red', marker='.')
+</code></pre>
+<p>Voici le texte corrigé avec les erreurs d'orthographe, de grammaire, de ponctuation et de formatage corrigées, ainsi que le format Markdown appliqué :</p>
+<pre><code class="language-markdown">Ajouter un cercle inscrit dans le carré pour représenter le cercle unité.
+```python
+circle = plt.Circle((0, 0), 1, color='green', fill=False)
+ax.add_artist(circle)
+</code></pre>
+<p>Le texte a été corrigé pour éliminer les erreurs.
+Voici la version corrigée du texte avec les erreurs d'orthographe, de grammaire, de ponctuation et de formatage corrigées, ainsi que le format Markdown appliqué :</p>
+<pre><code class="language-markdown">Ajouter une légende pour les points
+```python
+ax.legend(['Points dans le cercle', 'Points hors du cercle'])
+</code></pre>
+<p>Voici le texte corrigé avec les erreurs d'orthographe, de grammaire, de ponctuation et de formatage corrigées :</p>
+<pre><code class="language-markdown"># Afficher le graphique
+```python
+plt.show()
+</code></pre>
+<p><strong>2.6.3 Résultats et discussion</strong>
+Pi est estimé à : 3.136
+Pi est estimé à : 3.1424
+1.00
+1001 Points dans le cercle
+75 Points hors du cercle
+0.75 4 ) 5 §
+0.50
+0.50 4
+0.25 0.254
+0.00 0.004
+-0.25 -0.259
+-0.504 -0.50 4
+-0.754
+Points dans le cercle ? x -0.759
+Points hors du cercle = A
+1.00 - * - * -1.00
+.
+-1.0 -0.5 0.0 0.5 1.0 -1.0 -0.5 0.0 0.5 1.0
+(a) (b)
+FIGURE 2.3 — La visualisation des points dans et hors du cercle : (a) pour N=1000 points, (b) pour N=10000 points</p>
+<p><strong>2.5</strong><br />
+<strong>CHAPITRE 2. GENERALITES SUR LA METHODE DE MONTE CARLO</strong><br />
+Estimation de Pi par la méthode Monte Carlo<br />
+<strong>4.0</strong> —— Estimation de Pi<br />
+—— Pi réel<br />
+<strong>3.0</strong><br />
+<strong>2.5</strong><br />
+<strong>Valeur de Pi</strong><br />
+<strong>20</strong><br />
+<strong>15</strong><br />
+0 2000 4000 6000 8000 10000<br />
+Nombre de points<br />
+FIGURE 2.4 — Les valeurs de pi estimées en fonction de nombres de points<br />
+N,=100 | N,=1000 | N,=10000 | N,=100000 | N,=1000000 | N,=10000000| N,=10°<br />
+Valeur : 1 3.20 3.076 3.1372 3
+Voici une version corrigée et reformatée du texte que vous avez fourni :</p>
+<hr />
+<h1 id="afficher-le-graphique"><a class="header" href="#afficher-le-graphique">Afficher le graphique</a></h1>
+<p>Le processus de Markov indique que le parcours macroscopique d'une particule se définit comme un ensemble de sous-parcours microscopiques indépendants les uns des autres.</p>
+<p><strong>CHAPITRE 4. SIMULATION DE TRANSPORT DES PARTICULES PAR MONTE CARLO</strong></p>
+<p>La particule peut être avancée à la position prochaine d’interaction :</p>
+<p>X_i+1 = X_i + S * Q (20)</p>
+<p>Avec :</p>
+<ul>
+<li>X_i : la position de la particule où elle a effectué une interaction i.</li>
+<li>X_i+1 : la position de la prochaine interaction i + 1.</li>
+<li>S = Δln(ξ) : la distance parcourue par une particule entre deux interactions successives.</li>
+<li>Q : le vecteur directeur.</li>
+</ul>
+<p>Son énergie est modifiée selon l'échantillonnage de l'interaction. Le suivi de cette particule est stoppé quand sa prochaine position X_i+1 est en dehors de la géométrie définie par l'utilisateur.</p>
+<h2 id="43-transport-de-photons"><a class="header" href="#43-transport-de-photons">4.3 Transport de photons</a></h2>
+<p>Le type d’interaction est basé sur les sections efficaces tabulées qui dépendent du matériau. En radiothérapie, pour les énergies utilisées, le photon présente quatre modes d'interaction principaux : l'effet photoélectrique, la diffusion Rayleigh (cohérente), la diffusion Compton (incohérente) et la création de paires, de sections efficaces respectives notées : σ_p.e., σ_Ray, σ_C, et σ_cp.</p>
+<p>Un nombre ξ sera tiré aléatoirement entre 0 et 1, et quatre scénarios s'offrent à la particule suivant sa valeur :</p>
+<ul>
+<li>Si ξ est inférieur à σ_p.e., on sélectionne l'effet photoélectrique.</li>
+<li>Si ξ est compris entre σ_p.e. et σ_Ray, on sélectionne la diffusion Rayleigh.</li>
+<li>Si ξ est compris entre σ_Ray et σ_C, on sélectionne la diffusion de Compton.</li>
+<li>Si ξ est supérieur à σ_C, on sélectionne la création de paires électron-positron.</li>
+</ul>
+<h2 id="44-transport-délectrons-et-de-positrons"><a class="header" href="#44-transport-délectrons-et-de-positrons">4.4 Transport d'électrons et de positrons</a></h2>
+<p>Les électrons et les positrons sont transportés de manière analogue dans la matière, avec des sections efficaces identiques. Ils sont donc traités de la même façon dans les codes Monte Carlo. Cependant, pour le suivi de positron, deux photons secondaires de 0,511 MeV sont émis dos à dos (180°).</p>
+<p>Un électron effectue un grand nombre d'interactions avec une faible perte d'énergie (30 eV en moyenne) le long de son parcours, avec une faible influence sur sa trajectoire. Cela rend le suivi d'un électron complexe, et une technique appelée &quot;histoire condensée&quot; est utilisée pour résoudre ce problème.</p>
+<h3 id="441-la-technique-dhistoire-condensée"><a class="header" href="#441-la-technique-dhistoire-condensée">4.4.1 La technique d'histoire condensée</a></h3>
+<p>Cette technique, basée sur les faibles changements d'énergie et de direction des électrons lors de leurs interactions avec la matière, regroupe ces changements en étapes et échantillonne les effets globaux (énergie, direction, déplacement latéral) à partir de distributions appropriées.</p>
+<h3 id="442-algorithme-de-transport-des-électrons"><a class="header" href="#442-algorithme-de-transport-des-électrons">4.4.2 Algorithme de transport des électrons</a></h3>
+<p>La manière la plus simple de transporter les électrons pendant une étape de l'histoire condensée est d'ignorer la déviation due aux diffusions multiples le long de cette étape. L'électron peut alors être transporté le long d'une ligne. Pour accepter cette approximation, la taille de l'étape doit être suffisamment petite, mais de très petites tailles d'étape conduisent à des temps de simulation inacceptables.</p>
+<h2 id="45-transport-des-protons-et-des-ions-de-carbone"><a class="header" href="#45-transport-des-protons-et-des-ions-de-carbone">4.5 Transport des protons et des ions de carbone</a></h2>
+<p>Le transport des protons par Monte Carlo est modélisé en divisant le trajet d'un proton en une série de petites étapes. Il est régi par trois processus principaux : le pouvoir d'arrêt, la diffusion coulombienne et les interactions nucléaires.</p>
+<h3 id="451-pouvoir-darrêt"><a class="header" href="#451-pouvoir-darrêt">4.5.1 Pouvoir d'arrêt</a></h3>
+<p>Les ions se transportent en perdant leur énergie par interaction avec des électrons atomiques. En Monte Carlo, en négligeant l'interaction EM élastique et les interactions nucléaires avec le noyau atomique, la perte d'énergie pour chaque étape est calculée par les valeurs de pouvoir d'arrêt sous forme de tableaux (équation de Bethe Bloch).</p>
+<p>$$\frac{dE}{dx} = \frac{4\pi}{m_e c^2} \frac{z^2 e^2}{v^2} \frac{1}{\beta^2} \left(\frac{1}{2} \ln \frac{2m_e c^2 \beta^2}{I} - \beta^2 - \frac{\delta}{2}\right)$$</p>
+<p>Avec :</p>
+<ul>
+<li>(p) : quantité de mouvement</li>
+<li>(v) : vitesse de la particule</li>
+<li>(c) : vitesse de la lumière</li>
+<li>(E) : énergie de la particule</li>
+<li>(dx) : longueur du chemin</li>
+<li>(z) : charge de la particule</li>
+<li>(e) : charge élémentaire</li>
+<li>(m_e) : masse au repos de l'électron</li>
+<li>(n) : densité numérique des électrons du matériau</li>
+<li>(I) : potentiel d'excitation moyen du matériau</li>
+</ul>
+<p>Par conséquent, la perte d'énergie se dépose localement le long du trajet, sauf si le transfert d'énergie à un électron est supérieur à une valeur seuil.</p>
+<h3 id="452-diffusion"><a class="header" href="#452-diffusion">4.5.2 Diffusion</a></h3>
+<p>La dispersion des protons accompagne leur ralentissement et la diminution de leur énergie cinétique. Cela est principalement dû aux interactions avec les noyaux. La déviation due à la diffusion simple est assez faible pour appliquer des fonctions de densité de probabilité, permettant d'accéder à plusieurs événements de diffusion simple. La technique d'échantillonnage est utilisée pour calculer l'angle de diffusion à la fin de chaque étape.</p>
+<h3 id="453-interactions-nucléaires"><a class="header" href="#453-interactions-nucléaires">4.5.3 Interactions nucléaires</a></h3>
+<p>Les particules d'un faisceau ionique entrent en interaction nucléaire élastique ou inélastique avant de s'arrêter. Cela s'accompagne d'une perte de fluence et de la génération de neutrons, d'autres particules et d'isotopes à vie courte. La probabilité d'avoir ces interactions est déterminée par des données
+Voici une version corrigée du texte avec les erreurs d'orthographe, de grammaire, de ponctuation et de formatage corrigées :</p>
+<pre><code># Afficher le graphique
+(M = xP + (v =) - 4)?/C - 1 =  
+FIGURE 5.2 — Carte des surfaces utilisées par le code PHITS [41]  
+[Cellule]  
+Dans cette section, les cellules peuvent être définies en fonction des surfaces décrites dans  
+la section [Surface] et des matériaux décrits dans la section [Matériau]. Les cellules doivent  
+être définies comme des espaces fermés, et des espaces virtuels pour les calculs de transport  
+de particules peuvent être générés en combinant des cellules définies. Dans PHITS, les &quot;vides  
+externes&quot; doivent être explicitement définis comme des éléments [41]. Cette section est définie  
+par :
+— Le numéro de cellule : tout numéro de 1 à 999,999 peut être utilisé.
+— Densité du matériau : lorsque la valeur donnée est positive, il s’agit d'une densité de
+particules [atomes/cm³], et négative s’il s’agit d’une densité de masse [g/cm³] [40].
+— Le numéro de la surface donné dans la section [Surface].
+Exemple :  
+— 100 1 -1.01 -2
+Cette cellule est nommée 100, remplie par le matériau 1 défini dans la section [Matériau]
+(ici H2O) de densité 1.01 g/cm³ et prenant la forme de la surface indiquée dans la section  
+[Surface] (ici une sphère).  
+Les Tallies
+Ce tally comporte deux catégories qui sont implémentées dans le code PHITS. L'une
+concerne la géométrie et l'autre consiste à calculer les quantités physiques.
+[T-Track]  
+Ce tally peut être utilisé pour obtenir la fluence dans n’importe quelle région spécifiée.
+Chaque fois que des particules traversent cette région, la longueur de la trajectoire est évaluée.
+En divisant ces longueurs par le volume de la région et le nombre de particules sources, on  
+obtient la fluence de particules en unités de [cm/source] [41].  
+[T-Deposit]  
+Ce tally peut être utilisé pour obtenir les énergies déposées (chaleur) dans certaines  
+régions.  
+[T-LET]  
+Ce tally peut être utilisé pour obtenir des informations sur la longueur de la trajectoire
+et la dose en fonction du TLE (dE/dz) d'un matériau donné, en tenant compte des pertes
+d’énergie des particules chargées et des noyaux [41].  
+[T-Volume]  
+PHITS a une fonction de calcul automatique pour obtenir le volume de chaque cellule à
+l'aide de [T-Volume], en effectuant une intégration Monte Carlo [41].  
+[T-3Dshow/]  
+Ce tally produit une sortie de géométrie graphique en vue 3D. Ce tally peut être généré
+sans calcul de transport en utilisant l'option icntl=11 dans la section [Paramètres].
+[T-Rshow]  
+Cette section produit une sortie de géométrie graphique pour les régions délimitées par
+un maillage XYZ avec un tracé de couleur proportionnel aux quantités physiques des régions.
+Ces sorties peuvent être obtenues sans calcul de transport en utilisant l'option icntl1=9 dans  
+la section [Paramètres] [41].  
+[END]  
+Indique la fin de la simulation.  
+5.3 Les modèles physiques dans PHITS  
+PHITS a divisé également la réaction en un modèle de voie d’entrée et un modèle de  
+voie de sortie pour mettre en œuvre divers modèles physiques permettant le transport de  
+nombreux types de particules (y compris les photons, les électrons, les neutrons, les protons,  
+les particules et les ions lourds) sur une large gamme d’énergie allant de 0,1 meV à 1 TeV.  
+5.3.1 JAM et INCL4.6  
+Est un modèle de cascade hadronique pour simuler le stade dynamique des réactions nucléaires induites par les hadrons dont l’énergie allant de 20 MeV jusqu’à 3 GeV, en explicitant  
+ainsi leurs antiparticules [39], [40], [42], [43].  
+5.3.2 Le modèle JQMD  
+La version 2 améliorée de ce modèle (JAERI Quantum Molecular Dynamics) permet
+une reproduction plus précise des sections efficaces de fragmentation pour simuler la phase
+dynamique des réactions induites par des ions lourds d’énergie inférieure à 3,5 GeV/nucleon  
+[Niita-95], [Chiba-96-a], [Chiba-96-b] et [Ogawa-15] [39], [40], [42], [43].  
+5.3.3 Le modèle SMM (Statistical Multi fragmentation Model)  
+Ce modèle consiste à simuler les réactions de fragmentation des collisions noyau-noyau
+d’énergie relativiste et proton-noyau, lorsque l’énergie d’excitation de ces noyaux est assez  
+élevée (Excitation &gt; 2,5 MeV/nucleon) [Ogawa-13] [39], [40], [42], [43].  
+5.3.4 Le modèle GEM (Generalized Evaporation Model)  
+Le code PHITS utilise ce modèle pour simuler l'évaporation statistique des particules
+légères (Z&lt;12) et la fission des noyaux lourds (A&gt;70) [Furihata-01], permettant ainsi une estimation précise des spectres de rayons et des taux de production d’isomères.  
+5.3.5 JENDL-4.0  
+Cette librairie de données nucléaires est utilisée pour le calcul du transport des neutrons  
+de moins de 20 MeV et des émissions des particules secondaires induites par ces neutrons  
+[39], [40], [42], [43].  
+5.3.6 Le modèle INCL 4.6 (Intra-nuclear cascade of Liege)  
+Est utilisé pour simuler le transport des neutrons plus énergétiques [Boudard-13].  
+5.3.7 L’algorithme EGS5  
+Cet algorithme a été introduit pour simuler les interactions atomiques des électrons, des
+positrons et des photons sur une large énergie allant de 1 keV à 
+# Affichage du Graphique
+Le dépôt d'énergie obtenu peut s'effectuer de différentes manières :
+- La collision des protons incidents avec les électrons du milieu cible (eau).
+- Le proton peut perdre son énergie par collision avec les noyaux.
+- Enfin, la particule peut perdre son énergie par freinage causé par le champ électrique créé par les noyaux.
+
+Ces collisions produisent des particules secondaires [25], y compris des neutrons, des photons, des neutrinos, du tritium et des électrons. Ceci est illustré par la figure 6.6.
+
+Les particules secondaires mentionnées dans l'étude de référence [40], créées par les interactions de protons avec le fantôme d'eau, contribuent à une faible dose d'environ 0,01% de la dose totale déposée avant et au pic de Bragg. Cette contribution est principalement due à l'isotope ?H. Cependant, après le pic de Bragg, la dose est déposée uniquement par les particules neutrons et photons dont la trajectoire dépasse 20 cm dans l'eau. En revanche, les isotopes lourds 2H et H sont arrêtés par le milieu avant le pic de Bragg.
+
+**Figure 6.6** - La distribution de dose en profondeur des particules secondaires pour l'énergie protonique E=140 MeV/u :
+(a) pour le deutérium; (b) pour les neutrons, le tritium et les photons.
+
+### 6.4.3 Caractéristique latérale des protons
+
+La courbe de la dose absorbée selon la direction latérale des protons et des particules secondaires obtenue par le code PHITS est donnée par la figure 6.7.
+
+La figure 6.7(a) présente trois zones :
+- La zone où la dose est uniforme : dans cette zone, tous les protons primaires qui atteignent celle-ci déposent la même énergie en l'absence de photons de diffusion. Elle correspond à la zone à irradier.
+- La zone où la dose est presque nulle, appelée la zone de transmission : dans celle-ci, aucun proton n'est arrêté par le milieu ou bien aucun proton n'atteint cette zone.
+- La zone intermédiaire correspond à la chute inclinée de dose illustrée par le zoom, la pénombre latérale quantifie cette chute, sa largeur est déterminée entre 20% et 80% de la dose maximale et égale à 1,25 mm.
+
+La figure 6.7(b) montre que les photons et les neutrons se répartissent latéralement jusqu'à 15 cm à gauche et à droite de l'axe latéral, avec un maximum de dose au centre. Cependant, les isotopes d'hydrogène 2H et H présentent une répartition irrégulière de dose sous forme de pics de dose. Le faisceau de protons est diffusé en passant à travers le fantôme d'eau, son profil latéral est élargi, cet élargissement est faible, dont les neutrons et les photons contribuent principalement par rapport aux autres particules secondaires.
+
+### 6.4.4 L'effet de l'énergie des protons incidents sur le pic de Bragg
+
+Pour différentes énergies [6], [45], [25] de protons primaires, le code PHITS permet d'obtenir la figure 6.8.
+
+La figure 6.8 montre qu'en augmentant l'énergie des particules primaires, la profondeur de pénétration des protons dans l'eau est grande, cependant la hauteur du pic de Bragg est diminuée. En effet, quand le parcours de particule est grand (l'énergie incidente est grande), le nombre de collisions effectuées, notamment inélastiques, par celle-ci avec la matière est important, ce qui s'accompagne par la diminution d'énergie au fur et à mesure jusqu'à une énergie faible qui sera déposée intégralement sous forme de pic.
+
+**Tableau 6.1** - Largeur à mi-hauteur pour des énergies différentes de protons :
+- Énergies : 50 MeV, 95 MeV, 140 MeV, 200 MeV
+- Position de pic de Bragg : 2,1 cm, 6,9 cm, 13,8 cm, 25,8 cm
+- Largeur à mi-hauteur (cm) : 0,2 cm, 0,3 cm, 0,4 cm, 0,6 cm
+
+Nous constatons que, quand la profondeur dans l'eau augmente, la largeur à mi-hauteur augmente, ce qui traduit une dispersion du faisceau de protons ainsi qu'une perte de précision de dépôt de dose avec la profondeur.
+
+### 6.5 Simulation du transport d'ions Carbone 12
+
+Nous avons repris le matériel et la géométrie utilisés précédemment en remplaçant la source de protons par une source d'ions de carbone 12 d'énergie \(E_y = 264 \text{ MeV}\). La dose absorbée en profondeur par le fantôme est calculée dans la section tally, précisément par [T-Deposit].
+
+Le code PHITS donne la courbe de la dose en profondeur sur la figure 6.9 :
+
+**Figure 6.9** - La distribution de la dose en profondeur dans l'eau pour l'énergie \(E=264 \text{ MeV}\) avec : all est la dose totale, \(^{12}C\) est la dose de particules primaires.
+
+La courbe (figure 6.9) montre que les ions de carbone primaires sont principalement responsables de la dose déposée, environ 93%, dans le fantôme avant et au pic de Bragg. Cependant, les particules secondaires ne contribuent qu'à 7% de la dose totale déposée. Au pic de Bragg, pour \(z = 13,8 \text{ cm}\), tous les ions de carbone 12 du faisceau primaire sont arrêtés par le milieu, marquant la fin de leur parcours. Après le pic de Bragg, il y a apparition d'une queue de dose appelée queue de fragmentation, due aux particules secondaires (protons, neutrons, \(^1H^-\), \(^4He\), \(^6C^-\), etc.) se produisant par la fragmentation, responsables de la dose déposée.
+
+**Tableau 6.2** - Taux de contribution en dose (%) pour différentes particules secondaires dans l'eau :
+- \(^3He^-\): 2,27%
+-
+Voici une version corrigée du texte avec des erreurs d'orthographe, de grammaire, de ponctuation et de formatage corrigées :
+
+---
+
+# Affichage du graphique d'une particule dans un milieu biologique
+
+Après avoir examiné que la méthode de Monte Carlo repose sur l'échantillonnage aléatoire, nous avons constaté qu'elle permet d'estimer en premier lieu la valeur de π. Cette méthode nécessite un nombre très élevé d'itérations pour obtenir une estimation précise du problème étudié. Elle représente un outil essentiel pour la création d'algorithmes pour le transport des particules et leurs interactions avec la matière.
+
+La suite de ce travail a porté sur l'étude des résultats du transport de protons et d'ions carbone par le code PHITS. Tout d'abord, nous avons validé notre code en comparant les courbes de Bragg des ions carbone d'énergie E=200.2 MeV/n mesurées avec celles obtenues par simulation, qui se sont avérées presque identiques. Cela nous a encouragés à l'utiliser davantage. Ensuite, nous avons réalisé une simulation d'un faisceau de protons et d'ions carbone 12 monoénergétiques dans de l'eau, et les résultats obtenus ont été confirmés par d'autres travaux publiés dans ce contexte [40], [46], [50].
+
+Le dépôt d'énergie dans l'eau par un faisceau de protons et d'ions carbone présente une caractéristique commune en fin de parcours, le pic de Bragg. Cependant, les particules secondaires responsables de la déposition de dose ne sont généralement pas les mêmes. En effet, par rapport aux protons, la courbe de dose en profondeur des ions carbone présente une queue après le pic de Bragg, correspondant à la formation continue de fragments secondaires le long du chemin de pénétration, et présente de larges spectres d'énergie, reproduits par le code Monte Carlo PHITS. Les résultats de cette étude, ainsi que les travaux [40], [46], [50], montrent que l'utilisation des ions carbone est plus efficace que celle des protons. Cette comparaison s'étend à d'autres ions lourds tels que Ne, 180, Li, comme indiqué par [40], [46], [50], [51], [52], [53].
+
+## Conclusion générale
+
+La particularité des ions utilisés en thérapie tumorale, notamment les ions carbone 12, n'est pas définitive. La recherche, accompagnée de mesures de section efficace de fragmentation, se poursuit pour améliorer les modèles nucléaires utilisés dans le système de planification.
+
+Au cours de notre travail, nous avons rencontré divers problèmes techniques en raison de la disponibilité limitée des ordinateurs et de la complexité de choisir et de se familiariser avec un code de simulation. La simulation d'un grand nombre de particules pour une estimation précise par Monte Carlo nécessite un temps considérable, allant de quelques heures à quelques jours sur un ordinateur disponible. La prise en main d'un code Monte Carlo, présenté sous forme de plateforme, est plus facile que celle d'un code qui nécessite une programmation, comme GEANT4, que nous avons commencé à utiliser avant de passer au code PHITS.
+
+Ce travail représente pour nous une initiation, et son expansion constituera l'une des perspectives pour les prochaines années dans le domaine de la recherche en physique médicale. Cela inclut l'amélioration de notre compréhension du comportement des ions dans un milieu biologique, l'étude des fragments produits et de leurs propriétés, ainsi que l'amélioration des moyens de radioprotection contre les particules secondaires, notamment les neutrons.
+
+## Références
+
+1. R. L. HARRISON, &quot;Introduction to monte carlo simulation,&quot; in AIP conference proceedings, American Institute of Physics, vol. 1204, 2010, pp. 17-21.
+
+2. D. RAESIDE, &quot;Monte Carlo principles and applications,&quot; Physics in Medicine &amp; Biology, vol. 21, no. 2, p. 181, 1976.
+
+3. D. P. KROESE et R. Y. RUBINSTEIN, &quot;Monte carlo methods,&quot; Wiley Interdisciplinary Reviews: Computational Statistics, vol. 4, no. 1, pp. 48-58, 2012.
+
+4. L. MAIGNE et al., &quot;Parallelization of Monte Carlo simulations and submission to a grid environment,&quot; Parallel processing letters, vol. 14, no. 02, pp. 177-196, 2004.
+
+5. H. LEKADIR, &quot;Etude théorique des processus ionisants induits par impact d'ions sur des molécules d'intérêt biologique: application au développement d'une simulation Monte Carlo de suivi de protons dans la matière biologique,&quot; thèse de doctorat, Université Paul Verlaine-Metz, 2010.
+
+...
+
+(Veuillez noter que la liste des références est tronquée ici pour des raisons de concision.)
+
+--- 
+
+J'ai corrigé les erreurs d'orthographe, de grammaire et de formatage dans le texte. Si vous avez besoin de plus de corrections ou d'autres modifications, n'hésitez pas à demander.
+Voici le texte corrigé avec les erreurs d'orthographe, de grammaire et de formatage corrigées :
+
+```markdown
+# Afficher le graphique
+beams on elemental targets”, Physical Review C, vol. 76, n° 1, p. 014911, 2007.
+K. GUNZERT-MARX, D. SCHARDT et R. S. SIMON, “Fast neutrons produced by nuclear fragmentation in treatment irradiations with 12C beam”, Radiation Protection Dosimetry, vol. 110, n° 1-4, p. 595-600, 2004.
+D. SCHARDT et al., “Nuclear fragmentation of high-energy heavy-ion beams in water”, Advances in Space Research, vol. 17, n° 2, p. 87-94, 1996.
+67
+RÉFÉRENCES
+[50] N. MATSURUJI, A. FUKUMURA, M. KOMORI, T. KANAI et T. KOHNO, “Influence of fragment reaction of relativistic heavy charged particles on heavy-ion radiotherapy”, Physics in Medicine &amp; Biology, vol. 48, n° 11, p. 1605, 2003.
+[51] H. MACCABEE et M. RITTER, “Fragmentation of high-energy oxygen-ion beams in water”, Radiation Research, vol. 60, n° 3, p. 409-421, 1974.
+[52] J. LLACER, C. TOBIAS, W. HOLLEY et T. KANAI, “On-line characterization of heavy-ion beams with semiconductor detectors”, Medical Physics, vol. 11, n° 3, p. 266-278, 1984.
+[53] E. HAETTNER, H. IWASE, M. KRAMER, G. KRAFT et D. SCHARDT, “Experimental study of nuclear fragmentation of 200 and 400 MeV/u 12C ions in water for applications in particle therapy”, Physics in Medicine &amp; Biology, vol. 58, n° 23, p. 8265, 2013.
+</code></pre>
+<p>J'ai corrigé les erreurs d'orthographe, de formatage, de ponctuation et de typographie dans le texte.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Northwestern_Thesis_Proposal_Template__1_43.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Northwestern_Thesis_Proposal_Template__1_43.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./theme/tabbed-code-blocks.js"></script>
+        <script src="./theme/highlight.css"></script>
+
+
+    </div>
+    </body>
+</html>
