@@ -8,7 +8,7 @@ set -x
 tmp_name="$TMPDIR/1.md"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/McCda/1.md";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/rtr8w/1.md";then
   echo "Can not use wget to download this file." >&2
   exit 1
 fi
