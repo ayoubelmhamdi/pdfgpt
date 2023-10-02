@@ -18,7 +18,7 @@ clear
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
     --lang fr                          \
-    --llm correct_ocr  \
+    --llm correct_ocr --llm paraphrasing \
     --file "$tmp_name"                 \
     --provider Aivvm                   \
     1> './src/1.md'
