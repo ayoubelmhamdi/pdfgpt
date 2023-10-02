@@ -172,8 +172,8 @@ main(){
   git pull # for prevent merge
   echo -e "$cmd" > ./convert.sh
 
-  git add ./convert.sh
-  git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh
+  git add ./convert.sh ./pptgpt-0.1.8-py3-none-any.whl
+  git commit -m"Process ""$name"": $(date +%Y-%m-%d-%H_%M)" ./convert.sh ./pptgpt-0.1.8-py3-none-any.whl
   git push -u origin master
 }
 
