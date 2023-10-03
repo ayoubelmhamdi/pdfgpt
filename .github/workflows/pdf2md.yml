@@ -7,7 +7,7 @@ on:
 
 jobs:
   convert:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted #ubuntu-latest
     permissions:
       contents: write  # To push a branch 
       pages: write  # To push to a GitHub Pages site
@@ -18,16 +18,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          echo "pwd"
-          pwd
-          echo "ls"
-          ls
-          # sudo apt update
-          # sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra 1>/dev/null
-          # pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
-          # pip install -r requirements.txt 1>/dev/null
+      #4 - name: Install dependencies
+      #4   run: |
+      #4     echo "pwd"
+      #4     pwd
+      #4     echo "ls"
+      #4     ls
+      #4     sudo apt update
+      #4     sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra 1>/dev/null
+      #4     pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
+      #4     pip install -r requirements.txt 1>/dev/null
 
       #1- name: Get changed PDF file name
       #1  run: |
@@ -66,7 +66,8 @@ jobs:
           cat -n ./convert.sh
 
           echo "bash ./convert.sh"
-          bash ./convert.sh
+          # bash ./convert.sh
+          docker run -v $GITHUB_WORKSPACE:/workspace smpayoub/pdfgpt:v0.0.3 ./convert.sh
 
           echo "git add ./src/*.md"
           git add ./src/*.md

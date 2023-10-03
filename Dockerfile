@@ -10,14 +10,17 @@ FROM ubuntu:latest
 
 # # Install apt packages
 RUN apt update
-RUN apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
+RUN apt-get install -y  libmagic1 poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra
 
 # Install Python and pip
 RUN apt-get install -y python3 python3-pip
 #
 # # Install your Python packages
 COPY requirements.txt /app/
+COPY pptgpt-0.1.8-py3-none-any.whl /app/
+
 RUN pip3 install -r /app/requirements.txt
+RUN pip3 install /app/pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker
 
 # Set the working directory
 WORKDIR /app
