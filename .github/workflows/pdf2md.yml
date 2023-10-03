@@ -26,8 +26,8 @@ jobs:
           ls
           # sudo apt update
           # sudo apt install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ara tesseract-ocr-fra 1>/dev/null
-          pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
-          pip install -r requirements.txt 1>/dev/null
+          # pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null
+          # pip install -r requirements.txt 1>/dev/null
 
       #1- name: Get changed PDF file name
       #1  run: |
