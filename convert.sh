@@ -15,7 +15,6 @@ tmp_name="1.md"
 #
 # clear
 
-
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
     --lang fr                          \
