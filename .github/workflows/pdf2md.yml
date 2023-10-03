@@ -7,7 +7,7 @@ on:
 
 jobs:
   convert:
-    runs-on: smpayoub/pdfgpt
+    runs-on: ubuntu-latest
     permissions:
       contents: write  # To push a branch 
       pages: write  # To push to a GitHub Pages site
@@ -65,9 +65,10 @@ jobs:
           echo "cat -n ./convert.sh"
           cat -n ./convert.sh
 
-          echo "bash ./convert.sh"
-          bash ./convert.sh
-          # docker run -v $GITHUB_WORKSPACE:/workspace smpayoub/pdfgpt:v0.0.3 ./convert.sh
+          # echo "bash ./convert.sh"
+          # bash ./convert.sh
+          echo "docker run -v ${{ github.workspace }}:/workspace smpayoub/pdfgpt:v0.0.3 ./convert.sh"
+          docker run -v ${{ github.workspace }}:/workspace smpayoub/pdfgpt:v0.0.3 ./convert.sh
 
           echo "git add ./src/*.md"
           git add ./src/*.md
