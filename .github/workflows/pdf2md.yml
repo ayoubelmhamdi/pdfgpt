@@ -56,8 +56,10 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           echo 
-          echo ls "/home/runner/.local/lib/python3.10/site-packages/pptgpt/"
-          ls "/home/runner/.local/lib/python3.10/site-packages/pptgpt/" || echo
+          # echo ls "/home/runner/.local/lib/python3.10/site-packages/pptgpt/"
+          # ls "/home/runner/.local/lib/python3.10/site-packages/pptgpt/" || echo
+
+
 
           echo "mkdir -p ./src/"
           mkdir -p ./src/
@@ -68,10 +70,11 @@ jobs:
           # echo "bash ./convert.sh"
           # bash ./convert.sh
           echo "docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:v0.0.3 ls"
-          docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:v0.0.3 ls
-
-          echo "docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:v0.0.3 ./convert.sh"
-          docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:v0.0.3 ./convert.sh
+          docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:v0.0.3 "ls && \
+          echo \"pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker\" && \
+          pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker 1>/dev/null && \
+          echo ./convert.sh && \
+          ./convert.sh "
 
           echo "git add ./src/*.md"
           git add ./src/*.md
