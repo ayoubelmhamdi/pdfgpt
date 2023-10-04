@@ -2,6 +2,7 @@
 
 set -x
 cd ~ || exit 1
+rm -rf ~/pdfgpt
 git clone https://ayoubelmhamdi:ayoub123%40%40@github.com/ayoubelmhamdi/pdfgpt.git
 cd ~/pdfgpt || exit 1
 
