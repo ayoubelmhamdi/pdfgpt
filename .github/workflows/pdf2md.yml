@@ -69,17 +69,17 @@ jobs:
 
           # echo "bash ./convert.sh"
           # bash ./convert.sh
-          version=v0.0.7
-          docker run -v /data/projects/py/pdfgpt:/app smpayoub/pdfgpt:$version echo
+          version=v0.0.8
+          docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:$version echo
 
           echo "docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:$version ls"
-          docker run -v /data/projects/py/pdfgpt:/app smpayoub/pdfgpt:$version ls
+          docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:$version ls
 
           echo "Docker run: pip3 install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker"
-          docker run -v /data/projects/py/pdfgpt:/app smpayoub/pdfgpt:$version pip3 install pptgpt-0.1.8-py3-none-any.whl --ignore-installed blinker
+          docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:$version pip3 install pptgpt-0.1.8-py3-none-any.whl --ignore-installed blinker
 
           echo "Docker run: ./convert.sh"
-          docker run -v /data/projects/py/pdfgpt:/app smpayoub/pdfgpt:$version ./convert.sh
+          docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:$version ./convert.sh
 
 
 #5          echo "git add ./src/*.md"
