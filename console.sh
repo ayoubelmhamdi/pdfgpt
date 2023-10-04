@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=2028
 
 set -x
 cd ~ || exit 1
@@ -18,4 +19,6 @@ sudo apt install neovim
 sudo ln -s "$(which nvim)" /usr/bin/v
 sudo apt -y install docker-ce docker-ce-cli containerd.io
 
+echo '"\e[5~": history-search-forward' >> ~/.inputrc
+echo '"\e[6~": history-search-backward' >> ~/.inputrc
 # curl --proto '=https' --tlsv1.2 -sSf  https://raw.githubusercontent.com/ayoubelmhamdi/pdfgpt/master/console.sh | bash
