@@ -14,8 +14,8 @@ RUN apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-o
 RUN apt-get install -y python3 python3-pip
 
 # ORIGINAL
-COPY requirements2.txt /app/
-RUN pip3 install -r /app/requirements2.txt
+# COPY requirements2.txt /app/
+# RUN pip3 install -r /app/requirements2.txt
 # COPY pptgpt-0.1.8-py3-none-any.whl /app/
 # RUN pip3 install /app/pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker
 
