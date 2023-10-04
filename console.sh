@@ -3,7 +3,7 @@
 set -x
 cd ~ || exit 1
 rm -rf ~/pdfgpt
-git clone https://ayoubelmhamdi:ayoub123%40%40@github.com/ayoubelmhamdi/pdfgpt.git
+git clone "https://ayoubelmhamdi:$1@github.com/ayoubelmhamdi/pdfgpt.git"
 cd ~/pdfgpt || exit 1
 
 git config --global user.name "{your_username}"
