@@ -69,8 +69,8 @@ jobs:
 
           # echo "bash ./convert.sh"
           # bash ./convert.sh
-          echo "docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:v0.0.6 ls"
-          docker run -v /data/projects/py/pdfgpt:/app smpayoub/pdfgpt:v0.0.6 ls &&           echo "pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker" &&           pip install pptgpt-0.1.8-py3-none-any.whl --ignore-installed blinker &&           echo ./convert.sh &&           ./convert.sh
+          echo "docker run -v ${{ github.workspace }}:/app smpayoub/pdfgpt:v0.0.7 ls"
+          docker run -v /data/projects/py/pdfgpt:/app smpayoub/pdfgpt:v0.0.7 ls &&           echo "pip install pptgpt-0.1.8-py3-none-any.whl -qq --ignore-installed blinker" &&           pip install pptgpt-0.1.8-py3-none-any.whl --ignore-installed blinker &&           echo ./convert.sh &&           ./convert.sh
 
 
           echo "git add ./src/*.md"
