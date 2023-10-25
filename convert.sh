@@ -20,13 +20,13 @@ tmp_name="1.md"
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract           \
     --lang fr                          \
-    --llm correct_ocr --llm paraphrasing  \
+    --llm correct_ocr  \
     --file "$tmp_name"                 \
-    --provider Aivvm                   \
-    1> './src/1-2023-10-02-14_21.md'
+    --provider Chatgptbz                   \
+    1> './src/1-e2.md'
 then
     echo "some errors" >&2
     exit 1
 fi
 
-echo '- [1](./1-2023-10-02-14_21.md)' >> ./src/SUMMARY.md
+echo '- [1](./1-e2.md)' >> ./src/SUMMARY.md
