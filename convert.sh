@@ -8,7 +8,7 @@ set -x
 
 
 tmp_name="$TMPDIR/2.pdf"
-name="2"
+name="2-a"
 rm -f "$tmp_name"
 
 if ! wget -q --output-document "$tmp_name" "https://bashupload.com/0DL1Z/2.pdf";then
