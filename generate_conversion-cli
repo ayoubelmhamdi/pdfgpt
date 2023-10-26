@@ -156,14 +156,14 @@ main(){
   cmd+='    echo "some errors" >&2\n'
   cmd+='    exit 1\n'
   cmd+='fi\n\n'
-  cmd+="sed -i "
-  cmd+="-e '"
-  cmd+='s#\\\\\[\(\([^\]*\)[^]]\+\)\\\]#$$\1$$#g'
-  cmd+="' "
-  cmd+="-e '"
-  cmd+='s#\\\(\(\([^\]*\)[^]]\+\))#$\1$#g'
-  cmd+="'"
-  cmd+=' "./src/${name}.md"\n'
+  # cmd+="sed -i "
+  # cmd+="-e '"
+  # cmd+='s#\\\\\[\(\([^\]*\)[^]]\+\)\\\]#$$\1$$#g'
+  # cmd+="' "
+  # cmd+="-e '"
+  # cmd+='s#\\\(\(\([^\]*\)[^]]\+\))#$\1$#g'
+  # cmd+="'"
+  # cmd+=' "./src/${name}.md"\n'
   cmd+='echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md'
 
   cd "$working_dir" || exit
