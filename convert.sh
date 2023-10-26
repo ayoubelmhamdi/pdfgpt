@@ -9,7 +9,7 @@ tmp_name="$TMPDIR/2.pdf"
 name="2"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/byc1U/2.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/9bODJ/2.pdf";then
   echo "Can not use wget to download this file." >&2
   exit 1
 fi
@@ -28,5 +28,4 @@ then
     exit 1
 fi
 
-sed -i -e 's#\\\[\(\([^\]*\)[^]]\+\)\\]#$$\1$$#g' -e 's#\\(\(\([^\]*\)[^]]\+\))#$\1$#g' "./src/${name}.md"
 echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md
