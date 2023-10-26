@@ -56,7 +56,7 @@ main(){
           output="./src/${name}.md"
           ;;
       *)
-          echo "File has an unsupported extension: $file"
+          echo "File has an unsupported extension: <$file>"
           exit 1
           ;;
   esac
