@@ -5,6 +5,7 @@ set -x
 # initialise the TMPDIR with tmp if not initalise yet.
 : "${TMPDIR:=/tmp}"
 
+
 tmp_name="$TMPDIR/2.pdf"
 name="2"
 rm -f "$tmp_name"
