@@ -8,3 +8,4 @@ Simplification using LLM
 - [1](./1-e2.md)
 - [1](./1-e3.md)
 - [1](./1-e5.md)
+- [8](./1-e8.md)
