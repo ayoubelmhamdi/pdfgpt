@@ -166,6 +166,26 @@ main(){
   # cmd+=' "./src/${name}.md"\n'
   cmd+='echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md'
 
+  cmd+="left=\"\$(grep -o -e '"
+  cmd+='\\\\(\(\([^\]*\)[^)]\+\))'
+  cmd+="' -e '"
+  cmd+='\\\\\[\(\([^\]*\)[^]]\+\)]'
+  cmd+="' "
+  cmd+='"./src/${name}.md" | wc -l)\"\n'
+  cmd+='echo "left=$left"\n'
+  
+  cmd+="dollar=\"\$(grep -o '"
+  cmd+='\$\+\([^$]\+\)\$\+'
+  cmd+="' "
+  cmd+='"./src/${name}.md" | wc -l)\"\n'
+  cmd+='echo "dollar=$dollar"\n\n'
+  cmd+='if [ "$dollar" -gt "$left" ];then\n'
+  cmd+="  cat book_dollar.toml > book.toml\n"
+  cmd+="else\n"
+  cmd+="  cat book_left.toml > book.toml\n"
+  cmd+='fi'
+
+
   cd "$working_dir" || exit
 
   git pull # for prevent merge
