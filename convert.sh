@@ -9,7 +9,7 @@ tmp_name="$TMPDIR/Northwestern_Thesis_Proposal_Template__1_43.pdf"
 name="Northwestern_Thesis_Proposal_Template__1_43"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/UDqAe/CNRpy.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/_CVDL/kUPAS.pdf";then
   echo "Can not use wget to download this file." >&2
   exit 1
 fi
