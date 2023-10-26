@@ -1,0 +1,662 @@
+<!DOCTYPE HTML>
+<html lang="En" class="sidebar-visible no-js navy">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>004 - Paraphrasing the Pdfs</title>
+
+
+        <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="css/tavianator.css">
+        
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+        
+        <script src="tavianator.js"></script>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBDQXGZ6R1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EBDQXGZ6R1');
+        </script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./theme/tabbed-code-blocks.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> INTRODUCTION</a></li><li class="chapter-item expanded "><a href="mediacal_summilation.html"><strong aria-hidden="true">2.</strong> medical_similation1</a></li><li class="chapter-item expanded "><a href="sim_medical.html"><strong aria-hidden="true">3.</strong> medical similation2</a></li><li class="chapter-item expanded "><a href="2.html"><strong aria-hidden="true">4.</strong> 2</a></li><li class="chapter-item expanded "><a href="2-07h08.html"><strong aria-hidden="true">5.</strong> 2-07h08</a></li><li class="chapter-item expanded "><a href="2-11h00.html"><strong aria-hidden="true">6.</strong> 2-11h00</a></li><li class="chapter-item expanded "><a href="004.html" class="active"><strong aria-hidden="true">7.</strong> 004</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Paraphrasing the Pdfs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/ayoubelmhamdi/pdfgpt" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/ayoubelmhamdi/pdfgpt/tree/master/src/004.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="simplifié"><a class="header" href="#simplifié">Simplifié</a></h1>
+<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
+<p>cette étude utilise une méthode d'algorithmes qui utilise des nombres aléatoires pour résoudre des problèmes complexes. Nous l'avons utilisé pour comprendre comment les ions se déplacent dans l'eau. Nous avons découvert que les ions de carbone seraient très utiles dans le traitement des tumeurs car ils peuvent atteindre profondément le tumeur.</p>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>La simulation est un moyen de faire fonctionner un modèle d'un processus ou d'un système. On le fait souvent à l'aide de l'ordinateur. Il y a une méthode particulière appelée &quot;Méthode de Monte Carlo&quot; qui a été inventée pendant la Seconde Guerre mondiale. Elle utilise des nombres aléatoires pour résoudre des problèmes qui sont très complexes.</p>
+<h2 id="lapplication-de-cette-méthode-dans-le-monde-médical"><a class="header" href="#lapplication-de-cette-méthode-dans-le-monde-médical">L'application de cette méthode dans le monde médical</a></h2>
+<p>Cette méthode est utilisée dans le traitement du cancer par radiation. Les radiations interfèrent avec les cellules cancéreuses et aident à les détruire. Il existe deux types de radiothérapie, externe et interne - l'externe utilise les radiations provenant d'une source externe, tandis que l'interne place une source radioactive directement sur la tumeur.</p>
+<p>Les médecins utilisent des rayons X très puissants dans la radiothérapie externe. Ces rayons X peuvent interagir de quatre manières différentes avec les cellules du corps. Chaque type d'interaction provoque une ionisation - ce qui signifie que les électrons sont arrachés de leurs atomes. C'est ce qui peut tuer les cellules cancéreuses.</p>
+<p>En utilisant ces méthodes, les médecins peuvent cibler et détruire une tumeur tout en limitant les dommages causés aux cellules saines environnantes. En fin de compte, cela peut aider à obtenir des résultats positifs pour le patient.</p>
+<h2 id="dose-de-radiation"><a class="header" href="#dose-de-radiation">Dose de radiation</a></h2>
+<p>La dose de rayonnement représente la quantité d'énergie que les tissus absorbent à partir des particules ionisantes. On la mesure en Gray (J/kg). Plus cette valeur est élevée, plus les dommages biologiques aux tissus traversés sont importants.</p>
+<h1 id="simplification-du-texte"><a class="header" href="#simplification-du-texte">Simplification du Texte</a></h1>
+<h2 id="chapitre-1-concepts-de-physique-en-oncologie"><a class="header" href="#chapitre-1-concepts-de-physique-en-oncologie">Chapitre 1: Concepts de physique en oncologie</a></h2>
+<h3 id="dose-biologique"><a class="header" href="#dose-biologique">Dose biologique</a></h3>
+<p>La dose biologique est le rayonnement que reçoit un patient lors d'un traitement contre le cancer. On la mesure en Gray Equivalent Cobalt (60Co) et on l'appelle Do. Pour le traitement avec des protons (protonthérapie), on utilise un taux d'EBR de 1.1. EBR signifie Efficacité Biologique Relative. Pour le traitement avec des ions de carbone (carbonethérapie), le taux d'EBR est entre 2 et 3.</p>
+<h3 id="interaction-des-particules-avec-la-matière-biologique"><a class="header" href="#interaction-des-particules-avec-la-matière-biologique">Interaction des particules avec la matière biologique</a></h3>
+<p>Quand des particules chargées rencontrent des cellules vivantes, elles peuvent causer des dommages à l'ADN, soit directement soit en faisant réagir l'eau dans les cellules. Ces interactions peuvent mener à des cellules endommagées, qui seront soit réparées, soit elles mourront.</p>
+<h3 id="conclusion-du-chapitre-1"><a class="header" href="#conclusion-du-chapitre-1">Conclusion du chapitre 1</a></h3>
+<p>Dans le traitement du cancer, on utilise des particules chargées pour transmettre de l'énergie aux tumeurs et les détruire. Il est important de comprendre comment ces particules se déplacent pour optimiser le traitement et minimiser les dommages aux tissus sains.</p>
+<h2 id="chapitre-2-introduction-à-la-méthode-de-monte-carlo"><a class="header" href="#chapitre-2-introduction-à-la-méthode-de-monte-carlo">Chapitre 2: Introduction à la méthode de Monte Carlo</a></h2>
+<h3 id="introduction-1"><a class="header" href="#introduction-1">Introduction</a></h3>
+<p>La méthode de Monte Carlo est une technique statistique qui utilise des nombres aléatoires, un peu comme les jeux de casino. Elle est utile dans plusieurs domaines, comme l'estimation des surfaces, les calculs d'intégrales multiples, la résolution d'équations ou les systèmes aléatoires comme le mouvement des particules.</p>
+<h3 id="générateur-de-nombres-aléatoires"><a class="header" href="#générateur-de-nombres-aléatoires">Générateur de nombres aléatoires</a></h3>
+<p>Pour la méthode de Monte Carlo, on a besoin d'un générateur de nombres aléatoires. Ces nombres peuvent être vraiment aléatoires (comme ceux obtenus par des processus physiques, par exemple la désintégration radioactive) ou seulement pseudo-aléatoires (des nombres produits par un algorithme informatique).</p>
+<h3 id="méthodes-déchantillonnage"><a class="header" href="#méthodes-déchantillonnage">Méthodes d'échantillonnage</a></h3>
+<p>Pour appliquer la méthode de Monte Carlo, on utilise différents modes d'échantillonnage : la méthode d'inversion directe, la méthode de rejet et la méthode de composition.</p>
+<h3 id="précision-dun-code-monte-carlo"><a class="header" href="#précision-dun-code-monte-carlo">Précision d'un code Monte Carlo</a></h3>
+<p>La précision d'un code de Monte Carlo dépend de plusieurs facteurs. D'abord, il y a les incertitudes physiques liées au modèle de diffusion. Ensuite, il y a les incertitudes statistiques liées au nombre de particules simulées. Plus on simule de particules, plus les résultats sont précis.
+Je vais explication le texte pour les débutants : </p>
+<h1 id="explication-des-symboles"><a class="header" href="#explication-des-symboles">Explication des Symboles</a></h1>
+<ul>
+<li><em>N</em> est simplement le nombre total d'éléments dans le groupe. </li>
+<li><em>c_i</em> représente chaque élément du groupe.</li>
+<li><em>G</em> c'est la valeur moyenne. </li>
+</ul>
+<h1 id="erreur-de-modèle"><a class="header" href="#erreur-de-modèle">Erreur de Modèle</a></h1>
+<p>Les erreurs peuvent survenir en raison de problèmes avec le modèle utilisé ou des erreurs dans le code informatique.</p>
+<h1 id="efficacité-de-la-simulation"><a class="header" href="#efficacité-de-la-simulation">Efficacité de la Simulation</a></h1>
+<ul>
+<li>L'efficacité aide à comparer comment deux différentes méthodes de simulation se comportent.</li>
+<li>Il est calculé par la formule : <em>e = 1 / (G * variance * T)</em>. Ici, <em>T</em> est le temps de calcul, la &quot;variance&quot; est une mesure de la variabilité de l'estimation, et <em>G</em> est encore la valeur moyenne.</li>
+</ul>
+<p>L'efficacité dépend fortement de la qualité du générateur de nombres aléatoires utilisé. </p>
+<h1 id="estimation-de-pi"><a class="header" href="#estimation-de-pi">Estimation de Pi</a></h1>
+<p>La méthode de simulation Monte Carlo permet d'estimer le nombre Pi. </p>
+<h1 id="comment-faire-"><a class="header" href="#comment-faire-">Comment faire ?</a></h1>
+<ol>
+<li>On choisit au hasard des points dans un carré de côté 1. </li>
+<li>On détermine si chaque point se situe à l'intérieur ou à l'extérieur d'un quart de disque de rayon 1 situé dans le carré. </li>
+<li>Le ratio du nombre de points qui se trouvent à l'intérieur du disque au nombre total de points choisis au hasard donne une approximation de Pi.</li>
+</ol>
+<p>Le code Python qui permet de faire cette simulation pourrait ressembler à ceci :</p>
+<pre><code>import random
+import matplotlib.pyplot as plt
+</code></pre>
+<h3 id="simplifier-le-texte"><a class="header" href="#simplifier-le-texte">Simplifier le Texte</a></h3>
+<p>Dans ce texte, on parle d'un concept appelé &quot;<strong>Nombre de points à utiliser pour l'estimation</strong>&quot;. C'est quelque chose de technique. Ici, c'est comme si vous vouliez savoir combien de points vous allez utiliser pour faire une estimation ou une supposition. </p>
+<p>Par exemple, imaginez que vous êtes en train de jouer à un jeu de fléchettes. Vous voulez savoir si vous êtes bon ou pas. Alors, vous allez lancer la fléchette plusieurs fois, n'est-ce pas ? Disons 10,000 fois. Chaque lancer est comme un &quot;point&quot; dans cette estimation.</p>
+<p>Dans le texte technique ci-dessus, ils utilisent le terme &quot;<strong>num_points</strong>&quot; pour représenter ce nombre de lancers, ou &quot;points&quot;.</p>
+<p>Le morceau de code donne une valeur à ce numéro de points : </p>
+<pre><code># Combien de points on utilise pour l'estimation
+num_points = 10000
+</code></pre>
+<p>Ce code signifie simplement : &quot;Je vais essayer 10,000 fois pour faire mon estimation&quot;.</p>
+<h1 id="simplification-du-texte-1"><a class="header" href="#simplification-du-texte-1">Simplification du Texte</a></h1>
+<p>On vous demande d'écrire un texte avec des mots et des idées faciles à comprendre. Utilisez des phrases courtes et utilisez des mots simples. Ne mettez pas trop de mots qui décrivent ou modifient d'autres mots. </p>
+<p>Par exemple, considérez un cercle. On veut compter les points à l'intérieur du cercle. En programmation, on peut écrire ça simplement :</p>
+<pre><code># Comptage de points dans le cercle
+count_inside = 0
+</code></pre>
+<p>Dans ce code, <code>count_inside = 0</code> est une manière simple de dire &quot;Comptons combien de points sont à l'intérieur du cercle. Pour l'instant, il n'y en a aucun, alors on commence le compte à zéro.&quot;</p>
+<p>Relisez toujours votre travail après l'avoir écrit, pour être sûr qu'il est clair et facile à lire.</p>
+<h2 id="simplifié-1"><a class="header" href="#simplifié-1">Simplifié</a></h2>
+<p>Voici comment vous pouvez écrire le texte de manière simplifiée :</p>
+<p>'''</p>
+<h1 id="instructions-simplifiées"><a class="header" href="#instructions-simplifiées">Instructions Simplifiées</a></h1>
+<ul>
+<li>Utilisez des mots simples.</li>
+<li>Faites des phrases courtes.</li>
+<li>Expliquez les mots ou idées difficiles.</li>
+<li>Ajoutez des exemples faciles.</li>
+<li>Evitez des mots compliqués.</li>
+<li>Découpez les idées complexes en petites parties.</li>
+<li>Ecrire des phrases en utilisant sujet-verbe-objet.</li>
+<li>N'utilisez pas trop de descriptifs.</li>
+<li>Utilisez des mots qui relient vos idées.</li>
+<li>Relisez votre travail pour s'assurer qu'il est clair.</li>
+</ul>
+<h2 id="exemple"><a class="header" href="#exemple">Exemple</a></h2>
+<ul>
+<li>Nous avons deux types de listes.</li>
+<li>Le premier type de listes sert à stocker les points à l'intérieur d'un cercle. Ce sont <code>x_inside</code> et <code>y_inside</code>. </li>
+<li>Le second type de listes sert à stocker les points à l'extérieur d'un cercle. Ce sont <code>x_outside</code> et <code>y_outside</code>.
+'''</li>
+</ul>
+<p>C'est simplement un moyen de dire que nous avons quatre listes : deux pour stocker les points qui sont à l'intérieur d'un cercle, et deux autres pour stocker les points qui sont à l'extérieur d'un cercle. </p>
+<p>Cela signifie que <code>x_inside</code> et <code>y_inside</code> sont utilisés pour enregistrer les points à l’intérieur du cercle, tandis que <code>x_outside</code> et <code>y_outside</code> sont utilisés pour enregistrer les points à l’extérieur du cercle.</p>
+<h1 id="chapitre-2-méthode-de-monte-carlo-simplifiée"><a class="header" href="#chapitre-2-méthode-de-monte-carlo-simplifiée">Chapitre 2: Méthode de Monte Carlo simplifiée</a></h1>
+<p>La méthode de Monte Carlo peut sembler compliquée, mais on peut la simplifier.</p>
+<h2 id="quest-ce-que-la-méthode-de-monte-carlo"><a class="header" href="#quest-ce-que-la-méthode-de-monte-carlo">Qu'est-ce que la méthode de Monte Carlo?</a></h2>
+<p>C'est une technique mathématique. Elle nous aide à comprendre des choses en utilisant le hasard. </p>
+<p>Par exemple, si vous voulez savoir combien de fois vous obtiendrez six avec un dé après cent lancers, vous pouvez utiliser cette méthode.</p>
+<h2 id="comment-ça-marche"><a class="header" href="#comment-ça-marche">Comment ça marche?</a></h2>
+<p>En gros, vous faites un grand nombre d'essais et comptez combien de fois vous obtenez le résultat que vous voulez. Par exemple, combien de fois vous obtenez six en lançant un dé cent fois.</p>
+<h2 id="pourquoi-cest-important"><a class="header" href="#pourquoi-cest-important">Pourquoi c'est important?</a></h2>
+<p>Cette méthode est très utile pour résoudre des problèmes qui sont trop compliqués pour les calculs classiques. </p>
+<p>Ainsi, même si le concept de la méthode de Monte Carlo peut sembler difficile, une fois que vous le divisez en parties plus petites, il est plus facile à comprendre.
+Ce texte explique comment utiliser une boucle pour créer des points au hasard. Voici le texte simplifié :</p>
+<h1 id="création-de-points-aléatoires"><a class="header" href="#création-de-points-aléatoires">Création de points aléatoires</a></h1>
+<p>Imaginez que vous voulez créer des points aléatoires sur une carte. Vous pouvez le faire facilement en utilisant une boucle. </p>
+<p>Voici comment :</p>
+<p>Chaque point a deux éléments : un &quot;x&quot; et un &quot;y&quot;. </p>
+<p>&quot;for i in range(num_points):&quot; signifie simplement &quot;pour chaque point que vous voulez créer&quot;. </p>
+<p>Maintenant, vous devez donner un emplacement aléatoire pour chaque point. </p>
+<p>Voici comment :</p>
+<p>&quot;x = random.uniform(-1, 1)&quot; signifie &quot;choisir un nombre au hasard entre -1 et 1 pour l'emplacement x&quot;. </p>
+<p>&quot;y = random.uniform(-1, 1)&quot; signifie &quot;choisir un nombre au hasard entre -1 et 1 pour l'emplacement y&quot;. </p>
+<pre><code class="language-python">for i in range(num_points):
+  x = random.uniform(-1, 1)
+  y = random.uniform(-1, 1)
+</code></pre>
+<p>Et voilà, vous avez créé des points aléatoires sur votre carte !</p>
+<h1 id="comment-calculer-la-distance-depuis-lorigine-00"><a class="header" href="#comment-calculer-la-distance-depuis-lorigine-00">Comment Calculer la Distance Depuis l'Origine (0,0)</a></h1>
+<p>Pour le calcul de la distance depuis l'origine, qui est le point (0,0) dans un plan 2D, nous utilisons une formule simple.</p>
+<p><strong>Formule:</strong>
+La formule est <code>distance = (x ** 2 + y ** 2) ** 0.5</code>. Là, 'x' et 'y' sont les coordonnées du point.</p>
+<ul>
+<li><code>x ** 2 + y ** 2</code> signifie la somme des carrés des coordonnées 'x' et 'y'.</li>
+<li><code>(x ** 2 + y ** 2) ** 0.5</code> signifie la racine carrée de la somme obtenue.</li>
+</ul>
+<p>Voici un exemple simple pour le rendre plus clair.</p>
+<p><strong>Exemple:</strong></p>
+<p>Prenons un point (3,4) dans le plan. Ici, 'x' est 3 et 'y' est 4. En utilisant la formule, nous obtenons <code>distance = (3 ** 2 + 4 ** 2) ** 0.5 = 5</code>.</p>
+<p>Donc, la distance du point (3,4) à l'origine est de 5 unités.</p>
+<p><strong>Résumé:</strong>
+La distance d'un point à l'origine peut être calculée en utilisant la formule donnée. Le résultat est facile à comprendre une fois que vous avez utilisé cette formule quelques fois. Vérifiez toujours votre travail pour vous assurer qu'il est précis et clair.</p>
+<h1 id="version-simplifiée"><a class="header" href="#version-simplifiée">Version Simplifiée</a></h1>
+<p>Essayez d'écrire vos textes de manière à ce qu'ils soient simples et faciles à comprendre. Comment pouvez-vous faire cela ?</p>
+<ul>
+<li>Expliquez les mots compliqués de manière simple. Par exemple, au lieu de dire &quot;symbiose&quot;, vous pouvez dire &quot;quand deux choses travaillent ensemble pour qu'elles soient toutes les deux meilleures&quot;.</li>
+<li>Faites des phrases courtes. Cela rend le texte plus facile à lire.</li>
+<li>Utilisez des mots que la plupart des gens connaissent.</li>
+<li>Donnez des exemples pour aider à comprendre.</li>
+<li>Essayez de ne pas utiliser des mots qui sont spécifiques à un certain sujet. Par exemple, au lieu de dire &quot;ADN&quot;, vous pouvez dire &quot;la chose qui détermine comment vous êtes fait&quot;.</li>
+<li>Si une idée est compliquée, divisez-la en petites parties. C'est comme résoudre un grand puzzle en commençant par les petites pièces.</li>
+<li>Lorsque vous écrivez des phrases, mettez toujours le sujet avant le verbe. Par exemple, &quot;Le chat dort&quot; au lieu de &quot;Dort le chat&quot;.</li>
+<li>N'utilisez pas beaucoup de mots pour décrire d'autres mots. Cela peut rendre le texte compliqué.</li>
+<li>Utilisez des mots qui montrent comment vos idées sont liées. Par exemple, &quot;parce que&quot;, &quot; donc &quot;, &quot;mais&quot; etc.</li>
+<li>Après avoir terminé, lisez votre travail attentivement pour vous assurer qu'il est facile à comprendre.</li>
+</ul>
+<h1 id="exemple-1"><a class="header" href="#exemple-1">Exemple</a></h1>
+<ul>
+<li>
+<p><strong>Ancien Texte</strong>:</p>
+<p><code>.Si la distance est inférieure ou égale à 1, le point est à l'intérieur du cercle. if distance &lt;= 1: count_inside += 1 x_inside.append(x) y_inside.append(y) else: x_outside.append(x) y_outside.append(y) Calculer Pi en utilisant le nombre de points à l'intérieur et à l'extérieur du cercle pi = 4 * count_inside / num_points.</code></p>
+</li>
+<li>
+<p><strong>Nouveau Texte</strong>:</p>
+<p>Supposons que nous ayons un cercle. Si un point est à une distance de 1 ou moins du centre du cercle, alors le point est dans le cercle. </p>
+<p>À chaque fois qu'un point est à l'intérieur du cercle, nous enregistrons son &quot;x&quot; et son &quot;y&quot;.</p>
+<p>Si le point n'est pas dans le cercle, nous le notons aussi, mais séparément.</p>
+<p>À la fin, nous utilisons tous les points que nous avons enregistrés pour calculer Pi.</p>
+<p><code>.si la distance est 1 ou moins : alors le point est à l'intérieur du cercle. si oui, noter &quot;x&quot; et &quot;y&quot;. sinon, noter &quot;x&quot; et &quot;y&quot; séparément. utiliser ces points pour calculer Pi.</code></p>
+</li>
+</ul>
+<p>Je vais vous expliquer comment simplifier un petit morceau de code, qui affiche le résultat d'une estimation. </p>
+<h2 id="1-ce-que-fait-le-code"><a class="header" href="#1-ce-que-fait-le-code">1. Ce que fait le code</a></h2>
+<p>Ce code utilise une fonction d'impression pour afficher le texte &quot;Pi est estimé à :&quot; suivi par la valeur de pi. </p>
+<h2 id="2-explication-des-mots-compliqués"><a class="header" href="#2-explication-des-mots-compliqués">2. Explication des mots compliqués</a></h2>
+<ul>
+<li>
+<p><strong>Fonction d'impression</strong> : C'est une fonction qui affiche à l'écran ce qu'on lui dit d'afficher.</p>
+</li>
+<li>
+<p><strong>Pi</strong> : C'est une constante mathématique, une sorte de nombre qui est toujours le même. On l'utilise beaucoup en mathématiques.</p>
+</li>
+</ul>
+<h2 id="3-comment-le-code-est-écrit"><a class="header" href="#3-comment-le-code-est-écrit">3. Comment le code est écrit</a></h2>
+<pre><code># Afficher le résultat
+print(&quot;Pi est estimé à :&quot;, pi)
+</code></pre>
+<h2 id="4-ce-que-fait-chaque-partie-du-code"><a class="header" href="#4-ce-que-fait-chaque-partie-du-code">4. Ce que fait chaque partie du code</a></h2>
+<ul>
+<li>
+<p><code>print</code>: C'est la fonction d'impression. Elle affiche à l'écran ce qu'on lui dit d'afficher.</p>
+</li>
+<li>
+<p><code>&quot;Pi est estimé à :&quot;</code>: C'est du texte que la fonction d'impression affiche. </p>
+</li>
+<li>
+<p><code>, pi</code>: Ici, on dit à la fonction d'impression d'afficher la valeur de pi après le texte.</p>
+</li>
+</ul>
+<h2 id="5-comment-comprendre-le-code"><a class="header" href="#5-comment-comprendre-le-code">5. Comment comprendre le code</a></h2>
+<p>C'est comme dire : &quot;Affiche (avec la fonction d'impression) le texte 'Pi est estimé à :' puis la valeur de pi.&quot;</p>
+<h2 id="6-vérification-du-travail"><a class="header" href="#6-vérification-du-travail">6. Vérification du travail</a></h2>
+<p>Cela fait sens ? Si c'est clair pour vous, alors on a réussi à simplifier le code.
+Voici une version simplifiée:</p>
+<h1 id="explication-simple"><a class="header" href="#explication-simple">Explication simple</a></h1>
+<p>On va apprendre à dessiner un cercle et à marquer des points à l'intérieur et à l'extérieur du cercle.</p>
+<h2 id="Étapes"><a class="header" href="#Étapes">Étapes</a></h2>
+<ul>
+<li>Nous allons utiliser un outil appelé 'plt'. Cette boîte à outils va nous aider à dessiner.</li>
+<li>'fig, ax = plt.subplots()' est comme préparer notre feuille de papier pour dessiner.</li>
+<li>Avec 'ax.set_aspect('equal', 'box')', nous faisons en sorte que notre dessin ait les mêmes proportions peu importe la taille.</li>
+</ul>
+<p>Voici le code pour cela: </p>
+<pre><code class="language-python">fig, ax = plt.subplots()
+ax.set_aspect('equal', 'box')
+</code></pre>
+<p>Si vous le copiez et le collez dans votre outil de codage, il vous permettra de préparer votre dessin. </p>
+<h2 id="point-important"><a class="header" href="#point-important">Point important</a></h2>
+<p>Assurez-vous de bien revoir votre code pour éviter toute erreur.</p>
+<h1 id="simplifié--dessiner-des-points-dans-un-cercle"><a class="header" href="#simplifié--dessiner-des-points-dans-un-cercle">Simplifié : Dessiner des Points dans un Cercle</a></h1>
+<h2 id="introduction-2"><a class="header" href="#introduction-2">Introduction</a></h2>
+<p>Voici les étapes pour dessiner des points dans et hors d'un cercle.</p>
+<h2 id="les-bases-de-loutil"><a class="header" href="#les-bases-de-loutil">Les bases de l'outil</a></h2>
+<p>On va utiliser un outil appelé 'Méthode de Monte Carlo'. C'est un nom compliqué, mais en fait, c'est juste une façon de faire des choses au hasard. Imaginez que vous jetez des dés à plusieurs reprises et que vous notez les résultats. Voilà, vous utilisez la Méthode de Monte Carlo !</p>
+<h2 id="comment-dessiner-les-points-"><a class="header" href="#comment-dessiner-les-points-">Comment dessiner les points ?</a></h2>
+<ol>
+<li>
+<p><strong>Dessiner les points à l'intérieur du cercle</strong><br />
+Utilisez cette ligne de code :</p>
+<pre><code>```ax.scatter(x_inside, y_inside, color='blue', marker='.')```
+</code></pre>
+<p>Ceci va créer des points bleus à l'intérieur d'un cercle.</p>
+</li>
+<li>
+<p><strong>Dessiner les points à l'extérieur du cercle</strong><br />
+Pour cela, utilisez ce code :</p>
+<pre><code>```ax.scatter(x_outside, y_outside, color='red', marker='.')```
+</code></pre>
+<p>Cette ligne va faire des points rouges autour du cercle.</p>
+</li>
+</ol>
+<p>Tout cela peut sembler complexe, mais une fois que vous avez compris les bases, ce sera plus clair. Pensez toujours à bien vérifier votre travail pour vous assurer qu'il est simple et facile à comprendre.</p>
+<h1 id="simplifier-le-texte-pour-débutant"><a class="header" href="#simplifier-le-texte-pour-débutant">Simplifier le texte pour débutant</a></h1>
+<h2 id="ajout-dun-cercle"><a class="header" href="#ajout-dun-cercle">Ajout d'un cercle</a></h2>
+<p>On pose un cercle dans un carré. Le cercle représente une unité.</p>
+<pre><code>circle = plt.Circle((0, 0), 1, color='green', fill=False)
+ax.add_artist(circle)
+</code></pre>
+<p>On écrit une légende pour le cercle.</p>
+<pre><code>ax.legend(['Points dans le cercle', 'Points hors du cercle'])
+</code></pre>
+<p>On montre le dessin.</p>
+<pre><code>plt.show()
+</code></pre>
+<h2 id="estimation-de-pi-1"><a class="header" href="#estimation-de-pi-1">Estimation de Pi</a></h2>
+<p>On a estimé Pi à 3.136 et à 3.1424.
+On compte les points dans le cercle et en dehors.</p>
+<h2 id="visualisation-des-points"><a class="header" href="#visualisation-des-points">Visualisation des points</a></h2>
+<p>On représente les points dans et hors le cercle pour différents nombres de points.</p>
+<h2 id="méthode-de-monte-carlo"><a class="header" href="#méthode-de-monte-carlo">Méthode de Monte Carlo</a></h2>
+<p>On utilise la méthode de Monte Carlo pour estimer Pi. Plus on utilise de points, plus notre estimation est proche de la vraie valeur de Pi.</p>
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>Pour avoir des résultats précis, on doit utiliser beaucoup de points. Mais cela prend du temps.</p>
+<h1 id="codes-de-simulation-par-monte-carlo"><a class="header" href="#codes-de-simulation-par-monte-carlo">Codes de Simulation par Monte Carlo</a></h1>
+<p>Il existe différents logiciels pour simuler des expériences. Ces logiciels utilisent la méthode de Monte Carlo.</p>
+<h2 id="quelques-exemples-de-logiciels"><a class="header" href="#quelques-exemples-de-logiciels">Quelques exemples de logiciels</a></h2>
+<ul>
+<li>Penelope</li>
+<li>EGS (Electron Gamma Shower)</li>
+<li>MCNP (Monte-Carlo Neutron Photon)</li>
+<li>PHITS (particle heavy and ion transport)</li>
+<li>GEANT4</li>
+</ul>
+<p>Chaque logiciel a ses propres spécificités. Par exemple, Penelope simule le transport des électrons et des photons. MCNP suit les particules neutres. PHITS simule la réaction et le transport de plusieurs particules.</p>
+<h2 id="logiciels-spécifiques-à-certaines-utilisations"><a class="header" href="#logiciels-spécifiques-à-certaines-utilisations">Logiciels spécifiques à certaines utilisations</a></h2>
+<p>Certains logiciels sont créés pour des utilisations précises. Par exemple, SIMIND est utilisé pour l'imagerie SPECT. SimSPECT est une version du code MCNP adaptée pour l'imagerie SPECT.</p>
+<h4 id="simplifié-2"><a class="header" href="#simplifié-2">Simplifié</a></h4>
+<h1 id="affichage-du-graphique"><a class="header" href="#affichage-du-graphique">Affichage du graphique</a></h1>
+<p>On peut utiliser des outils variés pour analyser le comportement de différentes formes de rayonnement. Un exemple en est un processus appelé &quot;PETsim&quot;.</p>
+<h2 id="333-petsim"><a class="header" href="#333-petsim">3.3.3 PETsim</a></h2>
+<p>PETsim est un outil spécifique pour un type de scan médical appelé tomographie par émission de positrons.</p>
+<h2 id="34-conclusion"><a class="header" href="#34-conclusion">3.4 Conclusion</a></h2>
+<p>Il n'existe pas d'outil spécifique pour le calcul de la dosimétrie. On utilise donc des outils plus généraux pour le faire.</p>
+<h1 id="chapitre-4-simuler-le-mouvement-de-particules"><a class="header" href="#chapitre-4-simuler-le-mouvement-de-particules">Chapitre 4: Simuler le mouvement de particules</a></h1>
+<h2 id="41-introduction"><a class="header" href="#41-introduction">4.1 Introduction</a></h2>
+<p>L'étude du mouvement de particules est par nature complexe et imprévisible, c'est pourquoi on utilise souvent des simulaitions pour le comprendre.</p>
+<h2 id="42-simulation-du-mouvement-dune-particule"><a class="header" href="#42-simulation-du-mouvement-dune-particule">4.2 Simulation du mouvement d'une particule</a></h2>
+<p>Lorsqu'on simule le déplacement d'une particule, on le fait étape par étape, jusqu'à ce que la particule s'arrête, soit absorbée, ou quitte la zone de simulation.</p>
+<h3 id="421-définition-de-la-géométrie"><a class="header" href="#421-définition-de-la-géométrie">4.2.1 Définition de la géométrie</a></h3>
+<p>Les dimensions et la forme des zones où la particule se déplace doivent être bien définies. Les paramètres incluent la composition chimique de la zone et les limites de son volume.</p>
+<h3 id="422-génération-des-particules"><a class="header" href="#422-génération-des-particules">4.2.2 Génération des particules</a></h3>
+<p>On doit définir certaines caractéristiques de la particule, tels que sa position de départ, son énergie et sa direction.</p>
+<h3 id="423-tirage-aléatoire-de-la-position"><a class="header" href="#423-tirage-aléatoire-de-la-position">4.2.3 Tirage aléatoire de la position</a></h3>
+<p>La distance avant le prochain mouvement de la particule est déterminée de manière aléatoire.</p>
+<h3 id="424-vérification-de-la-prochaine-position"><a class="header" href="#424-vérification-de-la-prochaine-position">4.2.4 Vérification de la prochaine position</a></h3>
+<p>La particule sera déplacée à la prochaine position si elle reste dans les limites de la zone définie.</p>
+<h2 id="43-transport-de-photons"><a class="header" href="#43-transport-de-photons">4.3 Transport de photons</a></h2>
+<p>La manière dont le photon interagit dépend de plusieurs facteurs. Selon un nombre aléatoire, différents scénarios peuvent se produire.</p>
+<h2 id="44-transport-délectrons-et-de-positrons"><a class="header" href="#44-transport-délectrons-et-de-positrons">4.4 Transport d’électrons et de positrons</a></h2>
+<p>Les électrons et les positrons se déplacent dans la matière de manière similaire et sont donc traités de la même façon dans les simulations.</p>
+<h3 id="441-la-technique-dhistoire-condensée"><a class="header" href="#441-la-technique-dhistoire-condensée">4.4.1 La technique d'histoire condensée</a></h3>
+<p>Vu la complexité du mouvement d'un électron, on utilise une méthode qui condense les multiples interactions en étapes pour mieux le comprendre.</p>
+<h3 id="442-algorithme-de-transport-des-électrons"><a class="header" href="#442-algorithme-de-transport-des-électrons">4.4.2 Algorithme de transport des électrons</a></h3>
+<p>L'électron peut être transporté en ligne droite, mais on doit être attentif à la taille du pas.</p>
+<h2 id="45-transport-des-protons-et-des-ions-de-carbone"><a class="header" href="#45-transport-des-protons-et-des-ions-de-carbone">4.5 Transport des protons et des ions de carbone</a></h2>
+<p>Le déplacement des protons est simulé en une série de petites étapes et est régi par plusieurs facteurs.</p>
+<h3 id="451-pouvoir-darrêt"><a class="header" href="#451-pouvoir-darrêt">4.5.1 Pouvoir d’arrêt</a></h3>
+<p>Le déplacement des ions dans la simulation s'arrête lorsqu'ils perdent toute leur énergie à cause des interactions avec les électrons.</p>
+<h3 id="452-dispersion"><a class="header" href="#452-dispersion">4.5.2 Dispersion</a></h3>
+<p>Les protons se dispersent principalement en raison des interactions avec d'autres noyaux.</p>
+<h3 id="453-interactions-nucléaires"><a class="header" href="#453-interactions-nucléaires">4.5.3 Interactions nucléaires</a></h3>
+<p>Les particules d'un faisceau interagissent de manière aléatoire et peuvent produire d'autres particules et isotopes.</p>
+<h2 id="46-conclusion"><a class="header" href="#46-conclusion">4.6 Conclusion</a></h2>
+<ul>
+<li></li>
+</ul>
+<p>'''</p>
+<h1 id="titre-chapitre-46-conclusion"><a class="header" href="#titre-chapitre-46-conclusion">Titre Chapitre 4.6: Conclusion</a></h1>
+<p>Dans ce chapitre, nous avons parlé du transport des particules (photons et électrons) à travers un milieu biologique. Puis, nous avons parlé du transport des ions utilisés en hadronthérapie, comme les protons et les ions carbone 12. À la suite, nous utiliserons un code Monte Carlo pour ce faire.</p>
+<h1 id="titre-chapitre-5-simulation-avec-le-code-phits"><a class="header" href="#titre-chapitre-5-simulation-avec-le-code-phits">Titre Chapitre 5: Simulation avec le code PHITS</a></h1>
+<h2 id="sous-titre-51-introduction"><a class="header" href="#sous-titre-51-introduction">Sous-titre 5.1: Introduction</a></h2>
+<p>PHITS est un système qui nous aide à simuler le transport de particules, comme les neutrons, protons, ions lourds, photons et électrons. C'est un code très utilisé partout dans le monde. Il a été créé par l'Agence Japonaise de l'Energie Atomique. PHITS peut fonctionner sur Windows, Mac et Linux. </p>
+<p>Nous utiliserons PHITS pour décrire l'architecture du fichier d'entrée, comment déterminer la section efficace et comment transférer de l'énergie linéaire.</p>
+<h2 id="sous-titre-52-fichier-dentrée-input"><a class="header" href="#sous-titre-52-fichier-dentrée-input">Sous-titre 5.2: Fichier d'entrée &quot;input&quot;</a></h2>
+<p>Le fichier d’entrée est là pour définir les paramètres, variables et formules qu'on va utiliser pour la simulation.</p>
+<ul>
+<li>Il gardera des informations sur:
+<ul>
+<li>La particule à simuler (type, énergie, position et direction)</li>
+<li>L'espace virtuel à utiliser (géométrie, matériaux)</li>
+</ul>
+</li>
+</ul>
+<h3 id="sous-titre-521-structure-du-fichier-input"><a class="header" href="#sous-titre-521-structure-du-fichier-input">Sous-titre 5.2.1: Structure du Fichier &quot;input&quot;</a></h3>
+<p>Le fichier commence avec un titre, puis vient une série de paramètres. Après que tous les paramètres soient définis, on spécifie les types de particules, les matériaux dont elles sont faites, et enfin les cellules.</p>
+<h3 id="sous-titre-522-les-sections-du-fichier-dentrée-input"><a class="header" href="#sous-titre-522-les-sections-du-fichier-dentrée-input">Sous-titre 5.2.2: Les sections du Fichier d'entrée ('input')</a></h3>
+<p>Dans le fichier d'entrée, on va préciser les détails de la simulation. Quelques paramètres sont:</p>
+<ul>
+<li>Le mode de calcul et la géométrie.</li>
+<li>Le nombre maximum de particules à simuler.</li>
+<li>Le nombre maximum de faisceaux (beams).</li>
+<li>Les énergies de coupure (maximales et minimales).</li>
+</ul>
+<p>Ensuite, on définit comment seront créées les particules. Plusieurs types de sources peuvent être spécifiés selon l'émission de particules souhaitée.</p>
+<h3 id="sous-titre-523-la-géométrie"><a class="header" href="#sous-titre-523-la-géométrie">Sous-titre 5.2.3: La géométrie</a></h3>
+<p>La géométrie est définie par trois sections: [Material], [Surface] et [Cell]. [Material] sert à définir le nombre de matériaux, le nombre d'éléments chimiques et leur pourcentage. [Surface] définit le nombre et la description des surfaces limitant une géométrie. [Cell] sert à définir des espaces fermés pour les calculs de transport de particules.</p>
+<h1 id="chapitre-53-les-tallies"><a class="header" href="#chapitre-53-les-tallies">Chapitre 5.3: Les Tallies</a></h1>
+<p>Tallies aident à calculer les quantités physiques. Il y a deux types de tally: l'un est pour la géométrie et l'autre est pour calculer les quantités physiques. Il comporte:</p>
+<ul>
+<li>[T-Track]: Pour obtenir la fluorescence.</li>
+<li>[T-Deposit]: Pour obtenir les énergies déposées (chaleur).</li>
+<li>[T-LET]: Pour obtenir les informations sur la longueur de la trajectoire et la dose.</li>
+<li>[T-Volume]: Pour obtenir le volume de chaque cellule.</li>
+<li>[T-3Dshow]: Pour produire une sortie de géométrie graphique en vue 3D.</li>
+<li>[T-Rshow]: Pour produire une réplique de la géométrie de la simulation.</li>
+</ul>
+<p>'''</p>
+<h1 id="simplifié-3"><a class="header" href="#simplifié-3">Simplifié</a></h1>
+<h2 id="affichage-du-graphique-1"><a class="header" href="#affichage-du-graphique-1">Affichage du graphique</a></h2>
+<p>La section T-Rshow permet de donner des informations visuelles sur des régions dans un système. Les informations visuelles sont à propos de la quantité physique de la région. On n'a pas besoin de réaliser de calcul pour obtenir ces informations visuelles.</p>
+<h2 id="fin-de-la-simulation"><a class="header" href="#fin-de-la-simulation">Fin de la Simulation</a></h2>
+<p>La phrase &quot;Afficher le Graphique [FIN]&quot; veut simplement dire que la simulation est terminée.</p>
+<h2 id="modèles-physiques-dans-phits"><a class="header" href="#modèles-physiques-dans-phits">Modèles Physiques dans PHITS</a></h2>
+<p>PHITS est un outil qui peut diviser une réaction en deux parties : entrée et sortie. Cet outil peut supporter beaucoup de types de particules, dont les photons, les électrons, les neutrons etc. Il peut supporter des énergies allant de 0,1 meV à 1 TeV.</p>
+<p>Voici des exemples de modèles utilisés dans PHITS : </p>
+<ol>
+<li>JAM et INCL4.6</li>
+<li>JQMD</li>
+<li>SMM</li>
+<li>GEM</li>
+<li>JENDL-4.0</li>
+<li>INCL 4.6</li>
+<li>EGS5</li>
+</ol>
+<p>Ces modèles sont utilisés pour simuler différentes choses, comme le transport d'électrons, la fission des noyaux lourds, les interactions atomiques d'électrons etc. </p>
+<h2 id="simulation-avec-phits"><a class="header" href="#simulation-avec-phits">Simulation avec PHITS</a></h2>
+<p>L'idée ici est d'utiliser PHITS pour simuler comment les particules se déplacent dans un contexte médical, comme le traitement des tumeurs par faisceau ionique. En utilisant PHITS, on peut obtenir des informations sur le comportement des protons et des ions de carbone 12. </p>
+<h2 id="matériel-et-méthode-pour-la-simulation"><a class="header" href="#matériel-et-méthode-pour-la-simulation">Matériel et Méthode pour la Simulation</a></h2>
+<p>Cette partie explique comment réaliser une simulation avec PHITS. Cela implique la création de formes géométriques simples et de sources de faisceau de protons. On utilise aussi de l'eau et du polyéthylène dans la simulation. </p>
+<h2 id="validation-de-code-phits"><a class="header" href="#validation-de-code-phits">Validation de code PHITS</a></h2>
+<p>Ici, on parle de tester le code PHITS en utilisant des résultats existants de la NASA. On compare les résultats de la simulation avec les résultats de l'expérience réelle. Les résultats montrent que PHITS est assez précis.</p>
+<h2 id="simulation-du-transport-des-protons"><a class="header" href="#simulation-du-transport-des-protons">Simulation du Transport des Protons</a></h2>
+<p>Cette partie explique comment simuler le transport d'énergie avec un faisceau de protons dans l'eau. On utilise l'outil &quot;tally&quot; pour mesurer la dose absorbée par la cible. </p>
+<p>C'est ici que l'on parle de le &quot;pic de Bragg&quot;, qui est le pic de dose absorbée par la cible. Ce pic se produit vers la fin du trajet des protons.</p>
+<h2 id="contribution-des-particules-secondaires"><a class="header" href="#contribution-des-particules-secondaires">Contribution des Particules Secondaires</a></h2>
+<p>Un effet important à considérer est les particules qui sont émises à la suite de collisions des protons avec le milieu cible. Ces particules secondaires ont une influence sur la dose déposée. Dans le cas des protons, ces particules secondaires contribuent à une dose relativement faible avant le pic de Bragg, mais elles sont la seule source de dose après celui-ci.
+Voici un texte plus simple à comprendre :</p>
+<h2 id="chapitre-6--résultats-et-discussions"><a class="header" href="#chapitre-6--résultats-et-discussions">Chapitre 6 : Résultats et discussions</a></h2>
+<p>Nous avons étudié la distribution de l'énergie déposée (ou dose) par différentes particules dans l'eau. </p>
+<h3 id="dose-des-protons-et-des-particules-secondaires"><a class="header" href="#dose-des-protons-et-des-particules-secondaires">Dose des protons et des particules secondaires</a></h3>
+<p><img src="diagram.png" alt="Diagramme de la distribution en profondeur" /></p>
+<p>Ce diagramme montre comment l'énergie de protons et d'autres particules se distribue à différentes profondeurs dans l'eau. À 140 MeV par la particule secondaire pour le deutérium, un type d'atome d'hydrogène, les neutrons et les photons sont les principales particules secondaires.</p>
+<h3 id="diffusion-latérale-des-protons"><a class="header" href="#diffusion-latérale-des-protons">Diffusion latérale des protons</a></h3>
+<p>La diffusion latérale fait référence à la façon dont l'énergie se répartit latéralement, ou de côté à côté. Nous avons observé trois zones principales lors de la diffusion des protons :</p>
+<ul>
+<li>Une zone uniforme où tous les protons déposent la même énergie.</li>
+<li>Une zone de transmission où très peu ou pas de protons atteignent.</li>
+<li>Une zone intermédiaire où la dose d'énergie baisse à mesure que l'on se déplace latéralement.</li>
+</ul>
+<p>Les neutrons et les photons sont les principales particules qui contribuent à la dispersion latérale.</p>
+<h3 id="effet-de-lénergie-des-protons-sur-le-pic-de-bragg"><a class="header" href="#effet-de-lénergie-des-protons-sur-le-pic-de-bragg">Effet de l'énergie des protons sur le pic de Bragg</a></h3>
+<p><img src="bragg_peak.png" alt="Diagramme de l'effet de l'énergie des protons sur le pic de Bragg" /></p>
+<p>Le pic de Bragg est un point où l'énergie déposée par un proton est à son maximum. Nous avons observé que lorsque l'énergie des protons augmente, le pic de Bragg devient plus large et moins pointu. Cela signifie que l'énergie se disperse plus largement.</p>
+<h3 id="simulation-de-transport-des-ions-de-carbone-12"><a class="header" href="#simulation-de-transport-des-ions-de-carbone-12">Simulation de transport des ions de carbone-12</a></h3>
+<p>Nous avons également simulé le comportement d'ions de carbone-12 dans l'eau. </p>
+<p>Les ions de carbone-12 sont principalement responsables de la dose déposée avant et au pic de Bragg. Mais, après le pic de Bragg, d'autres particules produites par fragmentation (comme le proton, le neutron, le bore-10, l'hélium-4 et le carbone-11) contribuent également.</p>
+<h3 id="comparaison-entre-lion-de-carbone-et-dautres-ions"><a class="header" href="#comparaison-entre-lion-de-carbone-et-dautres-ions">Comparaison entre l'ion de carbone et d'autres ions</a></h3>
+<p>Nous avons comparé l'ion de carbone aux ions de tritium-3 (léger) et de néon-20 (lourd). Les résultats de ces comparaisons seront présentés dans les sections suivantes du chapitre.</p>
+<h1 id="explication-simple-du-texte"><a class="header" href="#explication-simple-du-texte">Explication Simple du Texte</a></h1>
+<h2 id="graphiques-et-tableaux"><a class="header" href="#graphiques-et-tableaux">Graphiques et Tableaux</a></h2>
+<p>Le texte parle d'une étude sur les protons et les ions de carbone. Un graphique (Figure 6.11) montre comment ces deux particules se dispersent dans un certain matériau.</p>
+<p>Le tableau 6.2 résume les résultats du graphique. Par exemple, il montre que les protons se dispersent un peu plus que les ions de carbone.</p>
+<h2 id="conclusion-de-lÉtude"><a class="header" href="#conclusion-de-lÉtude">Conclusion de l'Étude</a></h2>
+<ul>
+<li>Les protons ne sont pas aussi précis que les ions de carbone pour déposer leur énergie.</li>
+<li>Les ions de carbone ne se dispersent pas autant en profondeur que les protons.</li>
+</ul>
+<p>Il parle ensuite d'un 'taux de dispersion', qui évalue la dispersion des particules dans la matière.</p>
+<h2 id="autres-particules-les-ions-de-néon"><a class="header" href="#autres-particules-les-ions-de-néon">Autres Particules: les Ions de Néon</a></h2>
+<p>La figure 6.12 est un autre graphique. Cette fois, il compare les ions de carbone et les ions de néon. Il montre comment ces particules déposent leur énergie en profondeur.</p>
+<p>Après avoir analysé le graphique:</p>
+<ul>
+<li>Les ions de carbone donnent une dose d'énergie constante et faible avant d'atteindre le pic de Bragg (un pic sur le graphique).</li>
+<li>Les ions de néon ont une plus grande fragmentation, c'est-à-dire qu'ils se décomposent en particules plus petites.</li>
+</ul>
+<p>Le tableau 6.4 donne plus de détails sur les doses déposées par les ions de carbone et de néon à différents endroits.</p>
+<h2 id="conclusion-générale"><a class="header" href="#conclusion-générale">Conclusion Générale</a></h2>
+<p>En fin de compte, l'étude conclut que le traitement avec les ions carbone est plus efficace que celui des protons pour détruire les tumeurs. Les ions carbone sont plus précis et ne se dispersent pas autant en profondeur que les protons.</p>
+<p>La dernière partie du texte discute des difficultés rencontrées lors de l'étude et des future avenues de recherche. Il mentionne notamment le temps et l'effort nécessaires pour effectuer les simulations, ainsi que l'importance de mieux comprendre le comportement des ions dans les matériaux biologiques.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2-11h00.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2-11h00.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="./theme/tabbed-code-blocks.js"></script>
+        <script src="./theme/highlight.css"></script>
+
+
+    </div>
+    </body>
+</html>
