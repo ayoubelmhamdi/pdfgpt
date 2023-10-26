@@ -7,7 +7,6 @@ set -x
 
 
 
-
 tmp_name="$TMPDIR/2.pdf"
 name="2"
 rm -f "$tmp_name"
