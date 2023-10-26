@@ -2,7 +2,7 @@
 # shellcheck disable=2016,2001
 
 
-set -xe
+set -e
 
 main(){
   working_dir="$(dirname "$0")"
