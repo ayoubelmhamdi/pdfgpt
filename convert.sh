@@ -6,10 +6,10 @@ set -x
 : "${TMPDIR:=/tmp}"
 
 tmp_name="$TMPDIR/2.pdf"
-summary_output="./2.md"
+name="2"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/zQPfV/2.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/C39OZ/2.pdf";then
   echo "Can not use wget to download this file." >&2
   exit 1
 fi
