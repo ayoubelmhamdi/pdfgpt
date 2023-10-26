@@ -135,6 +135,7 @@ main(){
   cmd+=': "${TMPDIR:=/tmp}"\n'
   cmd+='\n'
   cmd+='tmp_name="$TMPDIR/'"$full_name"'"\n'
+  cmd+='summary_output="'"$summary_output"'"\n'
   cmd+='rm -f "$tmp_name"\n\n'
   cmd+='if ! wget -q --output-document "$tmp_name" "'"$url"'";then\n'
   cmd+='  echo "Can not use wget to download this file." >&2\n'
@@ -149,8 +150,8 @@ main(){
   cmd+="    --lang $lang                          \\\\\n"
   cmd+="    $task \\\\\n"
   cmd+='    --file "$tmp_name"                 \\\n'
-  cmd+='    --provider Aivvm                   \\\n'
-  cmd+="    1> '${output}'\n"
+  cmd+='    --provider Chatgptbz               \\\n'
+  cmd+='    1> "./src/${name}.md"\n'
   cmd+='then\n'
   cmd+='    echo "some errors" >&2\n'
   cmd+='    exit 1\n'
@@ -162,8 +163,8 @@ main(){
   cmd+="-e '"
   cmd+='s#\\\(\(\([^\]*\)[^]]\+\))#$\1$#g'
   cmd+="'"
-  cmd+=" '${output}'\n"
-  cmd+="echo '- [${name}](${summary_output})' >> ./src/SUMMARY.md"
+  cmd+=' "./src/${name}.md"\n'
+  cmd+='echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md'
 
   cd "$working_dir" || exit
 
