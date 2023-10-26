@@ -12,10 +12,10 @@ if ! python3 llmtask.py                \
     --llm correct_ocr  \
     --file "$tmp_name"                 \
     --provider Chatgptbz                   \
-    1> './src/1-e4.md'
+    1> './src/1-e5.md'
 then
     echo "some errors" >&2
     exit 1
 fi
 
-echo '- [1](./1-e4.md)' >> ./src/SUMMARY.md
+echo '- [1](./1-e5.md)' >> ./src/SUMMARY.md
