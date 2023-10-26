@@ -6,9 +6,10 @@ set -x
 : "${TMPDIR:=/tmp}"
 
 tmp_name="$TMPDIR/2.pdf"
+summary_output="./2.md"
 rm -f "$tmp_name"
 
-if ! wget -q --output-document "$tmp_name" "https://bashupload.com/K3aXD/2.pdf";then
+if ! wget -q --output-document "$tmp_name" "https://bashupload.com/zQPfV/2.pdf";then
   echo "Can not use wget to download this file." >&2
   exit 1
 fi
@@ -20,12 +21,12 @@ if ! python3 llmtask.py                \
     --lang fr                          \
     --llm correct_ocr  \
     --file "$tmp_name"                 \
-    --provider Aivvm                   \
-    1> './src/2.md'
+    --provider Chatgptbz               \
+    1> "./src/${name}.md"
 then
     echo "some errors" >&2
     exit 1
 fi
 
-sed -i -e 's#\\\[\(\([^\]*\)[^]]\+\)\\]#$$\1$$#g' -e 's#\\(\(\([^\]*\)[^]]\+\))#$\1$#g' './src/2.md'
-echo '- [2](./2.md)' >> ./src/SUMMARY.md
+sed -i -e 's#\\\[\(\([^\]*\)[^]]\+\)\\]#$$\1$$#g' -e 's#\\(\(\([^\]*\)[^]]\+\))#$\1$#g' "./src/${name}.md"
+echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md
