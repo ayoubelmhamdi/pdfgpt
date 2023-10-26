@@ -4,18 +4,8 @@
 
 
 main(){
-  working_dir="${1:-}"
-  file="${2:-}"
-
-  if [ -z "$working_dir" ];then
-    echo "the is no directory provided"
-    exit 1
-  fi
-
-  if [ ! -d "$working_dir" ];then
-    echo "this ${working_dir} directory does not exist"
-    exit 1
-  fi
+  working_dir="$(dirname "$0")"
+  file="${1:-}"
 
   if [ -z "$file" ];then
     echo "the is no file provided"
@@ -27,7 +17,7 @@ main(){
     exit 1
   fi
 
-  extension="md"
+  extension="pdf"
   case "$file" in
      *."$extension")
           full_name="${file##*/}"
@@ -165,6 +155,14 @@ main(){
   cmd+='    echo "some errors" >&2\n'
   cmd+='    exit 1\n'
   cmd+='fi\n\n'
+  cmd+="sed -i "
+  cmd+="-e '"
+  cmd+='s#\\\\\[\(\([^\]*\)[^]]\+\)\\\]#$$\1$$#g'
+  cmd+="' "
+  cmd+="-e '"
+  cmd+='s#\\\(\(\([^\]*\)[^]]\+\))#$\1$#g'
+  cmd+="'"
+  cmd+=" '${output}'\n"
   cmd+="echo '- [${name}](${summary_output})' >> ./src/SUMMARY.md"
 
   cd "$working_dir" || exit
