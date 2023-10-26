@@ -164,20 +164,20 @@ main(){
   # cmd+='s#\\\(\(\([^\]*\)[^]]\+\))#$\1$#g'
   # cmd+="'"
   # cmd+=' "./src/${name}.md"\n'
-  cmd+='echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md'
+  cmd+='echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md\n'
 
   cmd+="left=\"\$(grep -o -e '"
   cmd+='\\\\(\(\([^\]*\)[^)]\+\))'
   cmd+="' -e '"
   cmd+='\\\\\[\(\([^\]*\)[^]]\+\)]'
   cmd+="' "
-  cmd+='"./src/${name}.md" | wc -l)\"\n'
+  cmd+='"./src/${name}.md" | wc -l)"\n'
   cmd+='echo "left=$left"\n'
   
   cmd+="dollar=\"\$(grep -o '"
   cmd+='\$\+\([^$]\+\)\$\+'
   cmd+="' "
-  cmd+='"./src/${name}.md" | wc -l)\"\n'
+  cmd+='"./src/${name}.md" | wc -l)"\n'
   cmd+='echo "dollar=$dollar"\n\n'
   cmd+='if [ "$dollar" -gt "$left" ];then\n'
   cmd+="  cat book_dollar.toml > book.toml\n"
