@@ -56,7 +56,7 @@ main(){
           output="./src/${name}.md"
           ;;
       *)
-          echo "File has an unsupported extension"
+          echo "File has an unsupported extension: $file"
           exit 1
           ;;
   esac
@@ -173,7 +173,7 @@ main(){
   cmd+="' "
   cmd+='"./src/${name}.md" | wc -l)"\n'
   cmd+='echo "left=$left"\n'
-  
+
   cmd+="dollar=\"\$(grep -o '"
   cmd+='\$\+\([^$]\+\)\$\+'
   cmd+="' "
