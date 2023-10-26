@@ -2,6 +2,7 @@
 # shellcheck disable=2016,2001
 
 
+set -xe
 
 main(){
   working_dir="$(dirname "$0")"
@@ -49,11 +50,10 @@ main(){
 
           name="${full_name%."${extension}"}"
           output="./src/${name}.md"
-          summary_output="./${name}.md"
           if [ -e "$output" ];then
-            output="./src/${name}-$(date +%Y-%m-%d-%H_%M).md"
-            summary_output="./${name}-$(date +%Y-%m-%d-%H_%M).md"
+            name="${name}-$(date +%Hh%M)" # for example: name-15h45
           fi
+          output="./src/${name}.md"
           ;;
       *)
           echo "File has an unsupported extension"
