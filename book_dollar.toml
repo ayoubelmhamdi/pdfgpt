@@ -1,0 +1,36 @@
+[book]
+authors = ["Ayoub EL Mhamdi"]
+language = "En"
+multilingual = false
+src = "src"
+title = "Paraphrasing the Pdfs"
+
+[build]
+create-missing = true
+build-dir = "book"
+
+[output.html]
+site-url = "/pdfgpt/"
+# no-section-label = true
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/ayoubelmhamdi/pdfgpt"
+edit-url-template = "https://github.com/ayoubelmhamdi/pdfgpt/tree/master/{path}"
+additional-css = ["./theme/tabbed-code-blocks.css"]
+additional-js = ["./theme/tabbed-code-blocks.js", "./theme/highlight.css"]
+
+
+# mathjax-support = true
+# [output.katex]
+# [preprocessor.katex]
+[preprocessor.katex]
+after = ["links"]
+inline-delimiter = { left = "$", right = "$" }
+block-delimiter = { left = "$$", right = "$$" }
+
+
+# [output.linkcheck]
+# optional = true
+# warning-policy = "warn"
+# traverse-parent-directories = true
+# follow-web-links = true
