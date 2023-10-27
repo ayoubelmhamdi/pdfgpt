@@ -17,6 +17,8 @@ then
     exit 1
 fi
 
+
+
 echo "- [${name}](${name}.md)" >> ./src/SUMMARY.md
 left="$(grep -o -e '\\(\(\([^\]*\)[^)]\+\))' -e '\\\[\(\([^\]*\)[^]]\+\)]' "./src/${name}.md" | wc -l)"
 dollar="$(grep -o '\$\+\([^$]\+\)\$\+' "./src/${name}.md" | wc -l)"
