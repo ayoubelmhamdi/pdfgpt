@@ -2,13 +2,13 @@
 
 set -x
 
-tmp_name="1.md"
-name="006"
+tmp_name="2.md"
+name="007"
 
 if ! python3 llmtask.py                \
     --ocr /usr/bin/tesseract-ocr           \
     --lang fr                          \
-    --llm correct_ocr \
+    --llm paraphrasing \
     --file "$tmp_name"                 \
     --provider Chatgptbz               \
     1> "./src/${name}.md"
