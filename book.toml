@@ -25,8 +25,9 @@ additional-js = ["./theme/tabbed-code-blocks.js", "./theme/highlight.css"]
 # [preprocessor.katex]
 [preprocessor.katex]
 after = ["links"]
-inline-delimiter = { left = "\\(", right = "\\)" }
-block-delimiter =  { left = "\\[", right = "\\]" }
+inline-delimiter = { left = "$", right = "$" }
+block-delimiter = { left = "$$", right = "$$" }
+
 
 # [output.linkcheck]
 # optional = true
