@@ -9,3 +9,4 @@ Simplification using LLM
 - [2-11h00](2-11h00.md)
 - [004](004.md)
 - [005](005.md)
+- [006](006.md)
