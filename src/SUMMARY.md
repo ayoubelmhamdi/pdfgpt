@@ -10,3 +10,4 @@ Simplification using LLM
 - [004](004.md)
 - [005](005.md)
 - [006](006.md)
+- [007](007.md)
