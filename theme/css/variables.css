@@ -14,7 +14,7 @@
 
 .ayu {
     --bg: hsl(210, 25%, 8%);
-    --fg-heading: #ffff00;
+    --fg-heading: #1E045B;
     --fg: #c5c5c5;
 
     --sidebar-bg: #14191f;
@@ -104,7 +104,7 @@
 
 .light {
     --bg: hsl(0, 0%, 100%);
-    --fg-heading: #ffff00;
+    --fg-heading: #1E045B;
     --fg: hsl(0, 0%, 0%);
 
     --sidebar-bg: #fafafa;
@@ -194,7 +194,7 @@
 
 .rust {
     --bg: hsl(60, 9%, 87%);
-    --fg-heading: #ffff00;
+    --fg-heading: #1E045B;
     --fg: #262625;
 
     --sidebar-bg: #3b2e2a;
@@ -240,7 +240,7 @@
 @media (prefers-color-scheme: dark) {
     .light.no-js {
         --bg: hsl(200, 7%, 8%);
-        --fg-heading: #ffff00;
+        --fg-heading: #1E045B;
         --fg: #98a3ad;
 
         --sidebar-bg: #292c2f;
